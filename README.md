@@ -578,6 +578,8 @@ Assistant:  site_memory · open   41 steps since July: pricing 46 → 91, 12 fix
 
 **It connects the dots.** A ranking drop, traffic drop, decay, vitals regression or alert comes with the fixes, deploys and decisions of the last three weeks, so the agent checks those first.
 
+**It learns across sites, if you opt in.** Open the memory with `share_learning: true` and each measured result adds one anonymous row per fix type to a shared pool: the fix type, the change rounded to a whole percent and the month, never the site, addresses, numbers or text. Once a fix type has 20 measurements from 10 sites, `prioritize_fixes`, `get_fix_pack` and `plan_sprint` show the median change across sites. Turning it off or deleting the memory removes everything that memory added.
+
 The memory stores summaries and a few numbers per step, not your raw data rows or page content. The key is stored only as a hash, and an unused memory is deleted after 400 days.
 
 ## Acts, guards and measures like an SEO team
