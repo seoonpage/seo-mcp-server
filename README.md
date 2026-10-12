@@ -12,7 +12,8 @@
 <p align="center">
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
-  <img alt="88 tools" src="https://img.shields.io/badge/tools-88-4f46e5">
+  <img alt="46 tools" src="https://img.shields.io/badge/tools-46-4f46e5">
+  <img alt="96 jobs" src="https://img.shields.io/badge/jobs-96-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -85,10 +86,10 @@ You:        Fix the SEO on our pricing page and keep going until it scores 90 or
 
 Assistant:  scan_page            46/100  no meta description, no H1, title 14 characters
             get_fix_pack         title, description and canonical, written from the page
-            generate_schema      Product JSON-LD, 2 values to fill in
+            schema · generate    Product JSON-LD, 2 values to fill in
             (edits pricing.html)
-            scan_html            92/100  before deploying, all errors gone
-            rescan_and_compare   94/100  live, +48 since the first scan
+            scan_page · html     92/100  before deploying, all errors gone
+            scan_page · rescan   94/100  live, +48 since the first scan
 
             Done. 46 to 94. Two prices in the JSON-LD still need your real values.
 ```
@@ -107,21 +108,25 @@ The SEO MCP servers from Ahrefs, Semrush, SE Ranking and DataForSEO are built fo
 <table>
   <tr><th align="left">Step</th><th align="left"><img src="assets/logos/onpage.png" width="26" height="26" alt=""><br>OnPage.dev</th><th align="left"><img src="assets/logos/ahrefs.png" width="22" height="22" alt="">&nbsp;&nbsp;<img src="assets/logos/semrush.png" width="22" height="22" alt="">&nbsp;&nbsp;<img src="assets/logos/seranking.png" width="22" height="22" alt="">&nbsp;&nbsp;<img src="assets/logos/dataforseo.png" width="22" height="22" alt=""><br>Data MCPs</th></tr>
   <tr><td><b>Search data: rankings, keywords, backlinks</b></td><td>✅ Uses yours, from Search Console, GA4, Ahrefs or Semrush in the same chat</td><td>Their core strength</td></tr>
-  <tr><td><b>Find what is wrong on the page</b></td><td>✅ <code>scan_page</code>, <code>deep_audit</code>, <code>render_page</code>: Google, AI search, speed, accessibility</td><td>Site audit data in some of them</td></tr>
-  <tr><td><b>Write the fix from the page itself</b></td><td>✅ <code>get_fix_pack</code>, <code>generate_schema</code></td><td><i>Not what they are built for</i></td></tr>
+  <tr><td><b>Find what is wrong on the page</b></td><td>✅ <code>scan_page</code>, <code>scan_page · deep</code>, <code>render_page</code>: Google, AI search, speed, accessibility</td><td>Site audit data in some of them</td></tr>
+  <tr><td><b>Write the fix from the page itself</b></td><td>✅ <code>get_fix_pack</code>, <code>schema · generate</code></td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Ship it where the code lives</b></td><td>✅ WordPress, Shopify, Webflow, Wix, Storyblok, Sanity, Contentful, Strapi, Ghost or Magento fields through your own connection, or a Git pull request for Next.js, Nuxt, SvelteKit, Astro, Angular, React or Vue</td><td><i>Not what they are built for</i></td></tr>
-  <tr><td><b>Check it before deploy</b></td><td>✅ <code>scan_html</code> and <code>compare_html</code> on unpublished HTML</td><td><i>Not what they are built for</i></td></tr>
-  <tr><td><b>Tell search engines</b></td><td>✅ <code>submit_indexnow</code>, plus URL Inspection through your Search Console</td><td><i>Not what they are built for</i></td></tr>
-  <tr><td><b>Cover the AI Mode fan-out</b></td><td>✅ <code>check_question_coverage</code>: every sub-question answered, buried or missing</td><td><i>Not what they are built for</i></td></tr>
-  <tr><td><b>Win back lost links</b></td><td>✅ <code>fix_broken_backlinks</code>: their broken and lost backlinks plus GA4 404 hits become ranked 301 rules, link edits and an outreach list</td><td>They list the broken and lost backlinks</td></tr>
-  <tr><td><b>Fix keyword cannibalization</b></td><td>✅ <code>diagnose_cannibalization</code>: your competing pages side by side on every on-page signal, with the plan</td><td>Show which pages compete for a keyword</td></tr>
-  <tr><td><b>Get into AI answers</b></td><td>✅ <code>find_ai_visibility_gaps</code>: their AI answers become the questions to cover and the sites to get onto</td><td>AI mention and citation tracking in some of them</td></tr>
-  <tr><td><b>Speed and alt texts as code</b></td><td>✅ <code>fix_core_web_vitals</code>, <code>fix_alt_texts</code>: tags, WordPress or a Cloudflare Worker</td><td><i>Not what they are built for</i></td></tr>
+  <tr><td><b>Check it before deploy</b></td><td>✅ <code>scan_page · html</code> and <code>compare · html</code> on unpublished HTML</td><td><i>Not what they are built for</i></td></tr>
+  <tr><td><b>Tell search engines</b></td><td>✅ <code>request_recrawl · indexnow</code>, plus URL Inspection through your Search Console</td><td><i>Not what they are built for</i></td></tr>
+  <tr><td><b>Cover the AI Mode fan-out</b></td><td>✅ <code>answer_readiness · questions</code>: every sub-question answered, buried or missing</td><td><i>Not what they are built for</i></td></tr>
+  <tr><td><b>Win back lost links</b></td><td>✅ <code>backlinks · broken</code>: their broken and lost backlinks plus GA4 404 hits become ranked 301 rules, link edits and an outreach list</td><td>They list the broken and lost backlinks</td></tr>
+  <tr><td><b>Fix keyword cannibalization</b></td><td>✅ <code>check_keyword · cannibalization</code>: your competing pages side by side on every on-page signal, with the plan</td><td>Show which pages compete for a keyword</td></tr>
+  <tr><td><b>Get into AI answers</b></td><td>✅ <code>ai_visibility · gaps</code>: their AI answers become the questions to cover and the sites to get onto</td><td>AI mention and citation tracking in some of them</td></tr>
+  <tr><td><b>Speed and alt texts as code</b></td><td>✅ <code>get_fix_pack · web_vitals</code>, <code>get_fix_pack · alt_texts</code>: tags, WordPress or a Cloudflare Worker</td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Prove a change before rolling it out</b></td><td>✅ <code>plan_split_test</code>: half the template gets the change, the other half is the control</td><td><i>Not what they are built for</i></td></tr>
-  <tr><td><b>Disavow without the risk</b></td><td>✅ <code>build_disavow</code>: only clear spam, the rest up for review, and a warning when not to upload</td><td>A disavow export from a toxicity score in some of them</td></tr>
-  <tr><td><b>Watch the whole site</b></td><td>✅ <code>schedule_site_audit</code>: weekly audits compared with the last one, regressions to Slack or Discord</td><td>Scheduled audits inside their own apps</td></tr>
+  <tr><td><b>Disavow without the risk</b></td><td>✅ <code>backlinks · disavow</code>: only clear spam, the rest up for review, and a warning when not to upload</td><td>A disavow export from a toxicity score in some of them</td></tr>
+  <tr><td><b>Turn link prospects into emails</b></td><td>✅ <code>backlinks · outreach</code>: one short email per site with the exact link to fix or add, as drafts in your mail after approval</td><td>They find the prospects</td></tr>
+  <tr><td><b>Turn fixes into a work plan</b></td><td>✅ <code>plan_sprint</code>: a week plan per developer, content and outreach, as tickets in Linear, Jira, Asana or GitHub</td><td><i>Not what they are built for</i></td></tr>
+  <tr><td><b>Catch deploy accidents</b></td><td>✅ <code>watch · guard</code>: robots.txt, sitemap, https, noindex and canonical checked every 6 hours, alerts with the fix</td><td>Site audits on their own schedule</td></tr>
+  <tr><td><b>Measure AI visits, brand and share of voice</b></td><td>✅ <code>measure</code> modes <code>ai_referrals</code>, <code>brand_split</code> and <code>share_of_voice</code> from your GA4, Search Console and rank data</td><td>Visibility and share of voice from their own data</td></tr>
+  <tr><td><b>Watch the whole site</b></td><td>✅ <code>watch · site_audit</code>: weekly audits compared with the last one, regressions to Slack or Discord</td><td>Scheduled audits inside their own apps</td></tr>
   <tr><td><b>Track the rankings that matter</b></td><td>✅ <code>track_rankings</code>: your Search Console and their tracker, keywords picked from your work, money pages and near wins</td><td>Rank tracking is their core strength; you pick and tag the keywords</td></tr>
-  <tr><td><b>Prove the result</b></td><td>✅ <code>measure_impact</code>: before and after, against pages you did not touch</td><td>Their numbers are the input</td></tr>
+  <tr><td><b>Prove the result</b></td><td>✅ <code>measure · impact</code>: before and after, against pages you did not touch</td><td>Their numbers are the input</td></tr>
   <tr><td><b>Price to start</b></td><td>✅ <b>Free.</b> No account, no API key</td><td>A paid plan or prepaid credits</td></tr>
 </table>
 
@@ -149,12 +154,12 @@ Most SEO tools stop at a report. OnPage.dev gives an agent every step, and each 
 
 | Step | What happens | Tools |
 |---|---|---|
-| **Find** | What is wrong for Google, AI search, phones and screen readers, ranked by the traffic it can win | `scan_page`, `start_site_audit`, `render_page`, `screen_reader_view`, `prioritize_fixes`, `match_intent`, `check_readability` |
-| **Fix** | Ready code from the page's own content, shipped as a pull request, through WordPress or at the edge with a Cloudflare Worker on any CMS | `get_fix_pack`, `generate_schema`, `ai_crawler_policy`, `plan_redirects`, `fix_broken_backlinks` |
-| **Check** | The new HTML and JSON-LD tested before deploy, then confirmed live | `scan_html`, `validate_schema`, `compare_html`, `rescan_and_compare` |
-| **Act** | Every shipped fix logged with its old and new value, and the plan sent to Google Sheets, Slack, Notion or the task board | `log_fix`, `export_findings`, `share_result` |
-| **Watch** | Every logged fix checked about every 6 hours, with the restore code sent to your webhook when a deploy undoes one | `get_fix_log`, `watch_page` |
-| **Measure** | Clicks, AI citations and real-user speed before and after, against pages you did not touch, saved per fix with a rollback plan and a client report. Plus why traffic dropped, page-1 results nobody clicks and queries almost on page 1 | `measure_impact`, `measure_ai_citations`, `check_vitals_trend`, `diagnose_traffic_drop`, `find_ctr_gaps`, `find_striking_distance`, `get_fix_log` |
+| **Find** | What is wrong for Google, AI search, phones and screen readers, ranked by the traffic it can win | `scan_page`, `site_audit · start`, `render_page`, `accessibility · screen_reader`, `prioritize_fixes`, `match_intent`, `text_quality · readability` |
+| **Fix** | Ready code from the page's own content, shipped as a pull request, through WordPress or at the edge with a Cloudflare Worker on any CMS | `get_fix_pack`, `schema · generate`, `robots_txt · ai_policy`, `plan_redirects`, `backlinks · broken` |
+| **Check** | The new HTML and JSON-LD tested before deploy, then confirmed live | `scan_page · html`, `schema · validate`, `compare · html`, `scan_page · rescan` |
+| **Act** | Every shipped fix logged with its old and new value, and the plan sent to Google Sheets, Slack, Notion or the task board | `fix_log · log`, `share · export`, `share · link` |
+| **Watch** | Every logged fix checked about every 6 hours, with the restore code sent to your webhook when a deploy undoes one | `fix_log · report`, `watch · page` |
+| **Measure** | Clicks, AI citations and real-user speed before and after, against pages you did not touch, saved per fix with a rollback plan and a client report. Plus why traffic dropped, page-1 results nobody clicks and queries almost on page 1 | `measure · impact`, `measure · ai_citations`, `web_vitals · trend`, `find_opportunities · traffic_drop`, `find_opportunities · ctr_gaps`, `find_opportunities · striking_distance`, `fix_log · report` |
 
 ```
 Four weeks later...
@@ -162,15 +167,15 @@ Four weeks later...
 You:        Did the fixes on /pricing and /features work?
 
 Assistant:  (Search Console)     clicks for 28 days before and after 8 September
-            measure_impact       changed pages +70%, unchanged pages +3%
+            measure · impact     changed pages +70%, unchanged pages +3%
                                  → +66% lift; /features +357% after the stray noindex was removed
 ```
 
-`measure_impact` subtracts the trend of the pages you did not change, so seasonality and Google updates are not counted as your result. It is honest about what it shows: a comparison of two periods, not proof.
+`measure · impact` subtracts the trend of the pages you did not change, so seasonality and Google updates are not counted as your result. It is honest about what it shows: a comparison of two periods, not proof.
 
 ## From finding to done
 
-Most SEO tools stop at a report. OnPage.dev hands the plan to the tools your team already works in, so fixes get assigned and shipped. `export_findings` turns a page scan or a whole site audit into:
+Most SEO tools stop at a report. OnPage.dev hands the plan to the tools your team already works in, so fixes get assigned and shipped. `share · export` turns a page scan or a whole site audit into:
 
 - **Google Sheets**: one row per finding with priority, page, issue, fix, code and status. Every export comes with a private CSV link, so `=IMPORTDATA("https://onpage.dev/export/….csv")` loads it into a sheet with **no connector at all**.
 - **Slack, Teams or Discord**: a ready summary with the fixes that matter most, posted by the agent's Slack tool or straight to an incoming webhook.
@@ -180,8 +185,8 @@ Most SEO tools stop at a report. OnPage.dev hands the plan to the tools your tea
 ```
 You:        Audit example.com, put every fix in a Google Sheet and post the summary in #seo.
 
-Assistant:  start_site_audit     25 pages, 41 findings
-            export_findings      sheet link, Slack message, 12 tasks
+Assistant:  site_audit · start   25 pages, 41 findings
+            share · export       sheet link, Slack message, 12 tasks
             (Google Sheets)      rows added to "SEO fixes"
             (Slack)              posted to #seo
 ```
@@ -201,7 +206,7 @@ It also checks **design and readability**, the details that make a page look pro
 - Mixed button styles: how many corner styles and heights the buttons use.
 - Uneven spacing between sections.
 
-**`screen_reader_view`** reads the page the way a screen reader announces it:
+**`accessibility · screen_reader`** reads the page the way a screen reader announces it:
 
 ```
 heading level 1, Running shoes for flat feet
@@ -214,17 +219,17 @@ link, Read more              ← vague, and weak anchor text
 
 It flags links and buttons without a name, vague link text, form fields without a label, a missing main landmark, skipped headings and visible text hidden from readers. Accessibility is not a direct Google ranking factor, but alt text, link text, headings and text that is not hidden are exactly what search engines, AI answer engines and browsing agents read. Even carefully built sites miss this, including sites built with AI coding assistants. In a real scan of a well-built news site that passed every other check, including Lighthouse, the screen reader view still caught links announced as just "link" in nine different card layouts across the site: each thumbnail image linked to its article but gave a screen reader no name to read.
 
-Have your own browser tool (Claude in Chrome, Playwright)? **`get_layout_probe`** gives a small measurement script and **`analyze_layout`** analyses its results: no daily limit, and it works on staging, localhost and pages behind a login.
+Have your own browser tool (Claude in Chrome, Playwright)? **`layout · probe`** gives a small measurement script and **`layout · analyze`** analyses its results: no daily limit, and it works on staging, localhost and pages behind a login.
 
 
 ## Real-user speed
 
-Lab tests guess. **`check_web_vitals`** shows what real Chrome visitors got over the last 28 days, from the Chrome UX Report: the field data Google uses for ranking.
+Lab tests guess. **`web_vitals · now`** shows what real Chrome visitors got over the last 28 days, from the Chrome UX Report: the field data Google uses for ranking.
 
 ```
 You:        Is our homepage fast enough for Google?
 
-Assistant:  check_web_vitals     Phone: passed · Desktop: passed
+Assistant:  web_vitals · now     Phone: passed · Desktop: passed
                                  LCP  1.4 s   good   93% of visits good
                                  INP  197 ms  good   75% of visits good, 8% poor
                                  CLS  0.00    good   95% of visits good
@@ -241,7 +246,7 @@ Already connected Google Search Console, GA4, Ahrefs or Semrush to your assistan
 ```
 You:        Audit example.com and tell me what to fix first.
 
-Assistant:  start_site_audit     10 pages, average 81
+Assistant:  site_audit · start   10 pages, average 81
             (Ahrefs) top pages   clicks, positions, keywords, referring domains
             prioritize_fixes     ranked by traffic impact
 
@@ -256,7 +261,7 @@ How it works: an MCP server cannot read other connectors, and should not. OnPage
 
 ### And what AI already cites
 
-With Ahrefs Brand Radar (or any source of AI citation counts) connected, `compare_ai_citations` puts the pages ChatGPT, Perplexity, Gemini and Google AI cite next to the ones they skip. OnPage.dev scans every page and shows which checks the cited pages pass and the others fail, the averages side by side (AI readiness, words, facts per 100 words, outside sources, entity graph issues), and what each skipped page should change. It is honest about the limits: a correlation over a few pages, not proof of cause.
+With Ahrefs Brand Radar (or any source of AI citation counts) connected, `ai_visibility · citations` puts the pages ChatGPT, Perplexity, Gemini and Google AI cite next to the ones they skip. OnPage.dev scans every page and shows which checks the cited pages pass and the others fail, the averages side by side (AI readiness, words, facts per 100 words, outside sources, entity graph issues), and what each skipped page should change. It is honest about the limits: a correlation over a few pages, not proof of cause.
 
 What `prioritize_fixes` looks for: blockers on pages with traffic, low click-through for the position, keywords in striking distance (position 4 to 15), top queries missing from the title or H1, and pages with strong backlinks that score badly.
 
@@ -288,7 +293,7 @@ Every run lists new top 3 and page 1 entries, keywords lost, big movers, a diffe
 
 ### Which of your pages wins the keyword
 
-Two pages of yours chase the same keyword and the wrong one ranks. `diagnose_cannibalization` reads the page that should rank and the pages that outrank it, live, and puts them side by side on every on-page signal, then says what to change:
+Two pages of yours chase the same keyword and the wrong one ranks. `check_keyword · cannibalization` reads the page that should rank and the pages that outrank it, live, and puts them side by side on every on-page signal, then says what to change:
 
 ```
 You:        Our blog post outranks the product page for "trail running shoes". Why?
@@ -313,84 +318,84 @@ It counts the keyword in the title (and how early), URL, meta description, H1, H
 
 ### Disavow without the risk, and manual actions cleaned up
 
-A wrong disavow file can cost more rankings than the spam ever did. `build_disavow` takes your backlink data (Ahrefs `is_spam`, Semrush toxic markers or a CSV) and only puts clear spam in `disavow.txt`: domains marked as spam, or spam anchors on sites with no authority and no traffic. Anything with authority goes on a list for a person to decide, and without a manual action or real negative SEO it tells you not to upload the file at all.
+A wrong disavow file can cost more rankings than the spam ever did. `backlinks · disavow` takes your backlink data (Ahrefs `is_spam`, Semrush toxic markers or a CSV) and only puts clear spam in `disavow.txt`: domains marked as spam, or spam anchors on sites with no authority and no traffic. Anything with authority goes on a list for a person to decide, and without a manual action or real negative SEO it tells you not to upload the file at all.
 
-Got a manual action? `explain_manual_action` covers every type in Google's documentation (unnatural links, thin content, cloaking, structured data, site reputation abuse and more): what Google means, the cleanup steps in order, the tools that check them, what to keep as proof, and a reconsideration request draft with a TODO for everything you actually did.
+Got a manual action? `explain_google · manual_action` covers every type in Google's documentation (unnatural links, thin content, cloaking, structured data, site reputation abuse and more): what Google means, the cleanup steps in order, the tools that check them, what to keep as proof, and a reconsideration request draft with a TODO for everything you actually did.
 
 ### Bring your own crawl
 
-`start_site_audit` reads up to 25 pages. Already crawled the site with Screaming Frog, Ahrefs Site Audit, Semrush or Sitebulb? `import_site_audit` takes up to 500 page rows and the internal links, and returns an `audit_id` that every audit tool understands: `get_site_audit`, `map_link_equity`, `suggest_internal_links`, `build_edge_rules`, `check_url_parameters` and `export_findings`.
+`site_audit · start` reads up to 25 pages. Already crawled the site with Screaming Frog, Ahrefs Site Audit, Semrush or Sitebulb? `site_audit · import` takes up to 500 page rows and the internal links, and returns an `audit_id` that every audit tool understands: `site_audit · continue`, `internal_links · equity`, `internal_links · suggest`, `edge_worker · rules`, `check_url_parameters` and `share · export`.
 
 ```
 You:        Here is our Screaming Frog export. What should we fix first?
 
-Assistant:  import_site_audit     480 pages, 6,912 internal links
-            get_site_audit        meta description missing on 118 pages, 9 broken pages
-            map_link_equity       /pricing is 5 clicks deep with 2 links in
-            build_edge_rules      one rule fixes the descriptions on all /blog pages
+Assistant:  site_audit · import   480 pages, 6,912 internal links
+            site_audit · continue  meta description missing on 118 pages, 9 broken pages
+            internal_links · equity  /pricing is 5 clicks deep with 2 links in
+            edge_worker · rules   one rule fixes the descriptions on all /blog pages
 ```
 
-Only the columns you send are checked, so a crawl without a description column never reports 480 missing descriptions. The rows live for one hour, long enough to work through the audit. After that only a compact snapshot (address, status, score, title, canonical, noindex and issue names per page) stays for 90 days, so `compare_site_audits` can show what changed next time.
+Only the columns you send are checked, so a crawl without a description column never reports 480 missing descriptions. The rows live for one hour, long enough to work through the audit. After that only a compact snapshot (address, status, score, title, canonical, noindex and issue names per page) stays for 90 days, so `site_audit · compare` can show what changed next time.
 
 ### What changed since the last audit
 
-Every finished site audit, crawled or imported, leaves a small snapshot for 90 days. After the next release, run the audit again and `compare_site_audits` shows what moved:
+Every finished site audit, crawled or imported, leaves a small snapshot for 90 days. After the next release, run the audit again and `site_audit · compare` shows what moved:
 
 ```
 You:        We shipped the new templates. Did anything break?
 
-Assistant:  import_site_audit     480 pages from this morning's crawl
-            compare_site_audits   vs the crawl of 3 October
+Assistant:  site_audit · import   480 pages from this morning's crawl
+            site_audit · compare  vs the crawl of 3 October
 
             Regressions: /pricing now returns 404, /blog/guide turned noindex,
             12 product pages changed their canonical.
             Fixed: meta descriptions on 118 pages, 9 broken pages work again.
 ```
 
-Or let it run by itself: `schedule_site_audit` audits the site every day, week or month (up to 25 pages), compares each audit with the last one, and posts the changes to Slack, Discord or any https webhook when pages broke, turned noindex, changed canonical or got new issues. `action: "status"` shows the last result.
+Or let it run by itself: `watch · site_audit` audits the site every day, week or month (up to 25 pages), compares each audit with the last one, and posts the changes to Slack, Discord or any https webhook when pages broke, turned noindex, changed canonical or got new issues. `action: "status"` shows the last result.
 
 ### Links to win, and AI answers to enter
 
 Two more jobs where your SEO tool has the data and OnPage.dev makes it a plan:
 
 - **`track_rankings`**: Search Console plus Ahrefs or Semrush rank tracking, keywords picked from your work, money pages and near wins, with what moved each run.
-- **`build_disavow`**: disavow.txt with only clear spam, the rest up for review, and a warning when you should not upload it.
-- **`explain_manual_action`**: every Google manual action type with cleanup steps, checking tools, proof to keep and a reconsideration request draft.
-- **`check_outbound_links`**: dead links to other sites, cited pages that now redirect to a home page and moved pages, with an archived copy as replacement.
-- **`diagnose_cannibalization`**: the page that should rank next to your pages that outrank it, signal by signal (title, URL, meta, H1 to H3, mentions, first 100 words, bold, italics, alt texts, file names, internal keyword anchors), with the plan to fix it.
-- **`plan_split_test`**: 20+ pages of one template split into two groups with equal traffic, a Worker that changes the title or description on one group only (same for visitors and Googlebot), measured with `measure_impact`.
-- **`share_audit_report`**: a finished site audit as a clean report page with your agency name, to send as a link or save as a PDF.
-- **`check_spelling`**: real spelling and grammar errors in a page's main text (LanguageTool, about 30 languages), brand names and style advice left out.
-- **`generate_sitemap`**: sitemap.xml from an audit with only indexable, self-canonical pages and the reason for every page left out.
-- **Sections and competitors**: `get_site_audit` shows issues per section; `compare_site_audits` with `competitor_audit_id` compares two sites side by side.
-- **`find_content_decay`**: monthly clicks per page (Search Console, Ahrefs pages-history or GA4) become a refresh queue of pages that peaked and kept falling, seasonal dips left out.
-- **`fix_alt_texts`**: lists images without alt text; your assistant looks at them and writes the texts; OnPage.dev checks them and ships them as HTML, a Cloudflare Worker, WordPress or code.
-- **Applied internal links**: `suggest_internal_links` with `platform` returns a Cloudflare Worker that links the first mention on each page (never inside an existing link), a WordPress plan or code edits.
+- **`backlinks · disavow`**: disavow.txt with only clear spam, the rest up for review, and a warning when you should not upload it.
+- **`explain_google · manual_action`**: every Google manual action type with cleanup steps, checking tools, proof to keep and a reconsideration request draft.
+- **`check_links · outbound`**: dead links to other sites, cited pages that now redirect to a home page and moved pages, with an archived copy as replacement.
+- **`check_keyword · cannibalization`**: the page that should rank next to your pages that outrank it, signal by signal (title, URL, meta, H1 to H3, mentions, first 100 words, bold, italics, alt texts, file names, internal keyword anchors), with the plan to fix it.
+- **`plan_split_test`**: 20+ pages of one template split into two groups with equal traffic, a Worker that changes the title or description on one group only (same for visitors and Googlebot), measured with `measure · impact`.
+- **`site_audit · report`**: a finished site audit as a clean report page with your agency name, to send as a link or save as a PDF.
+- **`text_quality · spelling`**: real spelling and grammar errors in a page's main text (LanguageTool, about 30 languages), brand names and style advice left out.
+- **`sitemap · generate`**: sitemap.xml from an audit with only indexable, self-canonical pages and the reason for every page left out.
+- **Sections and competitors**: `site_audit · continue` shows issues per section; `site_audit · compare` with `competitor_audit_id` compares two sites side by side.
+- **`find_opportunities · content_decay`**: monthly clicks per page (Search Console, Ahrefs pages-history or GA4) become a refresh queue of pages that peaked and kept falling, seasonal dips left out.
+- **`get_fix_pack · alt_texts`**: lists images without alt text; your assistant looks at them and writes the texts; OnPage.dev checks them and ships them as HTML, a Cloudflare Worker, WordPress or code.
+- **Applied internal links**: `internal_links · suggest` with `platform` returns a Cloudflare Worker that links the first mention on each page (never inside an existing link), a WordPress plan or code edits.
 - **Google Business Profile vs site**: `check_local_seo` with `gbp_profile` compares name, phone, address, opening hours per day, category and the profile's website link with the site.
-- **Rich result errors**: `explain_index_status` groups URL Inspection `richResultsResult` and Enhancements export rows per type and issue, so a broken template is one fix.
-- **`fix_core_web_vitals`**: speed fixes as code, ordered by the failing metric (main image priority, deferred scripts, preconnect, font swap, image sizes), also as a Cloudflare Worker.
-- **`find_link_opportunities`**: pass the referring domains of up to 5 competitors and your own (Ahrefs, Semrush or a CSV). You get the sites that link to two or more competitors but not to you, ranked by overlap and domain rating, typed (best-of list, resource page, review site, directory, forum, news) with how to approach each, and checked live. Add pages that mention your brand and it reads each one: the ones that name you without a link come back with the sentence to quote in your email.
-- **`find_ai_visibility_gaps`**: pass real AI answers from Ahrefs Brand Radar or another AI visibility tool. You get your share of answers per engine next to each competitor, the questions where they are named and you are not (by search volume), what the AI searched to answer them, and the outside sites it cites, which are the places to get onto.
+- **Rich result errors**: `explain_google · index_status` groups URL Inspection `richResultsResult` and Enhancements export rows per type and issue, so a broken template is one fix.
+- **`get_fix_pack · web_vitals`**: speed fixes as code, ordered by the failing metric (main image priority, deferred scripts, preconnect, font swap, image sizes), also as a Cloudflare Worker.
+- **`backlinks · opportunities`**: pass the referring domains of up to 5 competitors and your own (Ahrefs, Semrush or a CSV). You get the sites that link to two or more competitors but not to you, ranked by overlap and domain rating, typed (best-of list, resource page, review site, directory, forum, news) with how to approach each, and checked live. Add pages that mention your brand and it reads each one: the ones that name you without a link come back with the sentence to quote in your email.
+- **`ai_visibility · gaps`**: pass real AI answers from Ahrefs Brand Radar or another AI visibility tool. You get your share of answers per engine next to each competitor, the questions where they are named and you are not (by search volume), what the AI searched to answer them, and the outside sites it cites, which are the places to get onto.
 
 ```
 You:        Why does ChatGPT recommend Rivalo and not us?
 
 Assistant:  (Ahrefs) Brand Radar     120 answers for us and 2 competitors
-            find_ai_visibility_gaps  ChatGPT names Rivalo in 41%, us in 12%
+            ai_visibility · gaps     ChatGPT names Rivalo in 41%, us in 12%
                                      14 questions where only they appear
                                      cited most: zapier.com list, g2.com, reddit
-            find_link_opportunities  zapier.com links to both rivals, not to us
+            backlinks · opportunities  zapier.com links to both rivals, not to us
 ```
 
 ### And the links you lost
 
-Other sites still link to pages you deleted or moved, and visitors still land on them. Every one of those links and visits is value you no longer get. With Ahrefs, Semrush, GA4 (page views of your 404 page) or a CSV export, `fix_broken_backlinks` turns them back into ranking power and traffic:
+Other sites still link to pages you deleted or moved, and visitors still land on them. Every one of those links and visits is value you no longer get. With Ahrefs, Semrush, GA4 (page views of your 404 page) or a CSV export, `backlinks · broken` turns them back into ranking power and traffic:
 
 ```
 You:        Which of our backlinks point at dead pages? Fix them.
 
 Assistant:  (Ahrefs) broken backlinks   112 links to 19 dead pages
-            fix_broken_backlinks        ranked by linking sites and domain rating
+            backlinks · broken          ranked by linking sites and domain rating
                                         top 20 checked live: 14 dead, 3 already fixed, 2 block bots
 
             1. /blog/running-shoes-guide  38 sites, best DR 81  → /guides/running-shoes
@@ -399,11 +404,11 @@ Assistant:  (Ahrefs) broken backlinks   112 links to 19 dead pages
             14 rules ready for _redirects. /old-promo is still in your sitemap.
 ```
 
-The dead pages are grouped and ranked by link value (each linking site counts once, weighted by domain rating, nofollow at 30%). The top 20 are checked live, so pages that already work again or only block bots are not redirected by mistake. Each dead page gets the best live page from your sitemap or a site audit, matched on the URL, the page title and the anchor texts other sites used. No close match? It says so instead of dumping the link on the home page. GA4 404 hits add real visits to the ranking, and when the visitors came from one of your own pages, that link is listed as an edit instead of hiding it behind a redirect. The rules come out for `_redirects`, nginx, Apache, Next.js or CSV, with the strongest linking sites worth an email. Then `check_urls` confirms each one is a single 301 and `log_fix` keeps watching them.
+The dead pages are grouped and ranked by link value (each linking site counts once, weighted by domain rating, nofollow at 30%). The top 20 are checked live, so pages that already work again or only block bots are not redirected by mistake. Each dead page gets the best live page from your sitemap or a site audit, matched on the URL, the page title and the anchor texts other sites used. No close match? It says so instead of dumping the link on the home page. GA4 404 hits add real visits to the ranking, and when the visitors came from one of your own pages, that link is listed as an edit instead of hiding it behind a redirect. The rules come out for `_redirects`, nginx, Apache, Next.js or CSV, with the strongest linking sites worth an email. Then `check_links · urls` confirms each one is a single 301 and `fix_log · log` keeps watching them.
 
 Lost backlinks work too. Pass Ahrefs backlinks with their history and `lost_reason`: a page that died or a redirect that broke on your side gets a 301, and a link the other site took out goes on an outreach list, strongest first, with what to ask ("put it back", "link the new version of your page") and the sentence the link used to sit in.
 
-No Search Console connected? `find_striking_distance` and `map_topics` also take Ahrefs or Semrush organic keyword rows (keyword, url, position, volume, traffic). And `map_topics` with `competitor_rows` gives a keyword gap: topics where competitors rank in the top 10 and you do not, by search volume, with the page to strengthen or the page to write.
+No Search Console connected? `find_opportunities · striking_distance` and `map_topics` also take Ahrefs or Semrush organic keyword rows (keyword, url, position, volume, traffic). And `map_topics` with `competitor_rows` gives a keyword gap: topics where competitors rank in the top 10 and you do not, by search volume, with the page to strengthen or the page to write.
 
 ## Matches search intent
 
@@ -431,10 +436,10 @@ Assistant:  (Ahrefs) serp-overview   top 7 results
 
 ### Readability that fits the page
 
-A product page should not read like documentation. `check_readability` measures reading ease (Flesch, or Flesch-Douma for Dutch) against the right target: the median of the pages that rank for the keyword, or the common norm for the page type when there are no competitors. It lists the hardest sentences and paragraphs to rewrite first, ignoring menus, link lists and tables.
+A product page should not read like documentation. `text_quality · readability` measures reading ease (Flesch, or Flesch-Douma for Dutch) against the right target: the median of the pages that rank for the keyword, or the common norm for the page type when there are no competitors. It lists the hardest sentences and paragraphs to rewrite first, ignoring menus, link lists and tables.
 
 ```
-Assistant:  check_readability   Reading ease 63, ranking pages median 52 (52, 63, 49)
+Assistant:  text_quality · readability  Reading ease 63, ranking pages median 52 (52, 63, 49)
             Hardest sentence (22 words, score 8):
             "Runner's World Running Reviews Editor, Amanda Furrer, who has
              relatively low arches, researched shoe testing data from..."
@@ -455,7 +460,7 @@ Assistant:  scan_page            46: title too short, no meta description, 1 ima
 
             Shall I apply these 3 changes?          You: yes
             (WordPress) update post + media
-            rescan_and_compare   94, all 3 fixed
+            scan_page · rescan   94, all 3 fixed
 ```
 
 - The exact field for each value in Yoast SEO and Rank Math, alt texts for the media library, and structured data as a Custom HTML block.
@@ -491,17 +496,17 @@ Assistant:  scan_page            58: title too short, no canonical, no structure
                                  JSON-LD in the page component
             git switch -c seo/onpage-pricing
             (edit app/pricing/page.tsx, build)
-            scan_html            91, nothing else changed
+            scan_page · html     91, nothing else changed
             gh pr create         #42 "SEO: title, canonical, jsonLd for /pricing"
 ```
 
 - `metadata` for Next.js, `useSeoMeta` and `useHead` for Nuxt and Vue, `<svelte:head>` for SvelteKit, the `Title` and `Meta` services for Angular, head tags for Astro and plain HTML.
-- Always a new branch, checked with `scan_html` before the PR, never merged by the agent.
+- Always a new branch, checked with `scan_page · html` before the PR, never merged by the agent.
 - For client-side React, Vue and Angular apps it also says how to prerender, because AI crawlers do not run JavaScript.
 
 ## Share cards, with a free API
 
-`check_og_tags` shows how a page looks when it is shared on Facebook, LinkedIn, X, WhatsApp and Slack: every Open Graph and Twitter tag, and the share image itself. It loads the image and reads its real size from the file header, so it catches the cases other checkers miss: an `og:image` that returns 404, a 400 x 400 logo where a 1200 x 630 image belongs, an SVG that no platform shows, or a 6 MB file.
+`snippet · social` shows how a page looks when it is shared on Facebook, LinkedIn, X, WhatsApp and Slack: every Open Graph and Twitter tag, and the share image itself. It loads the image and reads its real size from the file header, so it catches the cases other checkers miss: an `og:image` that returns 404, a 400 x 400 logo where a 1200 x 630 image belongs, an SVG that no platform shows, or a 6 MB file.
 
 The same check is a free public REST API, no key needed:
 
@@ -519,12 +524,12 @@ curl "https://onpage.dev/api/v1/og?url=https://example.com"
 
 ## Keeps watching after you ship
 
-Most SEO problems are not there on launch day. They arrive later: a deploy adds `noindex`, a CMS update changes the canonical, a new robots.txt blocks GPTBot. `watch_page` rechecks a page about once a day and records every change for search and AI. Alerts go to a private RSS feed and, if you give one, a Slack or Discord webhook. No account, no key.
+Most SEO problems are not there on launch day. They arrive later: a deploy adds `noindex`, a CMS update changes the canonical, a new robots.txt blocks GPTBot. `watch · page` rechecks a page about once a day and records every change for search and AI. Alerts go to a private RSS feed and, if you give one, a Slack or Discord webhook. No account, no key.
 
 ```
 You:        Keep an eye on our pricing page and tell me if anything breaks.
 
-Assistant:  watch_page           baseline 94/100, 8 of 8 AI crawlers allowed
+Assistant:  watch · page         baseline 94/100, 8 of 8 AI crawlers allowed
             ...three days later, in your Slack:
             OnPage.dev: 2 change(s) on https://example.com/pricing
             - A noindex tag was added: the page will drop out of Google
@@ -534,57 +539,82 @@ Assistant:  watch_page           baseline 94/100, 8 of 8 AI crawlers allowed
 And three more jobs agents get asked to do every week:
 
 - **`create_content_brief`**: give a search term and the pages that rank, get a writing brief: the subtopics most of them cover, the questions they answer, figures to back up with your own data, a target length, schema and internal links. Bot walls and navigation headings are filtered out.
-- **`plan_redirects`**: give the old and new URLs (or the sites, to read their sitemaps) and get a 301 map with a confidence score per match, written as `_redirects`, nginx, Apache, Next.js or CSV. Then verify after launch with `check_urls`.
-- **`import_site_audit`**: pass the page rows of a crawl you already have (Screaming Frog, Ahrefs Site Audit, Semrush, Sitebulb), up to 500 pages plus the internal links, and every audit tool works on the whole site. Only the columns you send are checked.
-- **`compare_site_audits`**: a finished site audit against the previous one of the same site (snapshots kept 90 days): pages that broke, turned noindex or changed canonical or title, issues new or fixed per code, pages added or gone, average score before and after.
-- **`schedule_site_audit`**: audits a whole site every 1, 7 or 30 days, compares each audit with the previous one and posts regressions to a webhook (Slack, Discord or any https endpoint). Status and stop with the schedule_id.
-- **`find_link_opportunities`**: competitor backlink gap (sites linking to 2+ competitors, not to you) ranked and typed with how to approach each, plus unlinked brand mentions read live with the sentence to quote.
-- **`find_ai_visibility_gaps`**: real AI answers (Brand Radar or similar) turned into share per engine, questions where only competitors are named, the AI's searches and the sites it cites.
-- **`fix_broken_backlinks`**: pass the broken backlinks from Ahrefs, Semrush or a CSV export. The dead pages are ranked by the sites that still link to them, the top 20 are checked live, each gets the best live page to 301 to (from the sitemap, a site audit and the anchor texts), and the rules come out ready to ship. Dead pages still in the sitemap, redirect chains and temporary redirects are flagged too.
-- **`share_result`**: after fixing a site, publish a before and after page (for example 46 → 94, with the issues fixed) to send to your client. Not indexed, expires after 90 days.
+- **`plan_redirects`**: give the old and new URLs (or the sites, to read their sitemaps) and get a 301 map with a confidence score per match, written as `_redirects`, nginx, Apache, Next.js or CSV. Then verify after launch with `check_links · urls`.
+- **`site_audit · import`**: pass the page rows of a crawl you already have (Screaming Frog, Ahrefs Site Audit, Semrush, Sitebulb), up to 500 pages plus the internal links, and every audit tool works on the whole site. Only the columns you send are checked.
+- **`site_audit · compare`**: a finished site audit against the previous one of the same site (snapshots kept 90 days): pages that broke, turned noindex or changed canonical or title, issues new or fixed per code, pages added or gone, average score before and after.
+- **`watch · site_audit`**: audits a whole site every 1, 7 or 30 days, compares each audit with the previous one and posts regressions to a webhook (Slack, Discord or any https endpoint). Status and stop with the schedule_id.
+- **`backlinks · opportunities`**: competitor backlink gap (sites linking to 2+ competitors, not to you) ranked and typed with how to approach each, plus unlinked brand mentions read live with the sentence to quote.
+- **`ai_visibility · gaps`**: real AI answers (Brand Radar or similar) turned into share per engine, questions where only competitors are named, the AI's searches and the sites it cites.
+- **`backlinks · broken`**: pass the broken backlinks from Ahrefs, Semrush or a CSV export. The dead pages are ranked by the sites that still link to them, the top 20 are checked live, each gets the best live page to 301 to (from the sitemap, a site audit and the anchor texts), and the rules come out ready to ship. Dead pages still in the sitemap, redirect chains and temporary redirects are flagged too.
+- **`share · link`**: after fixing a site, publish a before and after page (for example 46 → 94, with the issues fixed) to send to your client. Not indexed, expires after 90 days.
 
+
+## Acts, guards and measures like an SEO team
+
+The work around the fixes, done by your agent with the tools you already connected.
+
+| Job | Call | What you get |
+|---|---|---|
+| Outreach that wins links | `backlinks · outreach` | One short email per site from your backlink data: the broken or missing link, your page and the anchor. Drafts in Gmail or Outlook after you approve |
+| A plan your team can run | `plan_sprint` | Fixes sorted into weeks for developer, content and outreach within their hours, as tickets in Linear, Jira, Asana, monday.com or GitHub |
+| Fixes recrawled fast | `request_recrawl` | Each shipped page checked for status, noindex and canonical, fresh sitemap lastmod entries, IndexNow, and the pages to request in Search Console |
+| Deploy guard | `watch · guard` | robots.txt, sitemap, https and key pages checked every 6 hours. A `Disallow: /`, a `noindex` or a moved canonical reaches your Slack with the fix |
+| What competitors publish | `watch · competitors` | New, updated and removed pages from up to 3 competitors' sitemaps every week, flagged when they touch your topics |
+| Visits from AI assistants | `measure · ai_referrals` | ChatGPT, Perplexity, Gemini, Copilot and Claude visits from GA4, per landing page, and how they convert |
+| Brand versus non-brand | `measure · brand_split` | Whether growth comes from SEO or from people searching your name |
+| Share of voice | `measure · share_of_voice` | Your share of the clicks against competitors from Ahrefs or Semrush rank rows, and the keywords where they take them |
+
+```
+You:        We shipped the new templates. Make sure nothing broke and plan next month.
+
+Assistant:  request_recrawl      12 of 12 pages indexable, IndexNow sent
+            watch · guard        guarding robots.txt, sitemap and 5 key pages
+            plan_sprint          19 tasks over 4 weeks, tickets ready for Linear
+            ...two days later, in your Slack:
+            OnPage.dev guard: /pricing has noindex. Fix: remove the noindex meta tag.
+```
 ## Built for agents
 
 What makes OnPage.dev different from every other SEO MCP server:
 
-- **Everything in one chat, dashboards included.** Data, plan, the fix your agent deploys and the proof all happen in the chat. `create_dashboard_feed` checks a site's key pages every day, `get_dashboard_data` returns the history as clean tables that join with GA4 and Search Console, and `build_seo_dashboard` designs a live dashboard for Claude with a realtime GA4 block (active users per minute, pages, events) next to SEO health, fixes, speed and AI visibility.
+- **Everything in one chat, dashboards included.** Data, plan, the fix your agent deploys and the proof all happen in the chat. `dashboard · feed` checks a site's key pages every day, `dashboard · data` returns the history as clean tables that join with GA4 and Search Console, and `dashboard · build` designs a live dashboard for Claude with a realtime GA4 block (active users per minute, pages, events) next to SEO health, fixes, speed and AI visibility.
 - **Takes action, not notes.** Your agent ships the fix itself: a pull request in your framework, a change through your own WordPress connection, or a Cloudflare Worker from `get_fix_pack` with `platform: "cloudflare"` that corrects the tags as the page is served, on any CMS on your own Cloudflare account. One step to roll back.
-- **Closes the loop for real.** `log_fix` records every fix that shipped. OnPage.dev checks about every 6 hours that each one is still live, sends the restore code to your webhook when a deploy undoes it, saves `measure_impact` results per fix with a rollback plan when one did worse, and `get_fix_log` writes the client report.
-- **Proves the result.** `measure_impact` compares before and after numbers against a control group of unchanged pages. [More](#the-whole-loop-inside-your-ai-agent).
-- **From finding to done.** `export_findings` sends the plan to Google Sheets (no connector needed), Slack, Notion or a task board. [More](#from-finding-to-done).
+- **Closes the loop for real.** `fix_log · log` records every fix that shipped. OnPage.dev checks about every 6 hours that each one is still live, sends the restore code to your webhook when a deploy undoes it, saves `measure · impact` results per fix with a rollback plan when one did worse, and `fix_log · report` writes the client report.
+- **Proves the result.** `measure · impact` compares before and after numbers against a control group of unchanged pages. [More](#the-whole-loop-inside-your-ai-agent).
+- **From finding to done.** `share · export` sends the plan to Google Sheets (no connector needed), Slack, Notion or a task board. [More](#from-finding-to-done).
 - **Sees every reader.** First screen on phone, tablet and desktop in a real browser, and the page read aloud like a screen reader. [More](#seen-by-every-reader).
 - **Handles JavaScript apps.** Pure client-side React, Angular and Vue apps get a full audit of the rendered page, the way Google sees it, plus how little AI crawlers get without JavaScript.
 - **Ships anywhere.** WordPress through your own connection, every other stack as a Git pull request with framework code. [More](#ships-as-a-pull-request).
-- **Real users and real bots.** `check_web_vitals` reads Core Web Vitals from real Chrome users; `analyze_logs` shows what Googlebot and AI crawlers actually crawl.
-- **Multilingual and trustworthy.** `check_hreflang` checks every language version and writes the corrected tag set; `check_trust_signals` checks the E-E-A-T signals across the whole site.
-- **No gaps in the technical audit.** `check_sitemap` checks format, limits and lastmod dates and samples the listed URLs for redirects, errors, noindex and canonicals elsewhere. `extract_from_pages` pulls one value from up to 20 pages (CSS selector, regex or JSON-LD path). `find_duplicate_content` groups near-duplicate pages from an audit by their own content, and `check_url_parameters` finds tracking, search and filter URLs that trap crawlers.
-- **Measures more than clicks.** `diagnose_traffic_drop` explains a drop page by page (lost rankings, lower demand, fewer clicks at the same position, pages that dropped out), `find_ctr_gaps` and `find_striking_distance` find the fastest wins in Search Console data, `check_vitals_trend` shows real-user speed weekly for about 9 months before and after a fix, and `measure_ai_citations` proves the gains in AI answers against a control group.
-- **Fixes a whole section, and JavaScript apps.** `build_edge_rules` turns a site audit into one Cloudflare Worker rule per section (titles, descriptions, canonicals, social tags on every matching page, with a preview). `get_prerender_worker` serves GPTBot, ClaudeBot and PerplexityBot the rendered page of a React, Vue or Angular app from Browser Rendering in your own Cloudflare account.
-- **Explains why Google skips a page.** `explain_index_status` turns Search Console URL Inspection results into causes, fixes and the next tool, and every scan catches a head that ends early (an image or iframe in `<head>` that hides the canonical).
-- **Watches your competitors.** `watch_page` with `competitor_of` follows a competitor's page; when they add a section, structured data or a lot more text, the alert says what your page is missing and which tool fixes it.
-- **Every fix in your GA4 charts and your repo.** `get_fix_log` with `format: "annotations"` marks each fix day in GA4, and the [fix guard](#github-action-fix-guard) GitHub Action opens an issue with the restore code when a deploy undoes a fix.
-- **Debugs your GA4.** `check_ga4_tracking` captures the hits a page really sends to Google in a real browser, before and after accepting cookies and on a return visit: double counting, tracking before consent, a banner that never updates Consent Mode, debug mode left on, Universal Analytics leftovers.
-- **Makes AI read and quote you.** `ai_crawler_policy` writes robots.txt rules for 13 AI crawlers, `generate_llms_txt` and `validate_llms_txt` handle llms.txt, `find_answer_passages` shows whether a page answers well enough to be quoted, `check_entity_graph` checks that AI knows who is behind the site.
-- **Maps your topics and wins the snippet.** `map_topics` groups Search Console queries into topics with the page that owns each one, competing pages and gaps; `check_answer_format` shows the answer format (paragraph, list or table) that wins the featured snippet.
-- **Matches what ranks.** `match_intent` finds the page type Google rewards for a keyword, `check_readability` compares reading ease with the pages that rank, and `create_content_brief` turns them into a writing brief.
-- **Share previews that work.** `check_og_tags` loads the real share image and checks it against Facebook, LinkedIn and X, also as a free REST API.
-- **Local and linked.** `check_local_seo` checks LocalBusiness markup, NAP consistency, the Google Business Profile link and a page per location; `map_link_equity` maps internal PageRank and click depth and shows which important pages need more links.
-- **Ready for AI Mode.** `check_question_coverage` checks a page against the sub-questions AI search fans out for a topic, and shows the gaps where AI will cite someone else.
-- **Accessibility for the EAA.** `check_accessibility` maps every check to WCAG 2.1 AA, the standard behind the European Accessibility Act.
-- **Ecommerce and consent.** `check_product_page` checks Product markup for merchant listings; `check_consent` checks the cookie banner and Consent Mode v2.
-- **Closes the loop after shipping.** `submit_indexnow` pings Bing and other IndexNow engines, and the agent runs URL Inspection in your Search Console tool for Google.
+- **Real users and real bots.** `web_vitals · now` reads Core Web Vitals from real Chrome users; `analyze_logs` shows what Googlebot and AI crawlers actually crawl.
+- **Multilingual and trustworthy.** `check_hreflang` checks every language version and writes the corrected tag set; `entity · trust` checks the E-E-A-T signals across the whole site.
+- **No gaps in the technical audit.** `sitemap · check` checks format, limits and lastmod dates and samples the listed URLs for redirects, errors, noindex and canonicals elsewhere. `extract_from_pages` pulls one value from up to 20 pages (CSS selector, regex or JSON-LD path). `find_duplicate_content` groups near-duplicate pages from an audit by their own content, and `check_url_parameters` finds tracking, search and filter URLs that trap crawlers.
+- **Measures more than clicks.** `find_opportunities · traffic_drop` explains a drop page by page (lost rankings, lower demand, fewer clicks at the same position, pages that dropped out), `find_opportunities · ctr_gaps` and `find_opportunities · striking_distance` find the fastest wins in Search Console data, `web_vitals · trend` shows real-user speed weekly for about 9 months before and after a fix, and `measure · ai_citations` proves the gains in AI answers against a control group.
+- **Fixes a whole section, and JavaScript apps.** `edge_worker · rules` turns a site audit into one Cloudflare Worker rule per section (titles, descriptions, canonicals, social tags on every matching page, with a preview). `edge_worker · prerender` serves GPTBot, ClaudeBot and PerplexityBot the rendered page of a React, Vue or Angular app from Browser Rendering in your own Cloudflare account.
+- **Explains why Google skips a page.** `explain_google · index_status` turns Search Console URL Inspection results into causes, fixes and the next tool, and every scan catches a head that ends early (an image or iframe in `<head>` that hides the canonical).
+- **Watches your competitors.** `watch · page` with `competitor_of` follows a competitor's page; when they add a section, structured data or a lot more text, the alert says what your page is missing and which tool fixes it.
+- **Every fix in your GA4 charts and your repo.** `fix_log · report` with `format: "annotations"` marks each fix day in GA4, and the [fix guard](#github-action-fix-guard) GitHub Action opens an issue with the restore code when a deploy undoes a fix.
+- **Debugs your GA4.** `tracking · ga4` captures the hits a page really sends to Google in a real browser, before and after accepting cookies and on a return visit: double counting, tracking before consent, a banner that never updates Consent Mode, debug mode left on, Universal Analytics leftovers.
+- **Makes AI read and quote you.** `robots_txt · ai_policy` writes robots.txt rules for 13 AI crawlers, `llms_txt · generate` and `llms_txt · validate` handle llms.txt, `answer_readiness · passages` shows whether a page answers well enough to be quoted, `entity · graph` checks that AI knows who is behind the site.
+- **Maps your topics and wins the snippet.** `map_topics` groups Search Console queries into topics with the page that owns each one, competing pages and gaps; `answer_readiness · format` shows the answer format (paragraph, list or table) that wins the featured snippet.
+- **Matches what ranks.** `match_intent` finds the page type Google rewards for a keyword, `text_quality · readability` compares reading ease with the pages that rank, and `create_content_brief` turns them into a writing brief.
+- **Share previews that work.** `snippet · social` loads the real share image and checks it against Facebook, LinkedIn and X, also as a free REST API.
+- **Local and linked.** `check_local_seo` checks LocalBusiness markup, NAP consistency, the Google Business Profile link and a page per location; `internal_links · equity` maps internal PageRank and click depth and shows which important pages need more links.
+- **Ready for AI Mode.** `answer_readiness · questions` checks a page against the sub-questions AI search fans out for a topic, and shows the gaps where AI will cite someone else.
+- **Accessibility for the EAA.** `accessibility · wcag` maps every check to WCAG 2.1 AA, the standard behind the European Accessibility Act.
+- **Ecommerce and consent.** `check_product_page` checks Product markup for merchant listings; `tracking · consent` checks the cookie banner and Consent Mode v2.
+- **Closes the loop after shipping.** `request_recrawl · indexnow` pings Bing and other IndexNow engines, and the agent runs URL Inspection in your Search Console tool for Google.
 - **Reads every language right.** Reading ease uses the formula for the page language: Flesch-Douma for Dutch, Amstad for German, Kandel-Moles for French, Fernández-Huerta for Spanish.
 - **A public scoring method.** Every check, what it costs and what the score leaves out, on [onpage.dev/methodology](https://onpage.dev/methodology). What changed lives on [onpage.dev/changelog](https://onpage.dev/changelog).
-- **Light on context.** Connect `https://onpage.dev/mcp?tools=core` for the 10 main tools when your agent already loads many servers.
-- **Keeps watching.** `watch_page` catches regressions after launch and alerts by RSS or webhook. [More](#keeps-watching-after-you-ship).
-- **Uses the data you already have.** Search Console, GA4, Ahrefs or Semrush in the same chat? `prioritize_fixes` ranks every fix by traffic impact with their numbers, and `compare_ai_citations` shows what the pages AI cites do differently. [How it works](#uses-the-seo-data-you-already-have).
+- **Light on context.** 46 tools cover 96 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 7 main tools when your agent already loads many servers.
+- **Keeps watching.** `watch · page` catches regressions after launch and alerts by RSS or webhook. [More](#keeps-watching-after-you-ship).
+- **Uses the data you already have.** Search Console, GA4, Ahrefs or Semrush in the same chat? `prioritize_fixes` ranks every fix by traffic impact with their numbers, and `ai_visibility · citations` shows what the pages AI cites do differently. [How it works](#uses-the-seo-data-you-already-have).
 - **Stable issue codes and typed results.** Every issue has a fixed code like `meta-missing` or `h1-missing`, and the main tools declare an output schema. An agent can work through issues one by one and prove each one is gone.
-- **It checks the code the agent writes.** `scan_html`, `validate_schema` and `compare_html` test new HTML and JSON-LD before it ships, and catch regressions such as a stray `noindex` or a removed canonical.
-- **Launch and migration built in.** `check_urls` follows every redirect chain for up to 20 URLs at once; `test_robots` answers "may this bot fetch this URL" with Google's own matching rules, including `*` and `$` wildcards.
-- **Whole sites, step by step.** `start_site_audit` runs as a job the agent works through, so a 25-page audit fits a free hosted service. It reports issues across the site by code, broken and orphan pages and duplicates.
-- **You vs the pages that rank.** `compare_pages` puts a page next to up to 3 competitors with content gaps and fixes to catch up; `suggest_internal_links` shows which pages should link where.
-- **Knowledge graph ready.** `check_entity_graph` checks that your Organization and authors are real, linked entities with profile links, not just valid markup. `validate_llms_txt` catches the common case where /llms.txt returns an HTML page.
-- **Citability, not just crawlability.** AI readiness checks fact density, cited outside sources and whether every question heading gets a direct answer. `compare_pages` shows the facts and figures only a competitor gives, and the ones only you give: information gain, measured against the pages that rank.
+- **It checks the code the agent writes.** `scan_page · html`, `schema · validate` and `compare · html` test new HTML and JSON-LD before it ships, and catch regressions such as a stray `noindex` or a removed canonical.
+- **Launch and migration built in.** `check_links · urls` follows every redirect chain for up to 20 URLs at once; `robots_txt · test` answers "may this bot fetch this URL" with Google's own matching rules, including `*` and `$` wildcards.
+- **Whole sites, step by step.** `site_audit · start` runs as a job the agent works through, so a 25-page audit fits a free hosted service. It reports issues across the site by code, broken and orphan pages and duplicates.
+- **You vs the pages that rank.** `compare · pages` puts a page next to up to 3 competitors with content gaps and fixes to catch up; `internal_links · suggest` shows which pages should link where.
+- **Knowledge graph ready.** `entity · graph` checks that your Organization and authors are real, linked entities with profile links, not just valid markup. `llms_txt · validate` catches the common case where /llms.txt returns an HTML page.
+- **Citability, not just crawlability.** AI readiness checks fact density, cited outside sources and whether every question heading gets a direct answer. `compare · pages` shows the facts and figures only a competitor gives, and the ones only you give: information gain, measured against the pages that rank.
 - **No made-up advice.** The `onpage://rules` resource gives the assistant every check, threshold and fix, so it explains SEO from the same rules the scanner uses.
 - **Free and hosted.** Paste one URL. No account, no API key, no install.
 
@@ -658,117 +688,130 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-88 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+46 tools that cover 96 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
 | Tool | What it does | Example result |
 |---|---|---|
 | `scan_page` | Score from 0 to 100, the issues to fix first with why and how, AI readiness and key facts | `46/100, 5 fixes` |
-| `deep_audit` | Everything measured, by section: speed hints, links and anchor texts, accessibility, image SEO, rich results, security headers, content and technical facts | `8 sections` |
+| `scan_page · deep` | Everything measured, by section: speed hints, links and anchor texts, accessibility, image SEO, rich results, security headers, content and technical facts | `8 sections` |
 | `get_fix_pack` | Ready-to-paste HTML for every issue, written from the page's own content. With `platform: "git"`: code for Next.js, Nuxt, SvelteKit, Astro, Angular, React or Vue and the steps for a pull request. With `platform: "wordpress"`: the Yoast SEO or Rank Math field per value and the steps to ship it through your WordPress connection. With `platform: "cloudflare"`: a Cloudflare Worker that applies the fixes at the edge, on any CMS | `<title>`, `<meta>`, canonical, social tags |
-| `build_edge_rules` | From a finished site audit, one Cloudflare Worker rule per section (for example `/products/*`) that fixes missing or badly sized titles and descriptions, missing canonicals and social tags on every matching page, with a preview. Only fills what is missing or out of range | `/products/*: 212 pages` |
-| `get_prerender_worker` | For client-side React, Vue and Angular apps: a Worker that serves AI crawlers the rendered page from Browser Rendering in your own Cloudflare account, cached for a day, while visitors and Google get the normal page. Says so when it is not needed | `12 → 900 words for GPTBot` |
-| `generate_schema` | Article, Product, FAQ, Organization or breadcrumb JSON-LD, validated against Google's rich result rules. Values it cannot read are marked TODO, never invented | `Product: eligible` |
-| `check_accessibility` | WCAG 2.1 AA report for the European Accessibility Act: every automated check mapped to its success criterion, contrast and reflow from the real-browser check, and what to test by hand | `9 of 11 criteria pass` |
+| `edge_worker · rules` | From a finished site audit, one Cloudflare Worker rule per section (for example `/products/*`) that fixes missing or badly sized titles and descriptions, missing canonicals and social tags on every matching page, with a preview. Only fills what is missing or out of range | `/products/*: 212 pages` |
+| `edge_worker · prerender` | For client-side React, Vue and Angular apps: a Worker that serves AI crawlers the rendered page from Browser Rendering in your own Cloudflare account, cached for a day, while visitors and Google get the normal page. Says so when it is not needed | `12 → 900 words for GPTBot` |
+| `schema · generate` | Article, Product, FAQ, Organization or breadcrumb JSON-LD, validated against Google's rich result rules. Values it cannot read are marked TODO, never invented | `Product: eligible` |
+| `accessibility · wcag` | WCAG 2.1 AA report for the European Accessibility Act: every automated check mapped to its success criterion, contrast and reflow from the real-browser check, and what to test by hand | `9 of 11 criteria pass` |
 | `check_product_page` | Ecommerce product page: Product and Offer markup, price, stock, identifiers, shipping and return policy for merchant listings, variants, out-of-stock handling and filter URLs | `2 errors, 3 warnings` |
-| `check_consent` | Cookie banner and Google Consent Mode v2: which consent platform runs, whether the default comes before the Google tags, ad_user_data and ad_personalization | `Consent Mode v2: missing signals` |
-| `check_ga4_tracking` | GA4 debugger in a real browser: installed measurement IDs and GTM containers, then the hits sent on a first visit, after accepting cookies and on a return visit. Finds page_view firing twice, hits before consent, Consent Mode that never updates, debug mode on and Universal Analytics leftovers | `G-XXXX sends 2 page_views` |
-| `check_web_vitals` | Core Web Vitals from real Chrome users (CrUX): LCP, INP, CLS, FCP and TTFB on phone and desktop, rated good, needs improvement or poor, with what to fix | `Phone fails: LCP 3.1 s` |
-| `rescan_and_compare` | Scan again after a fix: score change, what got fixed, what is new | `46 → 94` |
-| `share_result` | A public before and after page to send to a client: score change, fixed and open issues. Not indexed, expires after 90 days | `46 → 94, shareable` |
-| `export_findings` | A scan or site audit as an action plan: Google Sheets rows plus a CSV link for `=IMPORTDATA`, a Slack message (or webhook post), one task per issue for Linear, Jira, Asana or GitHub, and a Markdown checklist | `Sheet, Slack, 12 tasks` |
-| `measure_impact` | Before and after numbers from Search Console, GA4, Ahrefs or Semrush for the changed pages, against unchanged pages as a control group, with what changed per page from the watch history | `+66% clicks vs control` |
-| `diagnose_traffic_drop` | Why traffic dropped: two Search Console periods compared page by page, split into lost rankings, lower search demand, fewer clicks at the same position (AI Overview or snippet) and pages that dropped out, ranked by lost clicks, with the next tool per cause | `3 pages lost rankings` |
-| `find_ctr_gaps` | Page-1 results whose click-through rate is far below normal for their position, with the clicks a better title and description could win | `+700 clicks from 4 titles` |
-| `find_striking_distance` | Queries at positions 8 to 20 with real impressions, grouped per page, with the clicks a move into the top 5 could win and pages competing for the same query | `23 queries, +1,900 clicks` |
-| `check_vitals_trend` | Core Web Vitals from real Chrome users, weekly for about 9 months on phone and desktop, from the Chrome UX Report history. Before and after a fix date, and since when each metric passes | `LCP 4.2 s → 2.2 s` |
-| `measure_ai_citations` | AI citations before and after the fixes, per engine (ChatGPT, Perplexity, AI Overviews, AI Mode, Gemini, Copilot), against pages you did not change | `+190% vs control` |
-| `log_fix` | Log fixes after they ship (page, field, old and new value, how it shipped). OnPage.dev checks about every 6 hours that each one is still live and posts the restore code to a webhook when a deploy undoes it | `4 fixes logged, all live` |
-| `get_fix_log` | The fix log: still live, undone or changed, the restore code, impact per fix from `measure_impact`, a rollback plan for fixes that did worse, and a client-ready monthly report without OnPage.dev branding, plus GA4 annotations for every day fixes shipped | `1 undone, restore ready` |
+| `tracking · consent` | Cookie banner and Google Consent Mode v2: which consent platform runs, whether the default comes before the Google tags, ad_user_data and ad_personalization | `Consent Mode v2: missing signals` |
+| `tracking · ga4` | GA4 debugger in a real browser: installed measurement IDs and GTM containers, then the hits sent on a first visit, after accepting cookies and on a return visit. Finds page_view firing twice, hits before consent, Consent Mode that never updates, debug mode on and Universal Analytics leftovers | `G-XXXX sends 2 page_views` |
+| `web_vitals · now` | Core Web Vitals from real Chrome users (CrUX): LCP, INP, CLS, FCP and TTFB on phone and desktop, rated good, needs improvement or poor, with what to fix | `Phone fails: LCP 3.1 s` |
+| `scan_page · rescan` | Scan again after a fix: score change, what got fixed, what is new | `46 → 94` |
+| `share · link` | A public before and after page to send to a client: score change, fixed and open issues. Not indexed, expires after 90 days | `46 → 94, shareable` |
+| `share · export` | A scan or site audit as an action plan: Google Sheets rows plus a CSV link for `=IMPORTDATA`, a Slack message (or webhook post), one task per issue for Linear, Jira, Asana or GitHub, and a Markdown checklist | `Sheet, Slack, 12 tasks` |
+| `measure · impact` | Before and after numbers from Search Console, GA4, Ahrefs or Semrush for the changed pages, against unchanged pages as a control group, with what changed per page from the watch history | `+66% clicks vs control` |
+| `find_opportunities · traffic_drop` | Why traffic dropped: two Search Console periods compared page by page, split into lost rankings, lower search demand, fewer clicks at the same position (AI Overview or snippet) and pages that dropped out, ranked by lost clicks, with the next tool per cause | `3 pages lost rankings` |
+| `find_opportunities · ctr_gaps` | Page-1 results whose click-through rate is far below normal for their position, with the clicks a better title and description could win | `+700 clicks from 4 titles` |
+| `find_opportunities · striking_distance` | Queries at positions 8 to 20 with real impressions, grouped per page, with the clicks a move into the top 5 could win and pages competing for the same query | `23 queries, +1,900 clicks` |
+| `web_vitals · trend` | Core Web Vitals from real Chrome users, weekly for about 9 months on phone and desktop, from the Chrome UX Report history. Before and after a fix date, and since when each metric passes | `LCP 4.2 s → 2.2 s` |
+| `measure · ai_citations` | AI citations before and after the fixes, per engine (ChatGPT, Perplexity, AI Overviews, AI Mode, Gemini, Copilot), against pages you did not change | `+190% vs control` |
+| `fix_log · log` | Log fixes after they ship (page, field, old and new value, how it shipped). OnPage.dev checks about every 6 hours that each one is still live and posts the restore code to a webhook when a deploy undoes it | `4 fixes logged, all live` |
+| `fix_log · report` | The fix log: still live, undone or changed, the restore code, impact per fix from `measure · impact`, a rollback plan for fixes that did worse, and a client-ready monthly report without OnPage.dev branding, plus GA4 annotations for every day fixes shipped | `1 undone, restore ready` |
 | `render_page` | The first screen on phone, tablet and desktop in a real browser: H1 and call to action position, cookie walls and pop-ups, tap targets, small text, low-contrast text, what scrolls sideways, mixed buttons, uneven spacing, layout shift, JavaScript-only content, snippet match. With screenshots | `CTA below the fold on phone` |
 
 ### Whole site and competitors
 
 | Tool | What it does | Example result |
 |---|---|---|
-| `start_site_audit` | Audit up to 25 pages from the sitemap as a job. Returns an `audit_id` and the first progress | `3 of 25 scanned` |
-| `get_site_audit` | Continue until complete, then read the site-wide results: issues by code with affected pages, broken, orphan and duplicate pages | `25 pages, average 92` |
-| `map_link_equity` | Internal PageRank and click depth from a finished audit: pages the home page cannot reach, pages too deep, dead ends, strong pages that pass little on, links through redirects or to broken and noindex pages, and important pages (from Search Console or GA4) with too few links | `3 important pages need links` |
-| `create_dashboard_feed` | A daily check of the home page and up to 10 key pages, with the history kept: score, AI readiness, errors and warnings by code, AI crawler access and Core Web Vitals per week | `Feed live, 8 pages daily` |
-| `get_dashboard_data` | One dataset from a feed (overview, pages, issues, vitals, fixes, AI access) as a table with a date column and full URLs, ready to join with GA4, Search Console or their BigQuery exports | `30 days, 8 pages` |
-| `build_seo_dashboard` | A designed dashboard for Claude Dashboards or an artifact: realtime GA4 (users per minute, pages, events, countries), traffic, SEO health, fixes, speed and AI visibility, in light and dark | `Dashboard with 9 panels` |
-| `suggest_internal_links` | Which audited pages should link to a page, with anchor text. Works for a new page by topic | `3 links to add` |
+| `site_audit · start` | Audit up to 25 pages from the sitemap as a job. Returns an `audit_id` and the first progress | `3 of 25 scanned` |
+| `site_audit · continue` | Continue until complete, then read the site-wide results: issues by code with affected pages, broken, orphan and duplicate pages | `25 pages, average 92` |
+| `internal_links · equity` | Internal PageRank and click depth from a finished audit: pages the home page cannot reach, pages too deep, dead ends, strong pages that pass little on, links through redirects or to broken and noindex pages, and important pages (from Search Console or GA4) with too few links | `3 important pages need links` |
+| `dashboard · feed` | A daily check of the home page and up to 10 key pages, with the history kept: score, AI readiness, errors and warnings by code, AI crawler access and Core Web Vitals per week | `Feed live, 8 pages daily` |
+| `dashboard · data` | One dataset from a feed (overview, pages, issues, vitals, fixes, AI access) as a table with a date column and full URLs, ready to join with GA4, Search Console or their BigQuery exports | `30 days, 8 pages` |
+| `dashboard · build` | A designed dashboard for Claude Dashboards or an artifact: realtime GA4 (users per minute, pages, events, countries), traffic, SEO health, fixes, speed and AI visibility, in light and dark | `Dashboard with 9 panels` |
+| `internal_links · suggest` | Which audited pages should link to a page, with anchor text. Works for a new page by topic | `3 links to add` |
 | `map_topics` | Topic clusters from Search Console rows: which page owns each topic, where pages compete, topics without their own page, pages without search demand and the internal links to add | `14 topics, 3 compete, 2 gaps` |
 | `prioritize_fixes` | Rank fixes by traffic impact, using numbers from your connected Search Console, GA4, Ahrefs or Semrush: blockers, low CTR, striking distance, missing keywords, strong links on a weak page. Falls back to severity | `#6 → top 3, ~336 clicks/mo` |
 | `match_intent` | Does the page match search intent? Scans the top results you pass (from Ahrefs or Semrush), works out the page type Google ranks (guide, listicle, product, category, service, forum, video and more) and the format that ranks. With Search Console rows: pages that compete for the same query | `Mismatch: results are listicles, yours is a product page` |
-| `check_readability` | Reading ease with the formula for the page language (Flesch, Flesch-Douma, Amstad, Kandel-Moles, Fernández-Huerta, Flesch-Vacca) against the pages that rank or the norm for the page type, average sentence length, long sentences, and the hardest sentences and paragraphs to rewrite | `63 vs 52 for ranking pages` |
-| `check_og_tags` | Open Graph and Twitter tags plus the real share image (loads? size in pixels, type, weight) against what Facebook, LinkedIn and X need. Also a free REST API: `GET /api/v1/og?url=` | `og:image returns 404` |
-| `compare_pages` | A page next to up to 3 competitors: side by side, content gaps, structured data they have and fixes to catch up. Flags cookie walls | `You lead on 12 of 14` |
+| `text_quality · readability` | Reading ease with the formula for the page language (Flesch, Flesch-Douma, Amstad, Kandel-Moles, Fernández-Huerta, Flesch-Vacca) against the pages that rank or the norm for the page type, average sentence length, long sentences, and the hardest sentences and paragraphs to rewrite | `63 vs 52 for ranking pages` |
+| `snippet · social` | Open Graph and Twitter tags plus the real share image (loads? size in pixels, type, weight) against what Facebook, LinkedIn and X need. Also a free REST API: `GET /api/v1/og?url=` | `og:image returns 404` |
+| `compare · pages` | A page next to up to 3 competitors: side by side, content gaps, structured data they have and fixes to catch up. Flags cookie walls | `You lead on 12 of 14` |
 
+
+### Act, watch and measure
+
+| Tool | What it does | Example result |
+|---|---|---|
+| `backlinks · outreach` | Link prospects (broken, lost, unlinked mention or resource) become one email per site, strongest first, as drafts for the user's mail after approval | `14 drafts, 9 sites` |
+| `plan_sprint` | Fixes into a week-by-week plan per role within the hours you give, value per hour first, with one ticket per task | `23 tasks over 4 weeks` |
+| `request_recrawl` | Checks shipped pages are indexable, writes fresh sitemap lastmod entries, submits to IndexNow and lists the pages for URL Inspection | `8 of 9 ready` |
+| `watch · guard` | Every 6 hours: robots.txt blocking crawlers, a lost or shrunken sitemap, http without https, error status, noindex, moved canonical or empty title on key pages | `1 new problem: noindex` |
+| `watch · competitors` | Weekly diff of up to 3 competitors' sitemaps: new, updated and removed pages, flagged by your topics | `6 new, 2 on your topics` |
+| `measure · ai_referrals` | Sessions from AI assistants in GA4, per assistant and landing page, share of all visits and conversion rate | `1,240 visits, +38%` |
+| `measure · brand_split` | Search Console or Ahrefs keyword rows split into brand and non-brand, with the trend and top non-brand queries | `Non-brand +22%` |
+| `measure · share_of_voice` | Share of the clicks per domain from rank rows, weighted by position, with the keywords where a competitor wins | `31% → 36%` |
 ### AI search
 
 | Tool | What it does | Example result |
 |---|---|---|
-| `check_ai_visibility` | Which AI crawlers may read the page (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and more), llms.txt, 15 checks for AI answers, and the page as a model reads it | `7 of 8 crawlers allowed` |
-| `submit_indexnow` | Tell Bing, Yandex and other IndexNow engines that pages changed, right after a fix goes live. Sets up the key file the first time | `12 URLs accepted` |
+| `ai_visibility · check` | Which AI crawlers may read the page (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and more), llms.txt, 15 checks for AI answers, and the page as a model reads it | `7 of 8 crawlers allowed` |
+| `request_recrawl · indexnow` | Tell Bing, Yandex and other IndexNow engines that pages changed, right after a fix goes live. Sets up the key file the first time | `12 URLs accepted` |
 | `analyze_logs` | What Googlebot, Bingbot and 14 AI crawlers really request, from your access logs: hits per bot, errors and redirects they get, crawl budget on parameters, and sitemap pages Googlebot never visits | `GPTBot: 212 hits, 9% errors` |
 | `find_duplicate_content` | Near-duplicate pages from a site audit, grouped by the text outside menus, header and footer, with the page to keep and what to do with the rest (canonical, merge, rewrite, or variants as options for product pages) | `2 groups, 8 pages` |
 | `check_url_parameters` | Every query parameter in the audit's links classified as tracking, session, search, sort, pagination or filter, with crawl traps, pagination canonicals and the robots.txt rules to fix them | `utm in 14 internal links` |
-| `explain_index_status` | Search Console URL Inspection results (or Pages report rows) grouped by cause, most serious first: noindex, robots.txt, a canonical Google ignores, crawled or discovered but not indexed, soft 404, server and redirect errors, with the fix and the next tool | `12 crawled, not indexed` |
+| `explain_google · index_status` | Search Console URL Inspection results (or Pages report rows) grouped by cause, most serious first: noindex, robots.txt, a canonical Google ignores, crawled or discovered but not indexed, soft 404, server and redirect errors, with the fix and the next tool | `12 crawled, not indexed` |
 | `check_hreflang` | Multilingual sites: valid language and region codes, x-default, then every language version: status, noindex, canonical, return tags and html lang. Returns the corrected tag set | `4 versions, 1 missing return tag` |
-| `check_trust_signals` | E-E-A-T across the site: About, Contact, Privacy and Terms pages (found in English, Dutch, German, French and Spanish), email, phone, address, company and VAT numbers, Organization markup, social profiles, author and dates | `6 of 8 checks pass` |
+| `entity · trust` | E-E-A-T across the site: About, Contact, Privacy and Terms pages (found in English, Dutch, German, French and Spanish), email, phone, address, company and VAT numbers, Organization markup, social profiles, author and dates | `6 of 8 checks pass` |
 | `check_local_seo` | Local businesses: LocalBusiness markup (specific type, address, phone, opening hours, geo), whether name, address and phone match the pages, the Google Business Profile link, a map, the city in the title, and a page with its own markup per location. Writes corrected JSON-LD with TODOs | `NAP mismatch: phone` |
-| `check_question_coverage` | Coverage for AI Mode and AI Overviews: your assistant writes the sub-questions an AI search engine fans out for a topic, the tool rates each one answered, buried, partial or missing on your page (and up to 2 competitors) and lists the sections to add | `60/100, 2 missing` |
-| `check_answer_format` | Featured snippets and People Also Ask: the answer format that wins on the pages that rank (paragraph and length, list and items, or table) against your section, with the rewrite | `Winning: list of 7, yours: paragraph` |
-| `find_answer_passages` | Does the page answer a question well enough for AI to quote it? Returns the best passages with length and fit | `Best passage, 64 words` |
-| `ai_crawler_policy` | robots.txt rules for 13 AI crawlers from a policy (allow all, AI search only, block all), merged into your existing file | `13 bots, merged` |
-| `generate_llms_txt` | A ready `llms.txt` built from the sitemap and home page | `llms.txt, 42 pages` |
-| `validate_llms_txt` | Check an llms.txt against the llmstxt.org format: a real text file (not an HTML soft 404), one title, a summary, sections with `[name](url): notes` links, size, dead links, and whether llms-full.txt exists. Validates drafts too | `Valid, 6 sections, 8 of 8 links load` |
-| `check_entity_graph` | How the structured data describes who is behind a page, the way AI knowledge graphs read it: Organization, author and publisher as linked entities (`@id`), `sameAs` profiles that load, a match with the home page, and the missing JSON-LD with TODOs | `5 entities, 1 fix: no sameAs` |
-| `screen_reader_view` | How screen readers and browsing AI agents read the page: landmarks, heading outline, every link, button, image and field with its name, and what is missing | `3 links without a name` |
-| `compare_ai_citations` | AI citation counts per page from Ahrefs Brand Radar or another source, next to OnPage.dev checks: which checks the cited pages pass and the others fail, averages side by side, and what each skipped page should change | `Clear answer first: 100% of cited pages vs 0%` |
-| `watch_page` / `get_watch` / `unwatch` | A daily check for regressions: page down or redirected, noindex added, AI crawlers blocked, canonical or title changed, score drop, new and fixed issues. Private RSS feed, optional Slack or Discord webhook. With `competitor_of`: follows a competitor's page, and each new section, structured data type or length jump comes with the counter-move for your page | `noindex added, alert sent` |
+| `answer_readiness · questions` | Coverage for AI Mode and AI Overviews: your assistant writes the sub-questions an AI search engine fans out for a topic, the tool rates each one answered, buried, partial or missing on your page (and up to 2 competitors) and lists the sections to add | `60/100, 2 missing` |
+| `answer_readiness · format` | Featured snippets and People Also Ask: the answer format that wins on the pages that rank (paragraph and length, list and items, or table) against your section, with the rewrite | `Winning: list of 7, yours: paragraph` |
+| `answer_readiness · passages` | Does the page answer a question well enough for AI to quote it? Returns the best passages with length and fit | `Best passage, 64 words` |
+| `robots_txt · ai_policy` | robots.txt rules for 13 AI crawlers from a policy (allow all, AI search only, block all), merged into your existing file | `13 bots, merged` |
+| `llms_txt · generate` | A ready `llms.txt` built from the sitemap and home page | `llms.txt, 42 pages` |
+| `llms_txt · validate` | Check an llms.txt against the llmstxt.org format: a real text file (not an HTML soft 404), one title, a summary, sections with `[name](url): notes` links, size, dead links, and whether llms-full.txt exists. Validates drafts too | `Valid, 6 sections, 8 of 8 links load` |
+| `entity · graph` | How the structured data describes who is behind a page, the way AI knowledge graphs read it: Organization, author and publisher as linked entities (`@id`), `sameAs` profiles that load, a match with the home page, and the missing JSON-LD with TODOs | `5 entities, 1 fix: no sameAs` |
+| `accessibility · screen_reader` | How screen readers and browsing AI agents read the page: landmarks, heading outline, every link, button, image and field with its name, and what is missing | `3 links without a name` |
+| `ai_visibility · citations` | AI citation counts per page from Ahrefs Brand Radar or another source, next to OnPage.dev checks: which checks the cited pages pass and the others fail, averages side by side, and what each skipped page should change | `Clear answer first: 100% of cited pages vs 0%` |
+| `watch · page` / `watch · page_status` / `watch · page_stop` | A daily check for regressions: page down or redirected, noindex added, AI crawlers blocked, canonical or title changed, score drop, new and fixed issues. Private RSS feed, optional Slack or Discord webhook. With `competitor_of`: follows a competitor's page, and each new section, structured data type or length jump comes with the counter-move for your page | `noindex added, alert sent` |
 
 ### Launch and migration
 
 | Tool | What it does | Example result |
 |---|---|---|
-| `check_urls` | Status codes and full redirect chains for up to 20 URLs, checked against where each should land. Flags chains and temporary redirects | `19 of 20 OK` |
-| `check_sitemap` | The XML sitemap: found through robots.txt, index followed, format and limits, foreign hosts, fake or future lastmod dates, plus a sample of listed URLs checked for redirects, errors, noindex and canonicals elsewhere, with corrected entries | `4 of 12 URLs do not belong` |
+| `check_links · urls` | Status codes and full redirect chains for up to 20 URLs, checked against where each should land. Flags chains and temporary redirects | `19 of 20 OK` |
+| `sitemap · check` | The XML sitemap: found through robots.txt, index followed, format and limits, foreign hosts, fake or future lastmod dates, plus a sample of listed URLs checked for redirects, errors, noindex and canonicals elsewhere, with corrected entries | `4 of 12 URLs do not belong` |
 | `extract_from_pages` | One value from up to 20 pages, by CSS selector (with an attribute), regular expression or JSON-LD path such as `Product.offers.price`, to verify a template fix at scale | `18 of 20 have a price` |
 | `plan_redirects` | Old URLs to new ones with a confidence score per match, written as `_redirects`, nginx, Apache, Next.js or CSV rules | `212 matched, 9 to review` |
-| `import_site_audit` | A crawl from Screaming Frog, Ahrefs or Semrush (up to 500 pages and the internal links) turned into an audit every audit tool can use | `480 pages, 6,912 links` |
-| `compare_site_audits` | A site audit against the previous one: regressions, new and fixed issues per code, pages added and gone | `3 regressions, 41 fixed` |
-| `schedule_site_audit` | The whole site audited every day, week or month, with regressions posted to Slack, Discord or a webhook | `Weekly, 2 regressions sent` |
+| `site_audit · import` | A crawl from Screaming Frog, Ahrefs or Semrush (up to 500 pages and the internal links) turned into an audit every audit tool can use | `480 pages, 6,912 links` |
+| `site_audit · compare` | A site audit against the previous one: regressions, new and fixed issues per code, pages added and gone | `3 regressions, 41 fixed` |
+| `watch · site_audit` | The whole site audited every day, week or month, with regressions posted to Slack, Discord or a webhook | `Weekly, 2 regressions sent` |
 | `track_rankings` | A rank tracker that picks its own keywords and reports what moved | `3 into top 10, 1 lost` |
-| `build_disavow` | Disavow file with only clear spam and the rest up for review | `14 domains, 3 to review` |
-| `explain_manual_action` | Manual action cleanup plan and reconsideration draft | `Unnatural links: 5 steps` |
-| `check_outbound_links` | Dead and moved links to other sites, with archived copies | `3 dead, 1 moved` |
-| `diagnose_cannibalization` | Your competing pages side by side on every keyword signal, with the fix | `#1 wins on 6 signals` |
+| `backlinks · disavow` | Disavow file with only clear spam and the rest up for review | `14 domains, 3 to review` |
+| `explain_google · manual_action` | Manual action cleanup plan and reconsideration draft | `Unnatural links: 5 steps` |
+| `check_links · outbound` | Dead and moved links to other sites, with archived copies | `3 dead, 1 moved` |
+| `check_keyword · cannibalization` | Your competing pages side by side on every keyword signal, with the fix | `#1 wins on 6 signals` |
 | `plan_split_test` | Template pages split by traffic, a Worker for the variant, measured against the control | `12 vs 12 pages` |
-| `share_audit_report` | An audit as a branded report page and PDF | `Link and PDF` |
-| `check_spelling` | Spelling and grammar errors in the main text, with the fix | `4 errors, 3 spelling` |
-| `generate_sitemap` | A clean sitemap.xml from an audit, every exclusion explained | `212 pages, 9 left out` |
-| `find_content_decay` | Pages that peaked and kept losing clicks, as a refresh queue | `9 pages, −1,840 clicks` |
-| `fix_alt_texts` | Missing alt texts listed, checked and shipped as HTML, Worker, WordPress or code | `12 alts, 2 decorative` |
-| `fix_core_web_vitals` | Speed fixes as code, failing metric first, also as a Cloudflare Worker | `LCP: 4 fixes` |
-| `find_link_opportunities` | Sites that link to competitors but not to you, typed and ranked, plus brand mentions without a link | `38 sites, 6 unlinked` |
-| `find_ai_visibility_gaps` | AI answers turned into share per engine, gap questions, AI searches and cited sites | `14 gaps, 9 sources` |
-| `fix_broken_backlinks` | Broken and lost backlinks from Ahrefs or Semrush and 404 hits from GA4, ranked by link value and visits, checked live, written as 301 rules, link edits and an outreach list | `14 pages, 38 sites back` |
-| `test_robots` | May Googlebot, GPTBot, ClaudeBot or any crawler fetch this URL? Uses Google's matching rules and returns the exact deciding rule. Can test a proposed robots.txt too | `Blocked by "Disallow: /search?"` |
+| `site_audit · report` | An audit as a branded report page and PDF | `Link and PDF` |
+| `text_quality · spelling` | Spelling and grammar errors in the main text, with the fix | `4 errors, 3 spelling` |
+| `sitemap · generate` | A clean sitemap.xml from an audit, every exclusion explained | `212 pages, 9 left out` |
+| `find_opportunities · content_decay` | Pages that peaked and kept losing clicks, as a refresh queue | `9 pages, −1,840 clicks` |
+| `get_fix_pack · alt_texts` | Missing alt texts listed, checked and shipped as HTML, Worker, WordPress or code | `12 alts, 2 decorative` |
+| `get_fix_pack · web_vitals` | Speed fixes as code, failing metric first, also as a Cloudflare Worker | `LCP: 4 fixes` |
+| `backlinks · opportunities` | Sites that link to competitors but not to you, typed and ranked, plus brand mentions without a link | `38 sites, 6 unlinked` |
+| `ai_visibility · gaps` | AI answers turned into share per engine, gap questions, AI searches and cited sites | `14 gaps, 9 sources` |
+| `backlinks · broken` | Broken and lost backlinks from Ahrefs or Semrush and 404 hits from GA4, ranked by link value and visits, checked live, written as 301 rules, link edits and an outreach list | `14 pages, 38 sites back` |
+| `robots_txt · test` | May Googlebot, GPTBot, ClaudeBot or any crawler fetch this URL? Uses Google's matching rules and returns the exact deciding rule. Can test a proposed robots.txt too | `Blocked by "Disallow: /search?"` |
 
 ### Writing and code
 
 | Tool | What it does | Example result |
 |---|---|---|
-| `scan_html` | Scan HTML that is not live yet: a local build, a template or a draft. Same score and fixes as `scan_page` | `92/100 before deploy` |
-| `compare_html` | SEO diff between two versions of a page: score, issues fixed and introduced (by code), and changes to title, description, H1, canonical, robots and structured data | `72 → 18, noindex added` |
-| `validate_schema` | Check JSON-LD you wrote: syntax, @context and @type, ISO dates, absolute URLs, placeholders and Google's required fields | `2 errors, 3 warnings` |
-| `check_focus_keyword` | Eight checks for one search term: title, description, H1, URL, opening text, subheadings, alt texts and keyword use | `6 of 8` |
-| `check_snippet` | Pixel-width estimate of title and description against Google's cut-off, desktop and mobile | `612 px, cut off` |
+| `scan_page · html` | Scan HTML that is not live yet: a local build, a template or a draft. Same score and fixes as `scan_page` | `92/100 before deploy` |
+| `compare · html` | SEO diff between two versions of a page: score, issues fixed and introduced (by code), and changes to title, description, H1, canonical, robots and structured data | `72 → 18, noindex added` |
+| `schema · validate` | Check JSON-LD you wrote: syntax, @context and @type, ISO dates, absolute URLs, placeholders and Google's required fields | `2 errors, 3 warnings` |
+| `check_keyword · focus` | Eight checks for one search term: title, description, H1, URL, opening text, subheadings, alt texts and keyword use | `6 of 8` |
+| `snippet · search` | Pixel-width estimate of title and description against Google's cut-off, desktop and mobile | `612 px, cut off` |
 | `create_content_brief` | A writing brief from the pages that rank: subtopics, questions, figures, target length, schema, title patterns and internal links | `8 topics, 5 questions` |
-| `get_layout_probe` / `analyze_layout` | Run the first-screen checks in your own browser tool: no daily limit, works on staging and localhost | `First screen, 3 devices` |
+| `layout · probe` / `layout · analyze` | Run the first-screen checks in your own browser tool: no daily limit, works on staging and localhost | `First screen, 3 devices` |
 
 ### Ready workflows (MCP prompts)
 
@@ -797,7 +840,7 @@ In clients that support MCP Apps (Claude) or the Apps SDK (ChatGPT), scan result
 | Price | Free | Paid plan or API credits | Free |
 | Setup | Paste one URL | Account and key | Install and run yourself, often extra API keys |
 | Built for | Acting on results: fix, check before deploy, confirm | Research data: keywords, backlinks, rankings | Audits and reports |
-| Scan unpublished HTML | Yes, `scan_html` and `compare_html` | No | Rarely |
+| Scan unpublished HTML | Yes, `scan_page · html` and `compare · html` | No | Rarely |
 | Agent-grade output | Stable issue codes, output schemas, rules resource | Data rows | Varies |
 | Migration checks | Redirect chains, robots.txt tester | Partly | Partly |
 | Whole-site audit | 25 pages free, or your own crawl up to 500 pages, weekly on a schedule with alerts | Yes, paid | Yes, self-run |
@@ -857,7 +900,7 @@ The server plus commands and skills that run the fix loop for you.
 
 - `/seo-check [url or path]`: scan a live page, or find this project's built HTML and scan that, then fix what is wrong.
 - `/ai-visibility`: check whether ChatGPT, Claude, Perplexity and Gemini can read and quote the site, and write `robots.txt` and `llms.txt`.
-- **seo-fix-loop** skill: fixes in your source (templates, Next.js `metadata`, Astro frontmatter), checks with `scan_html` before deploy and confirms with `rescan_and_compare` after.
+- **seo-fix-loop** skill: fixes in your source (templates, Next.js `metadata`, Astro frontmatter), checks with `scan_page · html` before deploy and confirms with `scan_page · rescan` after.
 
 About 300 tokens of always-on context.
 
@@ -910,7 +953,7 @@ jobs:
     steps:
       - uses: seoonpage/seo-mcp-server/guard@v1
         with:
-          fix-log-id: "YOUR_FIX_LOG_ID"   # from log_fix
+          fix-log-id: "YOUR_FIX_LOG_ID"   # from fix_log
           fail-on-regression: "false"     # true to fail the run as well
 ```
 
@@ -920,18 +963,18 @@ Your coding agent can pick the issue up and open the pull request with the value
 
 - **Nothing changes on your site by itself.** OnPage.dev only reads public pages or the HTML you send. Fixes ship through your own tools (your git, your WordPress, your Cloudflare), after you approve them. Watches and shared result pages store scores and issue names, never page content; fix logs store the URLs and the old and new values you log.
 - **Public pages only.** Private, internal and local network addresses are refused (SSRF protection), and so are non-web schemes.
-- **No storage of content.** HTML sent to `scan_html` is analysed in memory and dropped. For change tracking, only the score and issue names are kept, under a hashed key, for up to 30 days. A scheduled audit stores the site address, interval, webhook and last result until you stop it (at most 400 days). A finished site audit leaves a snapshot for 90 days (per page: address, status, score, title, canonical, noindex and issue names) so `compare_site_audits` can show what changed; page text is never kept. `check_spelling` sends up to 10,000 characters of the page's own public text to LanguageTool. Backlink, 404 and AI answer rows passed to `fix_broken_backlinks`, `find_link_opportunities` or `find_ai_visibility_gaps` are used for that answer only.
-- **Your traffic data stays yours.** Numbers passed to `prioritize_fixes` or `measure_impact` are used for that answer only, except that `measure_impact` with a `fix_log_id` saves the before, after and change per logged page in that fix log. OnPage.dev never connects to Search Console, GA4, Ahrefs or Semrush itself.
+- **No storage of content.** HTML sent to `scan_page · html` is analysed in memory and dropped. For change tracking, only the score and issue names are kept, under a hashed key, for up to 30 days. A scheduled audit stores the site address, interval, webhook and last result until you stop it (at most 400 days). A finished site audit leaves a snapshot for 90 days (per page: address, status, score, title, canonical, noindex and issue names) so `site_audit · compare` can show what changed; page text is never kept. `text_quality · spelling` sends up to 10,000 characters of the page's own public text to LanguageTool. Backlink, 404 and AI answer rows passed to `backlinks · broken`, `backlinks · opportunities` or `ai_visibility · gaps` are used for that answer only.
+- **Your traffic data stays yours.** Numbers passed to `prioritize_fixes` or `measure · impact` are used for that answer only, except that `measure · impact` with a `fix_log_id` saves the before, after and change per logged page in that fix log. OnPage.dev never connects to Search Console, GA4, Ahrefs or Semrush itself.
 - **Prompt injection aware.** Text from scanned pages is returned as data and marked as such.
-- **Fair use limits.** About 20 scans per minute per connection, plus a shared cap. Real-browser checks (`render_page`, `screen_reader_view`) share a daily budget; with your own browser tool, `get_layout_probe` has no limit. No accounts, no keys, no tracking cookies.
+- **Fair use limits.** About 20 scans per minute per connection, plus a shared cap. Real-browser checks (`render_page`, `accessibility · screen_reader`) share a daily budget; with your own browser tool, `layout · probe` has no limit. No accounts, no keys, no tracking cookies.
 
 Full details: [onpage.dev/privacy](https://onpage.dev/privacy) and [onpage.dev/terms](https://onpage.dev/terms).
 
 ## Good to know
 
-- The main scan reads the HTML a server returns, the way AI crawlers do. When that HTML is an empty shell from a client-side React, Angular or Vue app, `scan_page` loads the page in a real browser and audits the rendered page instead, and reports how many words crawlers without JavaScript get. This shares the daily real-browser budget; when it runs out you get the raw-HTML scan with a warning. `render_page` and `screen_reader_view` add phone, tablet and desktop views, with and without JavaScript.
-- Link checks, image sizes and AI crawler access need a live URL, so `scan_html` skips them.
-- Pixel widths in `check_snippet` are an estimate; Google can also rewrite snippets.
+- The main scan reads the HTML a server returns, the way AI crawlers do. When that HTML is an empty shell from a client-side React, Angular or Vue app, `scan_page` loads the page in a real browser and audits the rendered page instead, and reports how many words crawlers without JavaScript get. This shares the daily real-browser budget; when it runs out you get the raw-HTML scan with a warning. `render_page` and `accessibility · screen_reader` add phone, tablet and desktop views, with and without JavaScript.
+- Link checks, image sizes and AI crawler access need a live URL, so `scan_page · html` skips them.
+- Pixel widths in `snippet · search` are an estimate; Google can also rewrite snippets.
 
 ## Links
 

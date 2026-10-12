@@ -96,7 +96,7 @@ async function main() {
       continue;
     }
     const url = urlFor(file, pattern, base);
-    const { json } = await rpc({ id: i + 2, method: 'tools/call', params: { name: 'scan_html', arguments: url ? { html, url } : { html } } }, session);
+    const { json } = await rpc({ id: i + 2, method: 'tools/call', params: { name: 'scan_page', arguments: url ? { mode: 'html', html, url } : { mode: 'html', html } } }, session);
     const r = json?.result;
     if (!r || r.isError) rows.push({ file, error: r?.content?.[0]?.text || json?.error?.message || 'scan failed' });
     else rows.push({ file, score: r.structuredContent.score, ai: r.structuredContent.aiReadiness, fixes: r.structuredContent.fixes || [] });

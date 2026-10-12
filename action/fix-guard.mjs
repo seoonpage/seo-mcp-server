@@ -25,7 +25,7 @@ export function issueBody(site, fixes, logId) {
 }
 
 async function getLog(id) {
-  const res = await fetch(MCP, { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'get_fix_log', arguments: { fix_log_id: id, verify: true } } }) });
+  const res = await fetch(MCP, { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'fix_log', arguments: { mode: 'report', fix_log_id: id, verify: true } } }) });
   const json = await res.json();
   if (json.error || json.result?.isError) throw new Error(json.error?.message || json.result?.content?.[0]?.text || 'get_fix_log failed');
   return json.result.structuredContent;
