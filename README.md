@@ -39,7 +39,8 @@
   <img src="assets/logos/contentful.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Contentful&nbsp;&nbsp;&nbsp;
   <img src="assets/logos/strapi.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Strapi&nbsp;&nbsp;&nbsp;
   <picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/ghost-dark.png"><img src="assets/logos/ghost.png" width="22" height="22" align="absmiddle" alt=""></picture>&nbsp;Ghost&nbsp;&nbsp;&nbsp;
-  Magento
+  <img src="assets/logos/magento.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Magento&nbsp;&nbsp;&nbsp;
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/github-dark.png"><img src="assets/logos/github.png" width="22" height="22" align="absmiddle" alt=""></picture>&nbsp;GitHub
 </p>
 
 <p align="center">
