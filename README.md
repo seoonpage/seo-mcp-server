@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
-  <img alt="87 tools" src="https://img.shields.io/badge/tools-87-4f46e5">
+  <img alt="88 tools" src="https://img.shields.io/badge/tools-88-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -37,6 +37,7 @@
   <a href="#install-in-one-minute">Install</a> ·
   <a href="#they-bring-the-data-onpagedev-closes-the-loop">Data vs results</a> ·
   <a href="#uses-the-seo-data-you-already-have">Your SEO data</a> ·
+  <a href="#a-rank-tracker-that-knows-what-matters">Rank tracker</a> ·
   <a href="#which-of-your-pages-wins-the-keyword">Cannibalization</a> ·
   <a href="#disavow-without-the-risk-and-manual-actions-cleaned-up">Disavow</a> ·
   <a href="#bring-your-own-crawl">Your own crawl</a> ·
@@ -102,6 +103,7 @@ The SEO MCP servers from Ahrefs, Semrush, SE Ranking and DataForSEO are built fo
   <tr><td><b>Prove a change before rolling it out</b></td><td>✅ <code>plan_split_test</code>: half the template gets the change, the other half is the control</td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Disavow without the risk</b></td><td>✅ <code>build_disavow</code>: only clear spam, the rest up for review, and a warning when not to upload</td><td>A disavow export from a toxicity score in some of them</td></tr>
   <tr><td><b>Watch the whole site</b></td><td>✅ <code>schedule_site_audit</code>: weekly audits compared with the last one, regressions to Slack or Discord</td><td>Scheduled audits inside their own apps</td></tr>
+  <tr><td><b>Track the rankings that matter</b></td><td>✅ <code>track_rankings</code>: your Search Console and their tracker, keywords picked from your work, money pages and near wins</td><td>Rank tracking is their core strength; you pick and tag the keywords</td></tr>
   <tr><td><b>Prove the result</b></td><td>✅ <code>measure_impact</code>: before and after, against pages you did not touch</td><td>Their numbers are the input</td></tr>
   <tr><td><b>Price to start</b></td><td>✅ <b>Free.</b> No account, no API key</td><td>A paid plan or prepaid credits</td></tr>
 </table>
@@ -243,6 +245,30 @@ What `prioritize_fixes` looks for: blockers on pages with traffic, low click-thr
 
 With GA4 conversions (key events) or revenue per page, it ranks by money instead of clicks: a pricing page that converts comes before a busy blog post that does not.
 
+### A rank tracker that knows what matters
+
+No keyword lists to maintain. Each run (daily or weekly, from a Claude routine or a dashboard refresh), the assistant passes your Search Console rows and, if connected, your Ahrefs Rank Tracker or Semrush Position Tracking rows to `track_rankings`. OnPage.dev merges Search Console's average with the tracker's exact position and picks what to follow by itself:
+
+- **Work you did:** the queries of every page in your fix log, with the day it changed
+- **Money keywords:** pages with GA4 conversions or revenue, commercial or transactional intent, your own list
+- **Near wins:** positions 4 to 20 with real demand
+- **Top 3 to defend**, plus everything you already track in Ahrefs or Semrush
+
+```
+You:        How did our rankings do this week?
+
+Assistant:  (Search Console) + (Ahrefs Rank Tracker)
+            track_rankings      run 6, 214 keywords followed
+
+            Needs attention: "buy boots" off page 1 (8 → 15) [money]
+                             "buy boots" now ranks with /blog/boots instead of /boots
+                             → diagnose_cannibalization
+            Wins:            "trail shoes" onto page 1 (13 → 5) [money]
+            Work done:       /trail (title, 1 Oct): 9 queries, average +6 places
+```
+
+Every run lists new top 3 and page 1 entries, keywords lost, big movers, a different page ranking (a cannibalization signal), vanished queries and AI Overviews appearing, with the next tool for each, and can post to Slack or Discord. It keeps the first run and the last 90.
+
 ### Which of your pages wins the keyword
 
 Two pages of yours chase the same keyword and the wrong one ranks. `diagnose_cannibalization` reads the page that should rank and the pages that outrank it, live, and puts them side by side on every on-page signal, then says what to change:
@@ -310,6 +336,7 @@ Or let it run by itself: `schedule_site_audit` audits the site every day, week o
 
 Two more jobs where your SEO tool has the data and OnPage.dev makes it a plan:
 
+- **`track_rankings`**: Search Console plus Ahrefs or Semrush rank tracking, keywords picked from your work, money pages and near wins, with what moved each run.
 - **`build_disavow`**: disavow.txt with only clear spam, the rest up for review, and a warning when you should not upload it.
 - **`explain_manual_action`**: every Google manual action type with cleanup steps, checking tools, proof to keep and a reconsideration request draft.
 - **`check_outbound_links`**: dead links to other sites, cited pages that now redirect to a home page and moved pages, with an archived copy as replacement.
@@ -599,7 +626,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-87 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+88 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -682,6 +709,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 | `import_site_audit` | A crawl from Screaming Frog, Ahrefs or Semrush (up to 500 pages and the internal links) turned into an audit every audit tool can use | `480 pages, 6,912 links` |
 | `compare_site_audits` | A site audit against the previous one: regressions, new and fixed issues per code, pages added and gone | `3 regressions, 41 fixed` |
 | `schedule_site_audit` | The whole site audited every day, week or month, with regressions posted to Slack, Discord or a webhook | `Weekly, 2 regressions sent` |
+| `track_rankings` | A rank tracker that picks its own keywords and reports what moved | `3 into top 10, 1 lost` |
 | `build_disavow` | Disavow file with only clear spam and the rest up for review | `14 domains, 3 to review` |
 | `explain_manual_action` | Manual action cleanup plan and reconsideration draft | `Unnatural links: 5 steps` |
 | `check_outbound_links` | Dead and moved links to other sites, with archived copies | `3 dead, 1 moved` |
@@ -761,6 +789,7 @@ In clients that support MCP Apps (Claude) or the Apps SDK (ChatGPT), scan result
 | Broken and lost backlinks | Turned into ranked 301 rules, link edits and outreach | Listed | Rarely |
 | Disavow | Only clear spam, review list, warns when not to upload | Export from a toxicity score in some | No |
 | Manual actions | Cleanup plan and reconsideration draft per type | No | No |
+| Rank tracking | Picks its own keywords from your work, money pages and near wins; Search Console plus your tracker | Yes, paid, you pick the keywords | Rarely |
 | Speed fixes | Code and a Cloudflare Worker, ordered by the failing metric | Lab reports | Reports |
 | SEO split tests | Traffic-balanced groups, a Worker and the measurement | No | No |
 | Client reports | Branded report page and PDF from an audit | Yes, paid | Varies |

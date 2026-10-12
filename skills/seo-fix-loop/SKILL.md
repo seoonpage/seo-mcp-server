@@ -44,6 +44,9 @@ Work in a loop: measure, fix in the source, measure again. Stop when the target 
 - After a speed fix, `check_vitals_trend` with the change date shows whether real users noticed; for AI answers, `measure_ai_citations` with before and after counts.
 - A few weeks after the fixes are live, offer `measure_impact` with the `fix_log_id`: fetch Search Console, GA4 or Ahrefs numbers for 28 days before and after the fix date, for the changed pages and a few unchanged ones, and pass them with changed true or false.
 
+## Track it
+- Offer `track_rankings` once fixes ship: pass Search Console rows (and Ahrefs Rank Tracker or Semrush Position Tracking rows if connected) with the fix_log_id, keep the tracker_id, and run it weekly or daily. Act on its "Needs attention" list first.
+
 ## Hand it to the team
 - For a client update, call `get_fix_log` with `format: "report"` (and the agency name as `brand`). If a GA4 tool that can write is connected, offer `format: "annotations"` to mark each fix day in GA4.
 - Offer the fix guard GitHub Action (`seoonpage/seo-mcp-server/guard@v1` with the fix_log_id) so undone fixes become an issue in the repo.
