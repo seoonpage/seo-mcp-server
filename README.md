@@ -71,6 +71,13 @@
 
 ---
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/ask-check-ship-dark.png">
+    <img src="assets/ask-check-ship-light.png" width="900" alt="You ask in your AI tool (Claude, ChatGPT, Cursor, VS Code), OnPage.dev checks how AI search sees your site (ChatGPT, Claude, Gemini, Perplexity), and ships the fix to your CMS (WordPress, Shopify, Webflow, Wix, Storyblok, Sanity, Contentful, Strapi, Ghost, Magento, GitHub) or any CMS at the edge.">
+  </picture>
+</p>
+
 Most SEO tools give you a report. OnPage.dev gives your assistant something to **do**: write the fix, check it before you publish, and confirm it worked. It also checks what AI search sees, not only Google: which AI crawlers may read your site, whether your content is ready to be quoted, and whether you have an `llms.txt`.
 
 ```
