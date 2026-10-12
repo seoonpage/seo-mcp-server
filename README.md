@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
-  <img alt="79 tools" src="https://img.shields.io/badge/tools-79-4f46e5">
+  <img alt="83 tools" src="https://img.shields.io/badge/tools-83-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -270,6 +270,11 @@ Or let it run by itself: `schedule_site_audit` audits the site every day, week o
 
 Two more jobs where your SEO tool has the data and OnPage.dev makes it a plan:
 
+- **`plan_split_test`**: 20+ pages of one template split into two groups with equal traffic, a Worker that changes the title or description on one group only (same for visitors and Googlebot), measured with `measure_impact`.
+- **`share_audit_report`**: a finished site audit as a clean report page with your agency name, to send as a link or save as a PDF.
+- **`check_spelling`**: real spelling and grammar errors in a page's main text (LanguageTool, about 30 languages), brand names and style advice left out.
+- **`generate_sitemap`**: sitemap.xml from an audit with only indexable, self-canonical pages and the reason for every page left out.
+- **Sections and competitors**: `get_site_audit` shows issues per section; `compare_site_audits` with `competitor_audit_id` compares two sites side by side.
 - **`find_content_decay`**: monthly clicks per page (Search Console, Ahrefs pages-history or GA4) become a refresh queue of pages that peaked and kept falling, seasonal dips left out.
 - **`fix_alt_texts`**: lists images without alt text; your assistant looks at them and writes the texts; OnPage.dev checks them and ships them as HTML, a Cloudflare Worker, WordPress or code.
 - **Applied internal links**: `suggest_internal_links` with `platform` returns a Cloudflare Worker that links the first mention on each page (never inside an existing link), a WordPress plan or code edits.
@@ -550,7 +555,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-79 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+83 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -633,6 +638,10 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 | `import_site_audit` | A crawl from Screaming Frog, Ahrefs or Semrush (up to 500 pages and the internal links) turned into an audit every audit tool can use | `480 pages, 6,912 links` |
 | `compare_site_audits` | A site audit against the previous one: regressions, new and fixed issues per code, pages added and gone | `3 regressions, 41 fixed` |
 | `schedule_site_audit` | The whole site audited every day, week or month, with regressions posted to Slack, Discord or a webhook | `Weekly, 2 regressions sent` |
+| `plan_split_test` | Template pages split by traffic, a Worker for the variant, measured against the control | `12 vs 12 pages` |
+| `share_audit_report` | An audit as a branded report page and PDF | `Link and PDF` |
+| `check_spelling` | Spelling and grammar errors in the main text, with the fix | `4 errors, 3 spelling` |
+| `generate_sitemap` | A clean sitemap.xml from an audit, every exclusion explained | `212 pages, 9 left out` |
 | `find_content_decay` | Pages that peaked and kept losing clicks, as a refresh queue | `9 pages, −1,840 clicks` |
 | `fix_alt_texts` | Missing alt texts listed, checked and shipped as HTML, Worker, WordPress or code | `12 alts, 2 decorative` |
 | `fix_core_web_vitals` | Speed fixes as code, failing metric first, also as a Cloudflare Worker | `LCP: 4 fixes` |
@@ -795,7 +804,7 @@ Your coding agent can pick the issue up and open the pull request with the value
 
 - **Nothing changes on your site by itself.** OnPage.dev only reads public pages or the HTML you send. Fixes ship through your own tools (your git, your WordPress, your Cloudflare), after you approve them. Watches and shared result pages store scores and issue names, never page content; fix logs store the URLs and the old and new values you log.
 - **Public pages only.** Private, internal and local network addresses are refused (SSRF protection), and so are non-web schemes.
-- **No storage of content.** HTML sent to `scan_html` is analysed in memory and dropped. For change tracking, only the score and issue names are kept, under a hashed key, for up to 30 days. A scheduled audit stores the site address, interval, webhook and last result until you stop it (at most 400 days). A finished site audit leaves a snapshot for 90 days (per page: address, status, score, title, canonical, noindex and issue names) so `compare_site_audits` can show what changed; page text is never kept. Backlink, 404 and AI answer rows passed to `fix_broken_backlinks`, `find_link_opportunities` or `find_ai_visibility_gaps` are used for that answer only.
+- **No storage of content.** HTML sent to `scan_html` is analysed in memory and dropped. For change tracking, only the score and issue names are kept, under a hashed key, for up to 30 days. A scheduled audit stores the site address, interval, webhook and last result until you stop it (at most 400 days). A finished site audit leaves a snapshot for 90 days (per page: address, status, score, title, canonical, noindex and issue names) so `compare_site_audits` can show what changed; page text is never kept. `check_spelling` sends up to 10,000 characters of the page's own public text to LanguageTool. Backlink, 404 and AI answer rows passed to `fix_broken_backlinks`, `find_link_opportunities` or `find_ai_visibility_gaps` are used for that answer only.
 - **Your traffic data stays yours.** Numbers passed to `prioritize_fixes` or `measure_impact` are used for that answer only, except that `measure_impact` with a `fix_log_id` saves the before, after and change per logged page in that fix log. OnPage.dev never connects to Search Console, GA4, Ahrefs or Semrush itself.
 - **Prompt injection aware.** Text from scanned pages is returned as data and marked as such.
 - **Fair use limits.** About 20 scans per minute per connection, plus a shared cap. Real-browser checks (`render_page`, `screen_reader_view`) share a daily budget; with your own browser tool, `get_layout_probe` has no limit. No accounts, no keys, no tracking cookies.

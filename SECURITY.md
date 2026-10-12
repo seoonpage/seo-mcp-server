@@ -13,7 +13,7 @@ Include the URL or tool name, the steps to reproduce, and what an attacker could
 
 ## Scope
 
-- The hosted MCP server at `https://onpage.dev/mcp` and its 79 tools
+- The hosted MCP server at `https://onpage.dev/mcp` and its 83 tools
 - The website and public endpoints on `onpage.dev`
 - The GitHub Action, Claude Code plugin and skills in this repository
 

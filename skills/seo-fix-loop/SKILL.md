@@ -48,6 +48,8 @@ Work in a loop: measure, fix in the source, measure again. Stop when the target 
 - For a client update, call `get_fix_log` with `format: "report"` (and the agency name as `brand`). If a GA4 tool that can write is connected, offer `format: "annotations"` to mark each fix day in GA4.
 - Offer the fix guard GitHub Action (`seoonpage/seo-mcp-server/guard@v1` with the fix_log_id) so undone fixes become an issue in the repo.
 - To keep an eye on a competitor, call `watch_page` with their page as `url` and the user's page as `competitor_of`.
+- For a client, call `share_audit_report` with the audit id and the agency name as brand: a report page that also saves as a PDF.
+- Before rolling a title or description change out to a whole template, offer `plan_split_test` and judge it with `measure_impact` after 4 to 6 weeks.
 - When the user wants to share or plan the work, call `export_findings` with the url or audit_id. If Google Sheets, Slack, Notion or a task board tool is connected, send the output there; otherwise give the `=IMPORTDATA` formula.
 
 ## Whole sites and competitors
