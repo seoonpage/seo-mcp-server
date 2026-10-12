@@ -13,7 +13,7 @@
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
   <img alt="46 tools" src="https://img.shields.io/badge/tools-46-4f46e5">
-  <img alt="96 jobs" src="https://img.shields.io/badge/jobs-96-4f46e5">
+  <img alt="99 jobs" src="https://img.shields.io/badge/jobs-99-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -563,6 +563,8 @@ The work around the fixes, done by your agent with the tools you already connect
 | Visits from AI assistants | `measure · ai_referrals` | ChatGPT, Perplexity, Gemini, Copilot and Claude visits from GA4, per landing page, and how they convert |
 | Brand versus non-brand | `measure · brand_split` | Whether growth comes from SEO or from people searching your name |
 | Share of voice | `measure · share_of_voice` | Your share of the clicks against competitors from Ahrefs or Semrush rank rows, and the keywords where they take them |
+| `find_opportunities · prune` | One decision per page from a year of clicks, impressions, conversions, backlinks and internal links: keep, refresh, merge with a 301, noindex or remove with a 410. Pages with value are never removed | `38 merges, 112 removals` |
+| `find_opportunities · discover` | Article templates checked for Google Discover and News (large image previews, a 1200 px image, date, Article markup, a clear title), with your Discover or News rows; `search_type` on content decay and traffic drops reads Discover, News, Image and Video rows | `4 of 6, image too small` |
 
 ```
 You:        We shipped the new templates. Make sure nothing broke and plan next month.
@@ -605,7 +607,7 @@ What makes OnPage.dev different from every other SEO MCP server:
 - **Closes the loop after shipping.** `request_recrawl · indexnow` pings Bing and other IndexNow engines, and the agent runs URL Inspection in your Search Console tool for Google.
 - **Reads every language right.** Reading ease uses the formula for the page language: Flesch-Douma for Dutch, Amstad for German, Kandel-Moles for French, Fernández-Huerta for Spanish.
 - **A public scoring method.** Every check, what it costs and what the score leaves out, on [onpage.dev/methodology](https://onpage.dev/methodology). What changed lives on [onpage.dev/changelog](https://onpage.dev/changelog).
-- **Light on context.** 46 tools cover 96 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 7 main tools when your agent already loads many servers.
+- **Light on context.** 46 tools cover 99 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 7 main tools when your agent already loads many servers.
 - **Keeps watching.** `watch · page` catches regressions after launch and alerts by RSS or webhook. [More](#keeps-watching-after-you-ship).
 - **Uses the data you already have.** Search Console, GA4, Ahrefs or Semrush in the same chat? `prioritize_fixes` ranks every fix by traffic impact with their numbers, and `ai_visibility · citations` shows what the pages AI cites do differently. [How it works](#uses-the-seo-data-you-already-have).
 - **Stable issue codes and typed results.** Every issue has a fixed code like `meta-missing` or `h1-missing`, and the main tools declare an output schema. An agent can work through issues one by one and prove each one is gone.
@@ -688,7 +690,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-46 tools that cover 96 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+46 tools that cover 99 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -699,7 +701,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 | `get_fix_pack` | Ready-to-paste HTML for every issue, written from the page's own content. With `platform: "git"`: code for Next.js, Nuxt, SvelteKit, Astro, Angular, React or Vue and the steps for a pull request. With `platform: "wordpress"`: the Yoast SEO or Rank Math field per value and the steps to ship it through your WordPress connection. With `platform: "cloudflare"`: a Cloudflare Worker that applies the fixes at the edge, on any CMS | `<title>`, `<meta>`, canonical, social tags |
 | `edge_worker · rules` | From a finished site audit, one Cloudflare Worker rule per section (for example `/products/*`) that fixes missing or badly sized titles and descriptions, missing canonicals and social tags on every matching page, with a preview. Only fills what is missing or out of range | `/products/*: 212 pages` |
 | `edge_worker · prerender` | For client-side React, Vue and Angular apps: a Worker that serves AI crawlers the rendered page from Browser Rendering in your own Cloudflare account, cached for a day, while visitors and Google get the normal page. Says so when it is not needed | `12 → 900 words for GPTBot` |
-| `schema · generate` | Article, Product, FAQ, Organization or breadcrumb JSON-LD, validated against Google's rich result rules. Values it cannot read are marked TODO, never invented | `Product: eligible` |
+| `schema · generate` | Article, Product, FAQ, Organization, breadcrumb, VideoObject, Event, Recipe, JobPosting, SoftwareApplication, ProfilePage or Course JSON-LD, validated against Google's rich result rules. Values it cannot read are marked TODO, never invented | `Product: eligible` |
 | `accessibility · wcag` | WCAG 2.1 AA report for the European Accessibility Act: every automated check mapped to its success criterion, contrast and reflow from the real-browser check, and what to test by hand | `9 of 11 criteria pass` |
 | `check_product_page` | Ecommerce product page: Product and Offer markup, price, stock, identifiers, shipping and return policy for merchant listings, variants, out-of-stock handling and filter URLs | `2 errors, 3 warnings` |
 | `tracking · consent` | Cookie banner and Google Consent Mode v2: which consent platform runs, whether the default comes before the Google tags, ad_user_data and ad_personalization | `Consent Mode v2: missing signals` |
@@ -755,7 +757,8 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 |---|---|---|
 | `ai_visibility · check` | Which AI crawlers may read the page (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and more), llms.txt, 15 checks for AI answers, and the page as a model reads it | `7 of 8 crawlers allowed` |
 | `request_recrawl · indexnow` | Tell Bing, Yandex and other IndexNow engines that pages changed, right after a fix goes live. Sets up the key file the first time | `12 URLs accepted` |
-| `analyze_logs` | What Googlebot, Bingbot and 14 AI crawlers really request, from your access logs: hits per bot, errors and redirects they get, crawl budget on parameters, and sitemap pages Googlebot never visits | `GPTBot: 212 hits, 9% errors` |
+| `analyze_logs` | What Googlebot, Bingbot and 14 AI crawlers really request, from your access logs, with Googlebot, Bingbot, OpenAI, Perplexity and Applebot hits checked against their published IP ranges so fake bots are left out: hits per bot, errors and redirects they get, crawl budget on parameters, and sitemap pages Googlebot never visits | `GPTBot: 212 hits, 9% errors` |
+| `ai_visibility · bots` | The page fetched as a browser and as Googlebot, Bingbot, GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot and PerplexityBot: firewall blocks, challenge pages, pay-per-crawl (HTTP 402, x402), cloaking and bot-only redirects that robots.txt never shows | `GPTBot blocked: 403` |
 | `find_duplicate_content` | Near-duplicate pages from a site audit, grouped by the text outside menus, header and footer, with the page to keep and what to do with the rest (canonical, merge, rewrite, or variants as options for product pages) | `2 groups, 8 pages` |
 | `check_url_parameters` | Every query parameter in the audit's links classified as tracking, session, search, sort, pagination or filter, with crawl traps, pagination canonicals and the robots.txt rules to fix them | `utm in 14 internal links` |
 | `explain_google · index_status` | Search Console URL Inspection results (or Pages report rows) grouped by cause, most serious first: noindex, robots.txt, a canonical Google ignores, crawled or discovered but not indexed, soft 404, server and redirect errors, with the fix and the next tool | `12 crawled, not indexed` |
