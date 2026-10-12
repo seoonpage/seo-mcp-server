@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
-  <img alt="74 tools" src="https://img.shields.io/badge/tools-74-4f46e5">
+  <img alt="76 tools" src="https://img.shields.io/badge/tools-76-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -39,6 +39,7 @@
   <a href="#uses-the-seo-data-you-already-have">Your SEO data</a> ·
   <a href="#bring-your-own-crawl">Your own crawl</a> ·
   <a href="#what-changed-since-the-last-audit">What changed</a> ·
+  <a href="#links-to-win-and-ai-answers-to-enter">Links and AI gaps</a> ·
   <a href="#and-the-links-you-lost">Lost links</a> ·
   <a href="#the-whole-loop-inside-your-ai-agent">The whole loop</a> ·
   <a href="#from-finding-to-done">From finding to done</a> ·
@@ -265,6 +266,23 @@ Assistant:  import_site_audit     480 pages from this morning's crawl
 
 Or let it run by itself: `schedule_site_audit` audits the site every day, week or month (up to 25 pages), compares each audit with the last one, and posts the changes to Slack, Discord or any https webhook when pages broke, turned noindex, changed canonical or got new issues. `action: "status"` shows the last result.
 
+### Links to win, and AI answers to enter
+
+Two more jobs where your SEO tool has the data and OnPage.dev makes it a plan:
+
+- **`find_link_opportunities`**: pass the referring domains of up to 5 competitors and your own (Ahrefs, Semrush or a CSV). You get the sites that link to two or more competitors but not to you, ranked by overlap and domain rating, typed (best-of list, resource page, review site, directory, forum, news) with how to approach each, and checked live. Add pages that mention your brand and it reads each one: the ones that name you without a link come back with the sentence to quote in your email.
+- **`find_ai_visibility_gaps`**: pass real AI answers from Ahrefs Brand Radar or another AI visibility tool. You get your share of answers per engine next to each competitor, the questions where they are named and you are not (by search volume), what the AI searched to answer them, and the outside sites it cites, which are the places to get onto.
+
+```
+You:        Why does ChatGPT recommend Rivalo and not us?
+
+Assistant:  (Ahrefs) Brand Radar     120 answers for us and 2 competitors
+            find_ai_visibility_gaps  ChatGPT names Rivalo in 41%, us in 12%
+                                     14 questions where only they appear
+                                     cited most: zapier.com list, g2.com, reddit
+            find_link_opportunities  zapier.com links to both rivals, not to us
+```
+
 ### And the links you lost
 
 Other sites still link to pages you deleted or moved, and visitors still land on them. Every one of those links and visits is value you no longer get. With Ahrefs, Semrush, GA4 (page views of your 404 page) or a CSV export, `fix_broken_backlinks` turns them back into ranking power and traffic:
@@ -404,6 +422,8 @@ And three more jobs agents get asked to do every week:
 - **`import_site_audit`**: pass the page rows of a crawl you already have (Screaming Frog, Ahrefs Site Audit, Semrush, Sitebulb), up to 500 pages plus the internal links, and every audit tool works on the whole site. Only the columns you send are checked.
 - **`compare_site_audits`**: a finished site audit against the previous one of the same site (snapshots kept 90 days): pages that broke, turned noindex or changed canonical or title, issues new or fixed per code, pages added or gone, average score before and after.
 - **`schedule_site_audit`**: audits a whole site every 1, 7 or 30 days, compares each audit with the previous one and posts regressions to a webhook (Slack, Discord or any https endpoint). Status and stop with the schedule_id.
+- **`find_link_opportunities`**: competitor backlink gap (sites linking to 2+ competitors, not to you) ranked and typed with how to approach each, plus unlinked brand mentions read live with the sentence to quote.
+- **`find_ai_visibility_gaps`**: real AI answers (Brand Radar or similar) turned into share per engine, questions where only competitors are named, the AI's searches and the sites it cites.
 - **`fix_broken_backlinks`**: pass the broken backlinks from Ahrefs, Semrush or a CSV export. The dead pages are ranked by the sites that still link to them, the top 20 are checked live, each gets the best live page to 301 to (from the sitemap, a site audit and the anchor texts), and the rules come out ready to ship. Dead pages still in the sitemap, redirect chains and temporary redirects are flagged too.
 - **`share_result`**: after fixing a site, publish a before and after page (for example 46 → 94, with the issues fixed) to send to your client. Not indexed, expires after 90 days.
 
@@ -522,7 +542,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-74 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+76 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -605,6 +625,8 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 | `import_site_audit` | A crawl from Screaming Frog, Ahrefs or Semrush (up to 500 pages and the internal links) turned into an audit every audit tool can use | `480 pages, 6,912 links` |
 | `compare_site_audits` | A site audit against the previous one: regressions, new and fixed issues per code, pages added and gone | `3 regressions, 41 fixed` |
 | `schedule_site_audit` | The whole site audited every day, week or month, with regressions posted to Slack, Discord or a webhook | `Weekly, 2 regressions sent` |
+| `find_link_opportunities` | Sites that link to competitors but not to you, typed and ranked, plus brand mentions without a link | `38 sites, 6 unlinked` |
+| `find_ai_visibility_gaps` | AI answers turned into share per engine, gap questions, AI searches and cited sites | `14 gaps, 9 sources` |
 | `fix_broken_backlinks` | Broken and lost backlinks from Ahrefs or Semrush and 404 hits from GA4, ranked by link value and visits, checked live, written as 301 rules, link edits and an outreach list | `14 pages, 38 sites back` |
 | `test_robots` | May Googlebot, GPTBot, ClaudeBot or any crawler fetch this URL? Uses Google's matching rules and returns the exact deciding rule. Can test a proposed robots.txt too | `Blocked by "Disallow: /search?"` |
 
@@ -762,7 +784,7 @@ Your coding agent can pick the issue up and open the pull request with the value
 
 - **Nothing changes on your site by itself.** OnPage.dev only reads public pages or the HTML you send. Fixes ship through your own tools (your git, your WordPress, your Cloudflare), after you approve them. Watches and shared result pages store scores and issue names, never page content; fix logs store the URLs and the old and new values you log.
 - **Public pages only.** Private, internal and local network addresses are refused (SSRF protection), and so are non-web schemes.
-- **No storage of content.** HTML sent to `scan_html` is analysed in memory and dropped. For change tracking, only the score and issue names are kept, under a hashed key, for up to 30 days. A scheduled audit stores the site address, interval, webhook and last result until you stop it (at most 400 days). A finished site audit leaves a snapshot for 90 days (per page: address, status, score, title, canonical, noindex and issue names) so `compare_site_audits` can show what changed; page text is never kept. Backlink and 404 rows passed to `fix_broken_backlinks` are used for that answer only.
+- **No storage of content.** HTML sent to `scan_html` is analysed in memory and dropped. For change tracking, only the score and issue names are kept, under a hashed key, for up to 30 days. A scheduled audit stores the site address, interval, webhook and last result until you stop it (at most 400 days). A finished site audit leaves a snapshot for 90 days (per page: address, status, score, title, canonical, noindex and issue names) so `compare_site_audits` can show what changed; page text is never kept. Backlink, 404 and AI answer rows passed to `fix_broken_backlinks`, `find_link_opportunities` or `find_ai_visibility_gaps` are used for that answer only.
 - **Your traffic data stays yours.** Numbers passed to `prioritize_fixes` or `measure_impact` are used for that answer only, except that `measure_impact` with a `fix_log_id` saves the before, after and change per logged page in that fix log. OnPage.dev never connects to Search Console, GA4, Ahrefs or Semrush itself.
 - **Prompt injection aware.** Text from scanned pages is returned as data and marked as such.
 - **Fair use limits.** About 20 scans per minute per connection, plus a shared cap. Real-browser checks (`render_page`, `screen_reader_view`) share a daily budget; with your own browser tool, `get_layout_probe` has no limit. No accounts, no keys, no tracking cookies.
