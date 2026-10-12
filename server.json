@@ -3,7 +3,7 @@
   "name": "dev.onpage/onpage",
   "title": "OnPage.dev",
   "description": "Free SEO MCP that closes the loop: find, fix, ship as a PR or to WordPress, prove. 88 tools, no key.",
-  "version": "1.40.0",
+  "version": "1.41.0",
   "websiteUrl": "https://onpage.dev/mcp",
   "repository": {
     "url": "https://github.com/seoonpage/seo-mcp-server",
