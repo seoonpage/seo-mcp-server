@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
-  <img alt="83 tools" src="https://img.shields.io/badge/tools-83-4f46e5">
+  <img alt="84 tools" src="https://img.shields.io/badge/tools-84-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -37,6 +37,7 @@
   <a href="#install-in-one-minute">Install</a> ·
   <a href="#they-bring-the-data-onpagedev-closes-the-loop">Data vs results</a> ·
   <a href="#uses-the-seo-data-you-already-have">Your SEO data</a> ·
+  <a href="#which-of-your-pages-wins-the-keyword">Cannibalization</a> ·
   <a href="#bring-your-own-crawl">Your own crawl</a> ·
   <a href="#what-changed-since-the-last-audit">What changed</a> ·
   <a href="#links-to-win-and-ai-answers-to-enter">Links and AI gaps</a> ·
@@ -234,6 +235,31 @@ What `prioritize_fixes` looks for: blockers on pages with traffic, low click-thr
 
 With GA4 conversions (key events) or revenue per page, it ranks by money instead of clicks: a pricing page that converts comes before a busy blog post that does not.
 
+### Which of your pages wins the keyword
+
+Two pages of yours chase the same keyword and the wrong one ranks. `diagnose_cannibalization` reads the page that should rank and the pages that outrank it, live, and puts them side by side on every on-page signal, then says what to change:
+
+```
+You:        Our blog post outranks the product page for "trail running shoes". Why?
+
+Assistant:  (Search Console) rows   blog post at #4, product page at #14
+            diagnose_cannibalization
+
+            | Signal          | Product page | Blog post   |
+            | Title           | partial      | exact @0    |
+            | H1              | –            | exact       |
+            | H2 / H3         | 0 / 1        | 3 / 2       |
+            | Body mentions   | 2 (0.3%)     | 11 (1.4%)   |
+            | Bold / italic   | 0 / 0        | 4 / 1       |
+            | Alt / file names| 0 / 0        | 3 / 2       |
+
+            1. Strengthen the product page: exact keyword at the start of the title, in the H1 and an H2.
+            2. Tone down the blog post: keyword out of its title, H1 around its own angle, stop bolding it.
+            3. Link from the blog post to the product page with "trail running shoes" as the anchor.
+```
+
+It counts the keyword in the title (and how early), URL, meta description, H1, H2 and H3, the body text and the first 100 words, bold and italics, image alt texts and file names, checks canonical and noindex, and maps which of the pages link to each other with the keyword as anchor. When two pages say nearly the same, it proposes a merge with a 301 instead. `map_topics` finds the competing pages across a whole site first.
+
 ### Bring your own crawl
 
 `start_site_audit` reads up to 25 pages. Already crawled the site with Screaming Frog, Ahrefs Site Audit, Semrush or Sitebulb? `import_site_audit` takes up to 500 page rows and the internal links, and returns an `audit_id` that every audit tool understands: `get_site_audit`, `map_link_equity`, `suggest_internal_links`, `build_edge_rules`, `check_url_parameters` and `export_findings`.
@@ -270,6 +296,7 @@ Or let it run by itself: `schedule_site_audit` audits the site every day, week o
 
 Two more jobs where your SEO tool has the data and OnPage.dev makes it a plan:
 
+- **`diagnose_cannibalization`**: the page that should rank next to your pages that outrank it, signal by signal (title, URL, meta, H1 to H3, mentions, first 100 words, bold, italics, alt texts, file names, internal keyword anchors), with the plan to fix it.
 - **`plan_split_test`**: 20+ pages of one template split into two groups with equal traffic, a Worker that changes the title or description on one group only (same for visitors and Googlebot), measured with `measure_impact`.
 - **`share_audit_report`**: a finished site audit as a clean report page with your agency name, to send as a link or save as a PDF.
 - **`check_spelling`**: real spelling and grammar errors in a page's main text (LanguageTool, about 30 languages), brand names and style advice left out.
@@ -555,7 +582,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-83 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+84 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -638,6 +665,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 | `import_site_audit` | A crawl from Screaming Frog, Ahrefs or Semrush (up to 500 pages and the internal links) turned into an audit every audit tool can use | `480 pages, 6,912 links` |
 | `compare_site_audits` | A site audit against the previous one: regressions, new and fixed issues per code, pages added and gone | `3 regressions, 41 fixed` |
 | `schedule_site_audit` | The whole site audited every day, week or month, with regressions posted to Slack, Discord or a webhook | `Weekly, 2 regressions sent` |
+| `diagnose_cannibalization` | Your competing pages side by side on every keyword signal, with the fix | `#1 wins on 6 signals` |
 | `plan_split_test` | Template pages split by traffic, a Worker for the variant, measured against the control | `12 vs 12 pages` |
 | `share_audit_report` | An audit as a branded report page and PDF | `Link and PDF` |
 | `check_spelling` | Spelling and grammar errors in the main text, with the fix | `4 errors, 3 spelling` |
