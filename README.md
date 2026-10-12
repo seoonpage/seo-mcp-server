@@ -12,8 +12,8 @@
 <p align="center">
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
-  <img alt="46 tools" src="https://img.shields.io/badge/tools-46-4f46e5">
-  <img alt="104 jobs" src="https://img.shields.io/badge/jobs-104-4f46e5">
+  <img alt="47 tools" src="https://img.shields.io/badge/tools-47-4f46e5">
+  <img alt="109 jobs" src="https://img.shields.io/badge/jobs-109-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -551,6 +551,30 @@ And three more jobs agents get asked to do every week:
 - **`share · link`**: after fixing a site, publish a before and after page (for example 46 → 94, with the issues fixed) to send to your client. Not indexed, expires after 90 days.
 
 
+## Remembers every site
+
+Agents forget everything between chats. OnPage.dev does not. `site_memory` keeps one memory per site, behind a secret `memory_key`: open it in a chat and every OnPage.dev tool call is recorded (what was found, shipped and measured), and guards, scheduled audits, competitor watches and fix logs started in that chat add their results too. The next chat, in Claude, ChatGPT or Cursor, starts where the last one stopped.
+
+```
+You:        Pick up where we left off on example.com.
+
+Assistant:  site_memory · open   41 steps since July: pricing 46 → 91, 12 fixes shipped,
+                                 +38% clicks vs control, guard caught a noindex on 3 Oct
+            Next:                1. Measure the 4 fixes shipped 5 weeks ago
+                                 2. /blog/guide scored 58, no fix written yet
+                                 3. No rank tracker yet
+```
+
+| Mode | What it does |
+|---|---|
+| `open` | Opens or creates the memory, binds it to the chat, returns the brief and the next steps |
+| `next` | The best next steps from everything recorded: unmeasured fixes, low scores without a fix, open alerts, missing guards or tracking |
+| `timeline` | Scans, fixes, measurements, ranking runs and alerts, newest first, per page or kind |
+| `note` | Decisions the tools cannot see, like "no prices in titles" or "migrated on 3 Oct" |
+| `forget` | Deletes the memory and everything in it |
+
+The memory stores summaries and a few numbers per step, not your raw data rows or page content. The key is stored only as a hash, and an unused memory is deleted after 400 days.
+
 ## Acts, guards and measures like an SEO team
 
 The work around the fixes, done by your agent with the tools you already connected.
@@ -614,7 +638,7 @@ What makes OnPage.dev different from every other SEO MCP server:
 - **Closes the loop after shipping.** `request_recrawl · indexnow` pings Bing and other IndexNow engines, and the agent runs URL Inspection in your Search Console tool for Google.
 - **Reads every language right.** Reading ease uses the formula for the page language: Flesch-Douma for Dutch, Amstad for German, Kandel-Moles for French, Fernández-Huerta for Spanish.
 - **A public scoring method.** Every check, what it costs and what the score leaves out, on [onpage.dev/methodology](https://onpage.dev/methodology). What changed lives on [onpage.dev/changelog](https://onpage.dev/changelog).
-- **Light on context.** 46 tools cover 104 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 7 main tools when your agent already loads many servers.
+- **Light on context.** 47 tools cover 109 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 7 main tools when your agent already loads many servers.
 - **Keeps watching.** `watch · page` catches regressions after launch and alerts by RSS or webhook. [More](#keeps-watching-after-you-ship).
 - **Uses the data you already have.** Search Console, GA4, Ahrefs or Semrush in the same chat? `prioritize_fixes` ranks every fix by traffic impact with their numbers, and `ai_visibility · citations` shows what the pages AI cites do differently. [How it works](#uses-the-seo-data-you-already-have).
 - **Stable issue codes and typed results.** Every issue has a fixed code like `meta-missing` or `h1-missing`, and the main tools declare an output schema. An agent can work through issues one by one and prove each one is gone.
@@ -697,7 +721,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-46 tools that cover 104 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+47 tools that cover 109 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 

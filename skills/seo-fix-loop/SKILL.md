@@ -7,6 +7,9 @@ description: Fix SEO issues in a web project and verify them with OnPage.dev unt
 
 Work in a loop: measure, fix in the source, measure again. Stop when the target score is reached (default 90) or when the remaining issues need the user's input.
 
+
+When working on a site over time, start with `site_memory` (mode `open`, with the user's `memory_key` if they have one). Every later tool call in the chat is then recorded, and the brief tells you what was already done. Give a new `memory_key` to the user to keep.
+
 ## 1. Measure
 - Published page: call `scan_page` with its URL.
 - Traffic first: if a Google Search Console, GA4, Ahrefs or Semrush tool is available, fetch the site's top pages (clicks, impressions, position, traffic, referring domains) and top queries, at most 10 pages and 20 queries each, and call `prioritize_fixes` with them. Work through its list in order. Without such a tool, skip this.
