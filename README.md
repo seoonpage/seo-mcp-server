@@ -95,6 +95,13 @@ The SEO MCP servers from Ahrefs, Semrush, SE Ranking and DataForSEO are built fo
   <tr><td><b>Check it before deploy</b></td><td>✅ <code>scan_html</code> and <code>compare_html</code> on unpublished HTML</td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Tell search engines</b></td><td>✅ <code>submit_indexnow</code>, plus URL Inspection through your Search Console</td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Cover the AI Mode fan-out</b></td><td>✅ <code>check_question_coverage</code>: every sub-question answered, buried or missing</td><td><i>Not what they are built for</i></td></tr>
+  <tr><td><b>Win back lost links</b></td><td>✅ <code>fix_broken_backlinks</code>: their broken and lost backlinks plus GA4 404 hits become ranked 301 rules, link edits and an outreach list</td><td>They list the broken and lost backlinks</td></tr>
+  <tr><td><b>Fix keyword cannibalization</b></td><td>✅ <code>diagnose_cannibalization</code>: your competing pages side by side on every on-page signal, with the plan</td><td>Show which pages compete for a keyword</td></tr>
+  <tr><td><b>Get into AI answers</b></td><td>✅ <code>find_ai_visibility_gaps</code>: their AI answers become the questions to cover and the sites to get onto</td><td>AI mention and citation tracking in some of them</td></tr>
+  <tr><td><b>Speed and alt texts as code</b></td><td>✅ <code>fix_core_web_vitals</code>, <code>fix_alt_texts</code>: tags, WordPress or a Cloudflare Worker</td><td><i>Not what they are built for</i></td></tr>
+  <tr><td><b>Prove a change before rolling it out</b></td><td>✅ <code>plan_split_test</code>: half the template gets the change, the other half is the control</td><td><i>Not what they are built for</i></td></tr>
+  <tr><td><b>Disavow without the risk</b></td><td>✅ <code>build_disavow</code>: only clear spam, the rest up for review, and a warning when not to upload</td><td>A disavow export from a toxicity score in some of them</td></tr>
+  <tr><td><b>Watch the whole site</b></td><td>✅ <code>schedule_site_audit</code>: weekly audits compared with the last one, regressions to Slack or Discord</td><td>Scheduled audits inside their own apps</td></tr>
   <tr><td><b>Prove the result</b></td><td>✅ <code>measure_impact</code>: before and after, against pages you did not touch</td><td>Their numbers are the input</td></tr>
   <tr><td><b>Price to start</b></td><td>✅ <b>Free.</b> No account, no API key</td><td>A paid plan or prepaid credits</td></tr>
 </table>
@@ -733,7 +740,7 @@ In clients that support MCP Apps (Claude) or the Apps SDK (ChatGPT), scan result
 | Scan unpublished HTML | Yes, `scan_html` and `compare_html` | No | Rarely |
 | Agent-grade output | Stable issue codes, output schemas, rules resource | Data rows | Varies |
 | Migration checks | Redirect chains, robots.txt tester | Partly | Partly |
-| Whole-site audit | Up to 25 pages, free, as a job | Yes, paid | Yes, self-run |
+| Whole-site audit | 25 pages free, or your own crawl up to 500 pages, weekly on a schedule with alerts | Yes, paid | Yes, self-run |
 | Competitor gaps | Page vs page, with content gaps | Keyword and backlink gaps | Rarely |
 | AI search tools | Crawler access, AI-answer checks, robots.txt policy, llms.txt | AI visibility tracking on some | Rarely |
 | Ready code | Fix pack, JSON-LD, robots.txt, llms.txt | No | Varies |
@@ -750,6 +757,13 @@ In clients that support MCP Apps (Claude) or the Apps SDK (ChatGPT), scan result
 | Measures the result | Before and after, with a control group | Rank and traffic charts | Rarely |
 | From findings to tasks | Google Sheets, Slack, Notion and task boards, no connector needed for Sheets | Exports to CSV or PDF | Rarely |
 | Migration redirect map | Old to new with confidence, ready rules | No | Rarely |
+| Keyword cannibalization | Competing pages compared on every on-page signal, with the plan | Which pages compete | Rarely |
+| Broken and lost backlinks | Turned into ranked 301 rules, link edits and outreach | Listed | Rarely |
+| Disavow | Only clear spam, review list, warns when not to upload | Export from a toxicity score in some | No |
+| Manual actions | Cleanup plan and reconsideration draft per type | No | No |
+| Speed fixes | Code and a Cloudflare Worker, ordered by the failing metric | Lab reports | Reports |
+| SEO split tests | Traffic-balanced groups, a Worker and the measurement | No | No |
+| Client reports | Branded report page and PDF from an audit | Yes, paid | Varies |
 
 Full comparison with the Ahrefs, Semrush, SE Ranking and DataForSEO MCP servers, with prices: [onpage.dev/compare](https://onpage.dev/compare).
 
