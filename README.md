@@ -13,7 +13,7 @@
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
   <img alt="46 tools" src="https://img.shields.io/badge/tools-46-4f46e5">
-  <img alt="99 jobs" src="https://img.shields.io/badge/jobs-99-4f46e5">
+  <img alt="104 jobs" src="https://img.shields.io/badge/jobs-104-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -120,6 +120,8 @@ The SEO MCP servers from Ahrefs, Semrush, SE Ranking and DataForSEO are built fo
   <tr><td><b>Speed and alt texts as code</b></td><td>✅ <code>get_fix_pack · web_vitals</code>, <code>get_fix_pack · alt_texts</code>: tags, WordPress or a Cloudflare Worker</td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Prove a change before rolling it out</b></td><td>✅ <code>plan_split_test</code>: half the template gets the change, the other half is the control</td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Disavow without the risk</b></td><td>✅ <code>backlinks · disavow</code>: only clear spam, the rest up for review, and a warning when not to upload</td><td>A disavow export from a toxicity score in some of them</td></tr>
+  <tr><td><b>See what AI bots really get</b></td><td>✅ <code>ai_visibility · bots</code>: the page fetched as Googlebot, GPTBot, ClaudeBot and PerplexityBot next to a browser, for firewall blocks, pay-per-crawl (x402) and cloaking</td><td>Their site audits crawl as their own bot</td></tr>
+  <tr><td><b>Spend ads and SEO money together</b></td><td>✅ <code>find_opportunities · paid_organic</code>: Google Ads terms next to Search Console, ad spend to test cutting and pages to write</td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Turn link prospects into emails</b></td><td>✅ <code>backlinks · outreach</code>: one short email per site with the exact link to fix or add, as drafts in your mail after approval</td><td>They find the prospects</td></tr>
   <tr><td><b>Turn fixes into a work plan</b></td><td>✅ <code>plan_sprint</code>: a week plan per developer, content and outreach, as tickets in Linear, Jira, Asana or GitHub</td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Catch deploy accidents</b></td><td>✅ <code>watch · guard</code>: robots.txt, sitemap, https, noindex and canonical checked every 6 hours, alerts with the fix</td><td>Site audits on their own schedule</td></tr>
@@ -371,7 +373,7 @@ Two more jobs where your SEO tool has the data and OnPage.dev makes it a plan:
 - **`find_opportunities · content_decay`**: monthly clicks per page (Search Console, Ahrefs pages-history or GA4) become a refresh queue of pages that peaked and kept falling, seasonal dips left out.
 - **`get_fix_pack · alt_texts`**: lists images without alt text; your assistant looks at them and writes the texts; OnPage.dev checks them and ships them as HTML, a Cloudflare Worker, WordPress or code.
 - **Applied internal links**: `internal_links · suggest` with `platform` returns a Cloudflare Worker that links the first mention on each page (never inside an existing link), a WordPress plan or code edits.
-- **Google Business Profile vs site**: `check_local_seo` with `gbp_profile` compares name, phone, address, opening hours per day, category and the profile's website link with the site.
+- **Google Business Profile vs site**: `local · check` with `gbp_profile` compares name, phone, address, opening hours per day, category and the profile's website link with the site.
 - **Rich result errors**: `explain_google · index_status` groups URL Inspection `richResultsResult` and Enhancements export rows per type and issue, so a broken template is one fix.
 - **`get_fix_pack · web_vitals`**: speed fixes as code, ordered by the failing metric (main image priority, deferred scripts, preconnect, font swap, image sizes), also as a Cloudflare Worker.
 - **`backlinks · opportunities`**: pass the referring domains of up to 5 competitors and your own (Ahrefs, Semrush or a CSV). You get the sites that link to two or more competitors but not to you, ranked by overlap and domain rating, typed (best-of list, resource page, review site, directory, forum, news) with how to approach each, and checked live. Add pages that mention your brand and it reads each one: the ones that name you without a link come back with the sentence to quote in your email.
@@ -565,6 +567,11 @@ The work around the fixes, done by your agent with the tools you already connect
 | Share of voice | `measure · share_of_voice` | Your share of the clicks against competitors from Ahrefs or Semrush rank rows, and the keywords where they take them |
 | `find_opportunities · prune` | One decision per page from a year of clicks, impressions, conversions, backlinks and internal links: keep, refresh, merge with a 301, noindex or remove with a 410. Pages with value are never removed | `38 merges, 112 removals` |
 | `find_opportunities · discover` | Article templates checked for Google Discover and News (large image previews, a 1200 px image, date, Article markup, a clear title), with your Discover or News rows; `search_type` on content decay and traffic drops reads Discover, News, Image and Video rows | `4 of 6, image too small` |
+| `local · reviews` | A short, personal reply for every Google review without one, unhappy customers first, with the themes people praise and complain about. Posted through the user's Business Profile connector after approval | `12 replies, 3 urgent` |
+| `local · demand` | Business Profile search terms and geo-grid ranks (Local Falcon or similar) become new service and location pages and the map areas to work on | `5 new pages, 2 weak areas` |
+| `tracking · gsc_vs_ga4` | Search Console clicks against GA4 sessions per page: a missing tag, consent loss, a redirect that drops the source, or mislabelled traffic | `3 pages lose 40% of visits` |
+| `find_opportunities · paid_organic` | Google Ads search terms next to Search Console: where you rank top 3 and still pay, converting ad terms with no page, and spend without conversions | `€1,240 a month to test` |
+| `explain_google · bing` | Bing Webmaster crawl and index issues grouped with the fix, and Bing against Google per query (Bing also feeds Copilot) | `14 issues, 6 weak queries` |
 
 ```
 You:        We shipped the new templates. Make sure nothing broke and plan next month.
@@ -600,14 +607,14 @@ What makes OnPage.dev different from every other SEO MCP server:
 - **Maps your topics and wins the snippet.** `map_topics` groups Search Console queries into topics with the page that owns each one, competing pages and gaps; `answer_readiness · format` shows the answer format (paragraph, list or table) that wins the featured snippet.
 - **Matches what ranks.** `match_intent` finds the page type Google rewards for a keyword, `text_quality · readability` compares reading ease with the pages that rank, and `create_content_brief` turns them into a writing brief.
 - **Share previews that work.** `snippet · social` loads the real share image and checks it against Facebook, LinkedIn and X, also as a free REST API.
-- **Local and linked.** `check_local_seo` checks LocalBusiness markup, NAP consistency, the Google Business Profile link and a page per location; `internal_links · equity` maps internal PageRank and click depth and shows which important pages need more links.
+- **Local and linked.** `local · check` checks LocalBusiness markup, NAP consistency, the Google Business Profile link and a page per location; `internal_links · equity` maps internal PageRank and click depth and shows which important pages need more links.
 - **Ready for AI Mode.** `answer_readiness · questions` checks a page against the sub-questions AI search fans out for a topic, and shows the gaps where AI will cite someone else.
 - **Accessibility for the EAA.** `accessibility · wcag` maps every check to WCAG 2.1 AA, the standard behind the European Accessibility Act.
 - **Ecommerce and consent.** `check_product_page` checks Product markup for merchant listings; `tracking · consent` checks the cookie banner and Consent Mode v2.
 - **Closes the loop after shipping.** `request_recrawl · indexnow` pings Bing and other IndexNow engines, and the agent runs URL Inspection in your Search Console tool for Google.
 - **Reads every language right.** Reading ease uses the formula for the page language: Flesch-Douma for Dutch, Amstad for German, Kandel-Moles for French, Fernández-Huerta for Spanish.
 - **A public scoring method.** Every check, what it costs and what the score leaves out, on [onpage.dev/methodology](https://onpage.dev/methodology). What changed lives on [onpage.dev/changelog](https://onpage.dev/changelog).
-- **Light on context.** 46 tools cover 99 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 7 main tools when your agent already loads many servers.
+- **Light on context.** 46 tools cover 104 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 7 main tools when your agent already loads many servers.
 - **Keeps watching.** `watch · page` catches regressions after launch and alerts by RSS or webhook. [More](#keeps-watching-after-you-ship).
 - **Uses the data you already have.** Search Console, GA4, Ahrefs or Semrush in the same chat? `prioritize_fixes` ranks every fix by traffic impact with their numbers, and `ai_visibility · citations` shows what the pages AI cites do differently. [How it works](#uses-the-seo-data-you-already-have).
 - **Stable issue codes and typed results.** Every issue has a fixed code like `meta-missing` or `h1-missing`, and the main tools declare an output schema. An agent can work through issues one by one and prove each one is gone.
@@ -690,7 +697,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-46 tools that cover 99 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+46 tools that cover 104 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -764,7 +771,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 | `explain_google · index_status` | Search Console URL Inspection results (or Pages report rows) grouped by cause, most serious first: noindex, robots.txt, a canonical Google ignores, crawled or discovered but not indexed, soft 404, server and redirect errors, with the fix and the next tool | `12 crawled, not indexed` |
 | `check_hreflang` | Multilingual sites: valid language and region codes, x-default, then every language version: status, noindex, canonical, return tags and html lang. Returns the corrected tag set | `4 versions, 1 missing return tag` |
 | `entity · trust` | E-E-A-T across the site: About, Contact, Privacy and Terms pages (found in English, Dutch, German, French and Spanish), email, phone, address, company and VAT numbers, Organization markup, social profiles, author and dates | `6 of 8 checks pass` |
-| `check_local_seo` | Local businesses: LocalBusiness markup (specific type, address, phone, opening hours, geo), whether name, address and phone match the pages, the Google Business Profile link, a map, the city in the title, and a page with its own markup per location. Writes corrected JSON-LD with TODOs | `NAP mismatch: phone` |
+| `local · check` | Local businesses: LocalBusiness markup (specific type, address, phone, opening hours, geo), whether name, address and phone match the pages, the Google Business Profile link, a map, the city in the title, and a page with its own markup per location. Writes corrected JSON-LD with TODOs | `NAP mismatch: phone` |
 | `answer_readiness · questions` | Coverage for AI Mode and AI Overviews: your assistant writes the sub-questions an AI search engine fans out for a topic, the tool rates each one answered, buried, partial or missing on your page (and up to 2 competitors) and lists the sections to add | `60/100, 2 missing` |
 | `answer_readiness · format` | Featured snippets and People Also Ask: the answer format that wins on the pages that rank (paragraph and length, list and items, or table) against your section, with the rewrite | `Winning: list of 7, yours: paragraph` |
 | `answer_readiness · passages` | Does the page answer a question well enough for AI to quote it? Returns the best passages with length and fit | `Best passage, 64 words` |
