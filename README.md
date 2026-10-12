@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
-  <img alt="70 tools" src="https://img.shields.io/badge/tools-70-4f46e5">
+  <img alt="71 tools" src="https://img.shields.io/badge/tools-71-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -37,6 +37,7 @@
   <a href="#install-in-one-minute">Install</a> ·
   <a href="#they-bring-the-data-onpagedev-closes-the-loop">Data vs results</a> ·
   <a href="#uses-the-seo-data-you-already-have">Your SEO data</a> ·
+  <a href="#and-the-links-you-lost">Lost links</a> ·
   <a href="#the-whole-loop-inside-your-ai-agent">The whole loop</a> ·
   <a href="#from-finding-to-done">From finding to done</a> ·
   <a href="#seen-by-every-reader">Every reader</a> ·
@@ -118,7 +119,7 @@ Most SEO tools stop at a report. OnPage.dev gives an agent every step, and each 
 | Step | What happens | Tools |
 |---|---|---|
 | **Find** | What is wrong for Google, AI search, phones and screen readers, ranked by the traffic it can win | `scan_page`, `start_site_audit`, `render_page`, `screen_reader_view`, `prioritize_fixes`, `match_intent`, `check_readability` |
-| **Fix** | Ready code from the page's own content, shipped as a pull request, through WordPress or at the edge with a Cloudflare Worker on any CMS | `get_fix_pack`, `generate_schema`, `ai_crawler_policy`, `plan_redirects` |
+| **Fix** | Ready code from the page's own content, shipped as a pull request, through WordPress or at the edge with a Cloudflare Worker on any CMS | `get_fix_pack`, `generate_schema`, `ai_crawler_policy`, `plan_redirects`, `fix_broken_backlinks` |
 | **Check** | The new HTML and JSON-LD tested before deploy, then confirmed live | `scan_html`, `validate_schema`, `compare_html`, `rescan_and_compare` |
 | **Act** | Every shipped fix logged with its old and new value, and the plan sent to Google Sheets, Slack, Notion or the task board | `log_fix`, `export_findings`, `share_result` |
 | **Watch** | Every logged fix checked about every 6 hours, with the restore code sent to your webhook when a deploy undoes one | `get_fix_log`, `watch_page` |
@@ -229,6 +230,25 @@ With Ahrefs Brand Radar (or any source of AI citation counts) connected, `compar
 What `prioritize_fixes` looks for: blockers on pages with traffic, low click-through for the position, keywords in striking distance (position 4 to 15), top queries missing from the title or H1, and pages with strong backlinks that score badly.
 
 With GA4 conversions (key events) or revenue per page, it ranks by money instead of clicks: a pricing page that converts comes before a busy blog post that does not.
+
+### And the links you lost
+
+Other sites still link to pages you deleted or moved. Every one of those links is value you no longer get. With Ahrefs, Semrush or a CSV export, `fix_broken_backlinks` turns them back into ranking power:
+
+```
+You:        Which of our backlinks point at dead pages? Fix them.
+
+Assistant:  (Ahrefs) broken backlinks   112 links to 19 dead pages
+            fix_broken_backlinks        ranked by linking sites and domain rating
+                                        top 20 checked live: 14 dead, 3 already fixed, 2 block bots
+
+            1. /blog/running-shoes-guide  38 sites, best DR 81  → /guides/running-shoes
+            2. /old-promo                 12 sites, best DR 64  → /socks/trail (anchor text match)
+            3. /moved                     reached via 3 redirects → one 301 straight to /new-home
+            14 rules ready for _redirects. /old-promo is still in your sitemap.
+```
+
+The dead pages are grouped and ranked by link value (each linking site counts once, weighted by domain rating, nofollow at 30%). The top 20 are checked live, so pages that already work again or only block bots are not redirected by mistake. Each dead page gets the best live page from your sitemap or a site audit, matched on the URL, the page title and the anchor texts other sites used. No close match? It says so instead of dumping the link on the home page. The rules come out for `_redirects`, nginx, Apache, Next.js or CSV, with the strongest linking sites worth an email. Then `check_urls` confirms each one is a single 301 and `log_fix` keeps watching them.
 
 ## Matches search intent
 
@@ -345,6 +365,7 @@ And three more jobs agents get asked to do every week:
 
 - **`create_content_brief`**: give a search term and the pages that rank, get a writing brief: the subtopics most of them cover, the questions they answer, figures to back up with your own data, a target length, schema and internal links. Bot walls and navigation headings are filtered out.
 - **`plan_redirects`**: give the old and new URLs (or the sites, to read their sitemaps) and get a 301 map with a confidence score per match, written as `_redirects`, nginx, Apache, Next.js or CSV. Then verify after launch with `check_urls`.
+- **`fix_broken_backlinks`**: pass the broken backlinks from Ahrefs, Semrush or a CSV export. The dead pages are ranked by the sites that still link to them, the top 20 are checked live, each gets the best live page to 301 to (from the sitemap, a site audit and the anchor texts), and the rules come out ready to ship. Dead pages still in the sitemap, redirect chains and temporary redirects are flagged too.
 - **`share_result`**: after fixing a site, publish a before and after page (for example 46 → 94, with the issues fixed) to send to your client. Not indexed, expires after 90 days.
 
 ## Built for agents
@@ -462,7 +483,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-70 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+71 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -542,6 +563,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 | `check_sitemap` | The XML sitemap: found through robots.txt, index followed, format and limits, foreign hosts, fake or future lastmod dates, plus a sample of listed URLs checked for redirects, errors, noindex and canonicals elsewhere, with corrected entries | `4 of 12 URLs do not belong` |
 | `extract_from_pages` | One value from up to 20 pages, by CSS selector (with an attribute), regular expression or JSON-LD path such as `Product.offers.price`, to verify a template fix at scale | `18 of 20 have a price` |
 | `plan_redirects` | Old URLs to new ones with a confidence score per match, written as `_redirects`, nginx, Apache, Next.js or CSV rules | `212 matched, 9 to review` |
+| `fix_broken_backlinks` | Broken backlinks from Ahrefs or Semrush ranked by link value, checked live, matched to the best live page and written as 301 rules | `14 pages, 38 sites back` |
 | `test_robots` | May Googlebot, GPTBot, ClaudeBot or any crawler fetch this URL? Uses Google's matching rules and returns the exact deciding rule. Can test a proposed robots.txt too | `Blocked by "Disallow: /search?"` |
 
 ### Writing and code
