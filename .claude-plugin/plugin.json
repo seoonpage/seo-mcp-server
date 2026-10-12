@@ -1,6 +1,6 @@
 {
   "name": "onpage",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "The whole SEO loop inside Claude Code: find what is wrong for Google and AI search, write the fix in your framework, check it before deploy, ship it as a pull request and prove the result. 46 tools (99 jobs) on the hosted OnPage.dev MCP server, free, no account or key.",
   "author": {
     "name": "OnPage.dev",
