@@ -49,13 +49,13 @@ Work in a loop: measure, fix in the source, measure again. Stop when the target 
 - When the user wants to share or plan the work, call `export_findings` with the url or audit_id. If Google Sheets, Slack, Notion or a task board tool is connected, send the output there; otherwise give the `=IMPORTDATA` formula.
 
 ## Whole sites and competitors
-- For a whole site, call `start_site_audit`, then `get_site_audit` with the returned id until status is complete. Fix the issues that affect the most pages first.
+- For a whole site, call `start_site_audit`, then `get_site_audit` with the returned id until status is complete. Fix the issues that affect the most pages first. If the user has a crawl from Screaming Frog, Ahrefs Site Audit or Semrush, or the site has more than 25 pages, call `import_site_audit` with those rows (and the internal links) instead; the audit id works the same.
 - Pages missing from Google? Fetch URL Inspection results with the Search Console tool and call `explain_index_status`.
 - For the site's topics, fetch Search Console rows by query and page and call `map_topics` with them (and the audit id). Fix competing pages first, then write pages for the topic gaps.
 - To see how link authority flows, call `map_link_equity` with the audit id, and pass the top pages from Search Console or GA4 as `important_urls` when available. Fix unreachable and weak important pages first.
 - For a dashboard or client report that stays up to date, call `create_dashboard_feed`, then `build_seo_dashboard` (with the user's GA4 connection for the realtime block) and `get_dashboard_data` for the tables.
 - After a site audit, also run `find_duplicate_content` and `check_url_parameters`, and check the sitemap with `check_sitemap`. To verify a template fix across pages, use `extract_from_pages`.
-- Dead pages that other sites still link to? If Ahrefs, Semrush or another backlink tool is connected, fetch the broken backlinks and call `fix_broken_backlinks` with them (and the audit id). Ship only the rules it marks ready, confirm the review ones with the user, then verify with `check_urls` and record them with `log_fix`.
+- Dead pages that other sites still link to? If Ahrefs, Semrush or another backlink tool is connected, fetch the broken backlinks (and GA4 page views of the 404 page with their referrer) and call `fix_broken_backlinks` with them (and the audit id). Ship only the rules it marks ready, confirm the review ones with the user, then verify with `check_urls` and record them with `log_fix`.
 - For orphan pages or new content, call `suggest_internal_links` with the audit id and add the links in body text.
 - To see what the pages that rank do better, call `compare_pages` with the page and up to 3 competitors (call again until complete).
 - For a client-side React, Vue or Angular app, the scan renders the page in a real browser and reports how many words crawlers without JavaScript get. If that gap is large, propose prerendering or server rendering for the key routes.
