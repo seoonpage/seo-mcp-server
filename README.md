@@ -646,6 +646,7 @@ What makes OnPage.dev different from every other SEO MCP server:
 - **Reads every language right.** Reading ease uses the formula for the page language: Flesch-Douma for Dutch, Amstad for German, Kandel-Moles for French, Fernández-Huerta for Spanish.
 - **A public scoring method.** Every check, what it costs and what the score leaves out, on [onpage.dev/methodology](https://onpage.dev/methodology). What changed lives on [onpage.dev/changelog](https://onpage.dev/changelog).
 - **Light on context.** 37 tools cover 109 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 8 main tools when your agent already loads many servers.
+- **Easy to continue, easy on context.** Every partial result carries `next_call`, the exact tool and arguments to continue, so long jobs get finished. Add `detail: "brief"` to any call for a short summary (about 80% shorter) while the structured result stays complete.
 - **Keeps watching.** `watch · page` catches regressions after launch and alerts by RSS or webhook. [More](#keeps-watching-after-you-ship).
 - **Uses the data you already have.** Search Console, GA4, Ahrefs or Semrush in the same chat? `prioritize_fixes` ranks every fix by traffic impact with their numbers, and `ai_visibility · citations` shows what the pages AI cites do differently. [How it works](#uses-the-seo-data-you-already-have).
 - **Stable issue codes and typed results.** Every issue has a fixed code like `meta-missing` or `h1-missing`, and the main tools declare an output schema. An agent can work through issues one by one and prove each one is gone.
@@ -935,6 +936,11 @@ One click in clients that show prompts:
 - **Launch checklist**: a tick or cross for everything a page needs before going live.
 - **AI visibility makeover**: robots.txt, llms.txt and answer passages in one go.
 - **Pre-deploy SEO gate**: scan the built HTML and block the release below a minimum score.
+- **Pick up where we left off**: opens the site memory and continues with the next step.
+- **Weekly SEO routine**: alerts, rankings, undone fixes and the three things to do this week.
+- **Fix and prove it**: scan, fix, ship after approval, log, recrawl and plan the measurement.
+- **Site migration**: baseline audit, redirect map, checks on the new site and a guard.
+- **Monthly client report**: fixes shipped, results against unchanged pages, rankings and next month.
 
 ### Reference resource
 
