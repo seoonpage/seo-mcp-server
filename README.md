@@ -6,7 +6,8 @@
 
 <p align="center">
   <b>The SEO scanner your AI assistant uses to fix your site itself.</b><br>
-  Scan, fix, check before deploy, confirm after. For Google and for AI search.
+  Scan, fix, check before deploy, confirm after. For Google and for AI search.<br>
+  <b>Remembers every site across chats, projects and clients.</b>
 </p>
 
 <p align="center">
