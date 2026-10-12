@@ -574,6 +574,10 @@ Assistant:  site_memory · open   41 steps since July: pricing 46 → 91, 12 fix
 | `note` | Decisions the tools cannot see, like "no prices in titles" or "migrated on 3 Oct" |
 | `forget` | Deletes the memory and everything in it |
 
+**It learns.** Every measured result is tied to the fixes shipped before it, so with a memory open `prioritize_fixes`, `get_fix_pack` and `plan_sprint` show which fix types moved traffic on this site ("title rewrites +38% here"), and `site_memory · next` suggests rolling them out to more pages. Decisions saved as notes come with every fix pack, brief and draft.
+
+**It connects the dots.** A ranking drop, traffic drop, decay, vitals regression or alert comes with the fixes, deploys and decisions of the last three weeks, so the agent checks those first.
+
 The memory stores summaries and a few numbers per step, not your raw data rows or page content. The key is stored only as a hash, and an unused memory is deleted after 400 days.
 
 ## Acts, guards and measures like an SEO team
