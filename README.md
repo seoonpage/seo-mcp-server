@@ -30,7 +30,15 @@
   <img src="assets/logos/gemini.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Gemini&nbsp;&nbsp;&nbsp;
   <img src="assets/logos/perplexity.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Perplexity&nbsp;&nbsp;&nbsp;
   <sub><b>Ships fixes to</b></sub>&nbsp;&nbsp;
-  <img src="assets/logos/wordpress.png" width="22" height="22" align="absmiddle" alt="">&nbsp;WordPress
+  <img src="assets/logos/wordpress.png" width="22" height="22" align="absmiddle" alt="">&nbsp;WordPress&nbsp;&nbsp;&nbsp;
+  <img src="assets/logos/shopify.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Shopify&nbsp;&nbsp;&nbsp;
+  <img src="assets/logos/webflow.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Webflow&nbsp;&nbsp;&nbsp;
+  <img src="assets/logos/wix.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Wix&nbsp;&nbsp;&nbsp;
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/sanity-dark.png"><img src="assets/logos/sanity.png" width="22" height="22" align="absmiddle" alt=""></picture>&nbsp;Sanity&nbsp;&nbsp;&nbsp;
+  <img src="assets/logos/contentful.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Contentful&nbsp;&nbsp;&nbsp;
+  <img src="assets/logos/strapi.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Strapi&nbsp;&nbsp;&nbsp;
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/ghost-dark.png"><img src="assets/logos/ghost.png" width="22" height="22" align="absmiddle" alt=""></picture>&nbsp;Ghost&nbsp;&nbsp;&nbsp;
+  Magento
 </p>
 
 <p align="center">
@@ -92,7 +100,7 @@ The SEO MCP servers from Ahrefs, Semrush, SE Ranking and DataForSEO are built fo
   <tr><td><b>Search data: rankings, keywords, backlinks</b></td><td>✅ Uses yours, from Search Console, GA4, Ahrefs or Semrush in the same chat</td><td>Their core strength</td></tr>
   <tr><td><b>Find what is wrong on the page</b></td><td>✅ <code>scan_page</code>, <code>deep_audit</code>, <code>render_page</code>: Google, AI search, speed, accessibility</td><td>Site audit data in some of them</td></tr>
   <tr><td><b>Write the fix from the page itself</b></td><td>✅ <code>get_fix_pack</code>, <code>generate_schema</code></td><td><i>Not what they are built for</i></td></tr>
-  <tr><td><b>Ship it where the code lives</b></td><td>✅ Yoast SEO and Rank Math fields, or a Git pull request for Next.js, Nuxt, SvelteKit, Astro, Angular, React or Vue</td><td><i>Not what they are built for</i></td></tr>
+  <tr><td><b>Ship it where the code lives</b></td><td>✅ WordPress, Shopify, Webflow, Wix, Sanity, Contentful, Strapi, Ghost or Magento fields through your own connection, or a Git pull request for Next.js, Nuxt, SvelteKit, Astro, Angular, React or Vue</td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Check it before deploy</b></td><td>✅ <code>scan_html</code> and <code>compare_html</code> on unpublished HTML</td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Tell search engines</b></td><td>✅ <code>submit_indexnow</code>, plus URL Inspection through your Search Console</td><td><i>Not what they are built for</i></td></tr>
   <tr><td><b>Cover the AI Mode fan-out</b></td><td>✅ <code>check_question_coverage</code>: every sub-question answered, buried or missing</td><td><i>Not what they are built for</i></td></tr>
@@ -446,6 +454,20 @@ Assistant:  scan_page            46: title too short, no meta description, 1 ima
 - OnPage.dev never logs in to your site and stores no passwords: your own WordPress connection makes every change.
 - Without a WordPress connection, the same plan tells you exactly what to paste where.
 
+### Ships to your CMS, not just WordPress
+
+`get_fix_pack` writes the plan for the platform the site runs on, with the exact MCP tool or API call and field for every fix, applied through the user's own connection after approval:
+
+| Platform | How the fix lands | Limits worth knowing |
+|---|---|---|
+| WordPress | Yoast SEO or Rank Math fields through a WordPress MCP | Theme-level tags stay in the theme |
+| Shopify | Admin GraphQL: `productUpdate` / `collectionUpdate` seo, page and article `global.title_tag` metafields, `urlRedirectCreate` | Canonical, structured data and robots.txt live in the theme |
+| Webflow | Official Webflow MCP: `update_page_settings` (seo, openGraph), CMS fields, `upsert_page_script` for JSON-LD | Per-page canonical not via MCP; redirects need Enterprise |
+| Wix | Official Wix MCP: the SEO tags API (title, description, canonical, robots, OG, JSON-LD) | Every write replaces the full tag set: read first |
+| Sanity, Contentful, Strapi | Their official MCP servers: patch or update the entry, then publish | Field names come from your content model |
+| Ghost, Magento | Admin or REST API, or a community MCP server | Theme templates for schema |
+| Anything else | A Git pull request, or a Cloudflare Worker that fixes any CMS at the edge | |
+
 ## Ships as a pull request
 
 Not on WordPress? `get_fix_pack` with `platform: "git"` writes the fixes as code for the site's framework and opens a pull request through the git tools your agent already has. It detects Next.js (App and Pages Router), Nuxt, SvelteKit, Astro, Angular, React, Vue and plain HTML from the page itself.
@@ -778,7 +800,7 @@ In clients that support MCP Apps (Claude) or the Apps SDK (ChatGPT), scan result
 | Real-browser first screen | Phone, tablet, desktop, with and without JavaScript | No | Rarely |
 | Client-side apps (React, Angular, Vue) | Full audit of the rendered page, plus what AI crawlers miss | No | Rarely |
 | Accessibility report | WCAG 2.1 AA, mapped per criterion, for the European Accessibility Act | No | Rarely |
-| Ships fixes | WordPress, or a Git pull request with framework code | No | Rarely |
+| Ships fixes | WordPress, Shopify, Webflow, Wix, headless CMS, or a Git pull request with framework code | No | Rarely |
 | Server log analysis | Googlebot and 14 AI crawlers, sitemap gaps | No | Some |
 | Real-user Web Vitals | Chrome UX Report, phone and desktop | Some | Some |
 | Screen reader view | Accessibility tree read aloud, unnamed controls flagged | No | Rarely |

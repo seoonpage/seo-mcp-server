@@ -18,6 +18,7 @@ Work in a loop: measure, fix in the source, measure again. Stop when the target 
 - Unpublished work: build the project if that is cheap, read the generated HTML and call `scan_html` with it. Pass the future URL as `url` when known so canonical and relative links are judged correctly.
 
 ## 2. Fix in the source, not in the build output
+- Site on Shopify, Webflow, Wix, Sanity, Contentful, Strapi, Ghost or Magento? Call `get_fix_pack` with that platform and apply the plan through the user's own connection to it, after approval. Theme-only items (Shopify canonical and schema) go as a theme change.
 - Call `get_fix_pack` with `platform: "git"` (published page) to get the fixes as code for this project's framework: Next.js, Nuxt, SvelteKit, Astro, Angular, React, Vue or plain HTML. It detects the framework; pass `framework` if you know better from the repo. For unpublished pages, use the fixes from `scan_html`.
 - Images without alt text: call `fix_alt_texts` with the url, look at each listed image and write its alt text, then call it again with the alts and the platform to get the patch.
 - Call `generate_schema` for structured data. Fill every value marked TODO with real data from the project, or ask the user. Never invent prices, dates or names.
