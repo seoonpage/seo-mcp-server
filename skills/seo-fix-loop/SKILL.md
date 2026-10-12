@@ -11,7 +11,7 @@ Work in a loop: measure, fix in the source, measure again. Stop when the target 
 - Published page: call `scan_page` with its URL.
 - Traffic first: if a Google Search Console, GA4, Ahrefs or Semrush tool is available, fetch the site's top pages (clicks, impressions, position, traffic, referring domains) and top queries, at most 10 pages and 20 queries each, and call `prioritize_fixes` with them. Work through its list in order. Without such a tool, skip this.
 - What visitors and assistive tech get: call `render_page` for the first screen on phone, tablet and desktop (H1 and call to action above the fold, cookie walls, tap targets, JavaScript-only content) and `screen_reader_view` for links, buttons and images without a name. With your own browser tool, use `get_layout_probe` and `analyze_layout` instead.
-- Real-user speed: call `check_web_vitals` for Core Web Vitals from real Chrome visitors. For any metric that is not good, look for the cause in the code (large hero images, render-blocking scripts, layout shifts) before anything else.
+- Real-user speed: call `check_web_vitals` for Core Web Vitals from real Chrome visitors. For any metric that is not good, call `fix_core_web_vitals` with the failing metrics and apply its code in the source (large hero images, render-blocking scripts, layout shifts) before anything else.
 - Page type checks: for a business with a shop, office or service area call `check_local_seo` (fill its JSON-LD TODOs only with real facts); on ecommerce product pages call `check_product_page`; for accessibility (and the European Accessibility Act) call `check_accessibility`; for the cookie banner and Google Consent Mode call `check_consent`; to see whether GA4 really tracks (double counting, hits before consent, consent never updated) call `check_ga4_tracking`.
 - Featured snippets: for a question the page should win, fetch the top results with the user's Ahrefs or Semrush and call `check_answer_format`; rewrite the section in the winning format.
 - Server logs: if the user can share access log lines, call `analyze_logs` to see what Googlebot and AI crawlers really crawl and which errors they get.
@@ -19,6 +19,7 @@ Work in a loop: measure, fix in the source, measure again. Stop when the target 
 
 ## 2. Fix in the source, not in the build output
 - Call `get_fix_pack` with `platform: "git"` (published page) to get the fixes as code for this project's framework: Next.js, Nuxt, SvelteKit, Astro, Angular, React, Vue or plain HTML. It detects the framework; pass `framework` if you know better from the repo. For unpublished pages, use the fixes from `scan_html`.
+- Images without alt text: call `fix_alt_texts` with the url, look at each listed image and write its alt text, then call it again with the alts and the platform to get the patch.
 - Call `generate_schema` for structured data. Fill every value marked TODO with real data from the project, or ask the user. Never invent prices, dates or names.
 - Use `check_snippet` to test title and description variants until they fit without being cut off.
 - Before committing JSON-LD, run it through `validate_schema` and fix every error.
@@ -38,6 +39,7 @@ Work in a loop: measure, fix in the source, measure again. Stop when the target 
 
 ## Prove it
 - Traffic dropped? Fetch two Search Console periods and call `diagnose_traffic_drop` before changing anything.
+- Pages slowly losing traffic? Monthly clicks per page into `find_content_decay` gives the refresh queue.
 - Looking for quick wins? `find_ctr_gaps` (titles that do not get clicked) and `find_striking_distance` (queries at positions 8 to 20).
 - After a speed fix, `check_vitals_trend` with the change date shows whether real users noticed; for AI answers, `measure_ai_citations` with before and after counts.
 - A few weeks after the fixes are live, offer `measure_impact` with the `fix_log_id`: fetch Search Console, GA4 or Ahrefs numbers for 28 days before and after the fix date, for the changed pages and a few unchanged ones, and pass them with changed true or false.

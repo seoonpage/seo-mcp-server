@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
-  <img alt="76 tools" src="https://img.shields.io/badge/tools-76-4f46e5">
+  <img alt="79 tools" src="https://img.shields.io/badge/tools-79-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -270,6 +270,9 @@ Or let it run by itself: `schedule_site_audit` audits the site every day, week o
 
 Two more jobs where your SEO tool has the data and OnPage.dev makes it a plan:
 
+- **`find_content_decay`**: monthly clicks per page (Search Console, Ahrefs pages-history or GA4) become a refresh queue of pages that peaked and kept falling, seasonal dips left out.
+- **`fix_alt_texts`**: lists images without alt text; your assistant looks at them and writes the texts; OnPage.dev checks them and ships them as HTML, a Cloudflare Worker, WordPress or code.
+- **`fix_core_web_vitals`**: speed fixes as code, ordered by the failing metric (main image priority, deferred scripts, preconnect, font swap, image sizes), also as a Cloudflare Worker.
 - **`find_link_opportunities`**: pass the referring domains of up to 5 competitors and your own (Ahrefs, Semrush or a CSV). You get the sites that link to two or more competitors but not to you, ranked by overlap and domain rating, typed (best-of list, resource page, review site, directory, forum, news) with how to approach each, and checked live. Add pages that mention your brand and it reads each one: the ones that name you without a link come back with the sentence to quote in your email.
 - **`find_ai_visibility_gaps`**: pass real AI answers from Ahrefs Brand Radar or another AI visibility tool. You get your share of answers per engine next to each competitor, the questions where they are named and you are not (by search volume), what the AI searched to answer them, and the outside sites it cites, which are the places to get onto.
 
@@ -303,6 +306,8 @@ Assistant:  (Ahrefs) broken backlinks   112 links to 19 dead pages
 The dead pages are grouped and ranked by link value (each linking site counts once, weighted by domain rating, nofollow at 30%). The top 20 are checked live, so pages that already work again or only block bots are not redirected by mistake. Each dead page gets the best live page from your sitemap or a site audit, matched on the URL, the page title and the anchor texts other sites used. No close match? It says so instead of dumping the link on the home page. GA4 404 hits add real visits to the ranking, and when the visitors came from one of your own pages, that link is listed as an edit instead of hiding it behind a redirect. The rules come out for `_redirects`, nginx, Apache, Next.js or CSV, with the strongest linking sites worth an email. Then `check_urls` confirms each one is a single 301 and `log_fix` keeps watching them.
 
 Lost backlinks work too. Pass Ahrefs backlinks with their history and `lost_reason`: a page that died or a redirect that broke on your side gets a 301, and a link the other site took out goes on an outreach list, strongest first, with what to ask ("put it back", "link the new version of your page") and the sentence the link used to sit in.
+
+No Search Console connected? `find_striking_distance` and `map_topics` also take Ahrefs or Semrush organic keyword rows (keyword, url, position, volume, traffic). And `map_topics` with `competitor_rows` gives a keyword gap: topics where competitors rank in the top 10 and you do not, by search volume, with the page to strengthen or the page to write.
 
 ## Matches search intent
 
@@ -542,7 +547,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-76 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+79 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -625,6 +630,9 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 | `import_site_audit` | A crawl from Screaming Frog, Ahrefs or Semrush (up to 500 pages and the internal links) turned into an audit every audit tool can use | `480 pages, 6,912 links` |
 | `compare_site_audits` | A site audit against the previous one: regressions, new and fixed issues per code, pages added and gone | `3 regressions, 41 fixed` |
 | `schedule_site_audit` | The whole site audited every day, week or month, with regressions posted to Slack, Discord or a webhook | `Weekly, 2 regressions sent` |
+| `find_content_decay` | Pages that peaked and kept losing clicks, as a refresh queue | `9 pages, −1,840 clicks` |
+| `fix_alt_texts` | Missing alt texts listed, checked and shipped as HTML, Worker, WordPress or code | `12 alts, 2 decorative` |
+| `fix_core_web_vitals` | Speed fixes as code, failing metric first, also as a Cloudflare Worker | `LCP: 4 fixes` |
 | `find_link_opportunities` | Sites that link to competitors but not to you, typed and ranked, plus brand mentions without a link | `38 sites, 6 unlinked` |
 | `find_ai_visibility_gaps` | AI answers turned into share per engine, gap questions, AI searches and cited sites | `14 gaps, 9 sources` |
 | `fix_broken_backlinks` | Broken and lost backlinks from Ahrefs or Semrush and 404 hits from GA4, ranked by link value and visits, checked live, written as 301 rules, link edits and an outreach list | `14 pages, 38 sites back` |
