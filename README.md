@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
-  <img alt="73 tools" src="https://img.shields.io/badge/tools-73-4f46e5">
+  <img alt="74 tools" src="https://img.shields.io/badge/tools-74-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -263,6 +263,8 @@ Assistant:  import_site_audit     480 pages from this morning's crawl
             Fixed: meta descriptions on 118 pages, 9 broken pages work again.
 ```
 
+Or let it run by itself: `schedule_site_audit` audits the site every day, week or month (up to 25 pages), compares each audit with the last one, and posts the changes to Slack, Discord or any https webhook when pages broke, turned noindex, changed canonical or got new issues. `action: "status"` shows the last result.
+
 ### And the links you lost
 
 Other sites still link to pages you deleted or moved, and visitors still land on them. Every one of those links and visits is value you no longer get. With Ahrefs, Semrush, GA4 (page views of your 404 page) or a CSV export, `fix_broken_backlinks` turns them back into ranking power and traffic:
@@ -401,6 +403,7 @@ And three more jobs agents get asked to do every week:
 - **`plan_redirects`**: give the old and new URLs (or the sites, to read their sitemaps) and get a 301 map with a confidence score per match, written as `_redirects`, nginx, Apache, Next.js or CSV. Then verify after launch with `check_urls`.
 - **`import_site_audit`**: pass the page rows of a crawl you already have (Screaming Frog, Ahrefs Site Audit, Semrush, Sitebulb), up to 500 pages plus the internal links, and every audit tool works on the whole site. Only the columns you send are checked.
 - **`compare_site_audits`**: a finished site audit against the previous one of the same site (snapshots kept 90 days): pages that broke, turned noindex or changed canonical or title, issues new or fixed per code, pages added or gone, average score before and after.
+- **`schedule_site_audit`**: audits a whole site every 1, 7 or 30 days, compares each audit with the previous one and posts regressions to a webhook (Slack, Discord or any https endpoint). Status and stop with the schedule_id.
 - **`fix_broken_backlinks`**: pass the broken backlinks from Ahrefs, Semrush or a CSV export. The dead pages are ranked by the sites that still link to them, the top 20 are checked live, each gets the best live page to 301 to (from the sitemap, a site audit and the anchor texts), and the rules come out ready to ship. Dead pages still in the sitemap, redirect chains and temporary redirects are flagged too.
 - **`share_result`**: after fixing a site, publish a before and after page (for example 46 → 94, with the issues fixed) to send to your client. Not indexed, expires after 90 days.
 
@@ -519,7 +522,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-73 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+74 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -601,6 +604,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 | `plan_redirects` | Old URLs to new ones with a confidence score per match, written as `_redirects`, nginx, Apache, Next.js or CSV rules | `212 matched, 9 to review` |
 | `import_site_audit` | A crawl from Screaming Frog, Ahrefs or Semrush (up to 500 pages and the internal links) turned into an audit every audit tool can use | `480 pages, 6,912 links` |
 | `compare_site_audits` | A site audit against the previous one: regressions, new and fixed issues per code, pages added and gone | `3 regressions, 41 fixed` |
+| `schedule_site_audit` | The whole site audited every day, week or month, with regressions posted to Slack, Discord or a webhook | `Weekly, 2 regressions sent` |
 | `fix_broken_backlinks` | Broken and lost backlinks from Ahrefs or Semrush and 404 hits from GA4, ranked by link value and visits, checked live, written as 301 rules, link edits and an outreach list | `14 pages, 38 sites back` |
 | `test_robots` | May Googlebot, GPTBot, ClaudeBot or any crawler fetch this URL? Uses Google's matching rules and returns the exact deciding rule. Can test a proposed robots.txt too | `Blocked by "Disallow: /search?"` |
 
@@ -758,7 +762,7 @@ Your coding agent can pick the issue up and open the pull request with the value
 
 - **Nothing changes on your site by itself.** OnPage.dev only reads public pages or the HTML you send. Fixes ship through your own tools (your git, your WordPress, your Cloudflare), after you approve them. Watches and shared result pages store scores and issue names, never page content; fix logs store the URLs and the old and new values you log.
 - **Public pages only.** Private, internal and local network addresses are refused (SSRF protection), and so are non-web schemes.
-- **No storage of content.** HTML sent to `scan_html` is analysed in memory and dropped. For change tracking, only the score and issue names are kept, under a hashed key, for up to 30 days. A finished site audit leaves a snapshot for 90 days (per page: address, status, score, title, canonical, noindex and issue names) so `compare_site_audits` can show what changed; page text is never kept. Backlink and 404 rows passed to `fix_broken_backlinks` are used for that answer only.
+- **No storage of content.** HTML sent to `scan_html` is analysed in memory and dropped. For change tracking, only the score and issue names are kept, under a hashed key, for up to 30 days. A scheduled audit stores the site address, interval, webhook and last result until you stop it (at most 400 days). A finished site audit leaves a snapshot for 90 days (per page: address, status, score, title, canonical, noindex and issue names) so `compare_site_audits` can show what changed; page text is never kept. Backlink and 404 rows passed to `fix_broken_backlinks` are used for that answer only.
 - **Your traffic data stays yours.** Numbers passed to `prioritize_fixes` or `measure_impact` are used for that answer only, except that `measure_impact` with a `fix_log_id` saves the before, after and change per logged page in that fix log. OnPage.dev never connects to Search Console, GA4, Ahrefs or Semrush itself.
 - **Prompt injection aware.** Text from scanned pages is returned as data and marked as such.
 - **Fair use limits.** About 20 scans per minute per connection, plus a shared cap. Real-browser checks (`render_page`, `screen_reader_view`) share a daily budget; with your own browser tool, `get_layout_probe` has no limit. No accounts, no keys, no tracking cookies.
