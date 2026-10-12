@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "dev.onpage/onpage",
   "title": "OnPage.dev",
-  "description": "Free SEO MCP that closes the loop: find, fix, ship as a PR or to WordPress, prove. 84 tools, no key.",
-  "version": "1.37.0",
+  "description": "Free SEO MCP that closes the loop: find, fix, ship as a PR or to WordPress, prove. 87 tools, no key.",
+  "version": "1.38.0",
   "websiteUrl": "https://onpage.dev/mcp",
   "repository": {
     "url": "https://github.com/seoonpage/seo-mcp-server",

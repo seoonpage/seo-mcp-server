@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
-  <img alt="84 tools" src="https://img.shields.io/badge/tools-84-4f46e5">
+  <img alt="87 tools" src="https://img.shields.io/badge/tools-87-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -38,6 +38,7 @@
   <a href="#they-bring-the-data-onpagedev-closes-the-loop">Data vs results</a> ·
   <a href="#uses-the-seo-data-you-already-have">Your SEO data</a> ·
   <a href="#which-of-your-pages-wins-the-keyword">Cannibalization</a> ·
+  <a href="#disavow-without-the-risk-and-manual-actions-cleaned-up">Disavow</a> ·
   <a href="#bring-your-own-crawl">Your own crawl</a> ·
   <a href="#what-changed-since-the-last-audit">What changed</a> ·
   <a href="#links-to-win-and-ai-answers-to-enter">Links and AI gaps</a> ·
@@ -260,6 +261,12 @@ Assistant:  (Search Console) rows   blog post at #4, product page at #14
 
 It counts the keyword in the title (and how early), URL, meta description, H1, H2 and H3, the body text and the first 100 words, bold and italics, image alt texts and file names, checks canonical and noindex, and maps which of the pages link to each other with the keyword as anchor. When two pages say nearly the same, it proposes a merge with a 301 instead. `map_topics` finds the competing pages across a whole site first.
 
+### Disavow without the risk, and manual actions cleaned up
+
+A wrong disavow file can cost more rankings than the spam ever did. `build_disavow` takes your backlink data (Ahrefs `is_spam`, Semrush toxic markers or a CSV) and only puts clear spam in `disavow.txt`: domains marked as spam, or spam anchors on sites with no authority and no traffic. Anything with authority goes on a list for a person to decide, and without a manual action or real negative SEO it tells you not to upload the file at all.
+
+Got a manual action? `explain_manual_action` covers every type in Google's documentation (unnatural links, thin content, cloaking, structured data, site reputation abuse and more): what Google means, the cleanup steps in order, the tools that check them, what to keep as proof, and a reconsideration request draft with a TODO for everything you actually did.
+
 ### Bring your own crawl
 
 `start_site_audit` reads up to 25 pages. Already crawled the site with Screaming Frog, Ahrefs Site Audit, Semrush or Sitebulb? `import_site_audit` takes up to 500 page rows and the internal links, and returns an `audit_id` that every audit tool understands: `get_site_audit`, `map_link_equity`, `suggest_internal_links`, `build_edge_rules`, `check_url_parameters` and `export_findings`.
@@ -296,6 +303,9 @@ Or let it run by itself: `schedule_site_audit` audits the site every day, week o
 
 Two more jobs where your SEO tool has the data and OnPage.dev makes it a plan:
 
+- **`build_disavow`**: disavow.txt with only clear spam, the rest up for review, and a warning when you should not upload it.
+- **`explain_manual_action`**: every Google manual action type with cleanup steps, checking tools, proof to keep and a reconsideration request draft.
+- **`check_outbound_links`**: dead links to other sites, cited pages that now redirect to a home page and moved pages, with an archived copy as replacement.
 - **`diagnose_cannibalization`**: the page that should rank next to your pages that outrank it, signal by signal (title, URL, meta, H1 to H3, mentions, first 100 words, bold, italics, alt texts, file names, internal keyword anchors), with the plan to fix it.
 - **`plan_split_test`**: 20+ pages of one template split into two groups with equal traffic, a Worker that changes the title or description on one group only (same for visitors and Googlebot), measured with `measure_impact`.
 - **`share_audit_report`**: a finished site audit as a clean report page with your agency name, to send as a link or save as a PDF.
@@ -582,7 +592,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 
 ## What it can do
 
-84 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+87 tools in five jobs. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -665,6 +675,9 @@ Streamable HTTP transport at `https://onpage.dev/mcp`. JSON responses, no authen
 | `import_site_audit` | A crawl from Screaming Frog, Ahrefs or Semrush (up to 500 pages and the internal links) turned into an audit every audit tool can use | `480 pages, 6,912 links` |
 | `compare_site_audits` | A site audit against the previous one: regressions, new and fixed issues per code, pages added and gone | `3 regressions, 41 fixed` |
 | `schedule_site_audit` | The whole site audited every day, week or month, with regressions posted to Slack, Discord or a webhook | `Weekly, 2 regressions sent` |
+| `build_disavow` | Disavow file with only clear spam and the rest up for review | `14 domains, 3 to review` |
+| `explain_manual_action` | Manual action cleanup plan and reconsideration draft | `Unnatural links: 5 steps` |
+| `check_outbound_links` | Dead and moved links to other sites, with archived copies | `3 dead, 1 moved` |
 | `diagnose_cannibalization` | Your competing pages side by side on every keyword signal, with the fix | `#1 wins on 6 signals` |
 | `plan_split_test` | Template pages split by traffic, a Worker for the variant, measured against the control | `12 vs 12 pages` |
 | `share_audit_report` | An audit as a branded report page and PDF | `Link and PDF` |
