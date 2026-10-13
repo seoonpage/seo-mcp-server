@@ -14,7 +14,7 @@
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
   <img alt="37 tools" src="https://img.shields.io/badge/tools-37-4f46e5">
-  <img alt="111 jobs" src="https://img.shields.io/badge/jobs-111-4f46e5">
+  <img alt="113 jobs" src="https://img.shields.io/badge/jobs-113-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -261,6 +261,25 @@ Assistant:  site_audit · start   10 pages, average 81
 ```
 
 How it works: an MCP server cannot read other connectors, and should not. OnPage.dev's results and instructions ask the assistant to fetch the numbers from any SEO data tool it has, and the assistant passes them to `prioritize_fixes`. The numbers are used for that answer only and never stored. OnPage.dev never logs in to those services.
+
+### Spikes, drops and the Google update behind them
+
+Search Console, GA4 and Bing in one chat, no CSV exports. Ask about your traffic and the agent passes the daily rows to `find_opportunities` with `mode: "anomalies"`:
+
+```
+You:        Did anything odd happen to our traffic this quarter?
+
+Assistant:  (Search Console)  daily clicks, 90 days, by page
+            find_opportunities · anomalies
+
+            Drop 25 to 27 Sep: -59% (90 clicks, normal about 220)
+            Google: September 2026 spam update (Ranking, 24 Sep to 8 Oct)
+            /pricing   12 clicks, normal about 80
+```
+
+- Each day is compared with the 28 days before it, per weekday, so a normal weekend dip is not an alarm.
+- Google core updates, spam updates and Search incidents are read live from the [Google Search Status Dashboard](https://status.search.google.com). `traffic_drop` takes a `drop_date` and checks the same list.
+- `mode: "ai_queries"` finds the questions, comparisons and long conversational queries in your Search Console or Bing rows, per page, and flags pages that rank but lose the click to an AI answer.
 
 ### And what AI already cites
 
@@ -668,7 +687,7 @@ What makes OnPage.dev different from every other SEO MCP server:
 - **Closes the loop after shipping.** `request_recrawl · indexnow` pings Bing and other IndexNow engines, and the agent runs URL Inspection in your Search Console tool for Google.
 - **Reads every language right.** Reading ease uses the formula for the page language: Flesch-Douma for Dutch, Amstad for German, Kandel-Moles for French, Fernández-Huerta for Spanish.
 - **A public scoring method.** Every check, what it costs and what the score leaves out, on [onpage.dev/methodology](https://onpage.dev/methodology). What changed lives on [onpage.dev/changelog](https://onpage.dev/changelog).
-- **Light on context.** 37 tools cover 111 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 8 main tools when your agent already loads many servers.
+- **Light on context.** 37 tools cover 113 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 8 main tools when your agent already loads many servers.
 - **Easy to continue, easy on context.** Every partial result carries `next_call`, the exact tool and arguments to continue, so long jobs get finished. Add `detail: "brief"` to any call for a short summary (about 80% shorter) while the structured result stays complete.
 - **Keeps watching.** `watch · page` catches regressions after launch and alerts by RSS or webhook. [More](#keeps-watching-after-you-ship).
 - **Uses the data you already have.** Search Console, GA4, Ahrefs or Semrush in the same chat? `prioritize_fixes` ranks every fix by traffic impact with their numbers, and `ai_visibility · citations` shows what the pages AI cites do differently. [How it works](#uses-the-seo-data-you-already-have).
@@ -824,7 +843,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`, no authentication. Suppor
 
 ## What it can do
 
-37 tools that cover 111 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+37 tools that cover 113 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
