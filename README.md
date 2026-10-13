@@ -983,6 +983,9 @@ One click in clients that show prompts:
 - **Fix and prove it**: scan, fix, ship after approval, log, recrawl and plan the measurement.
 - **Site migration**: baseline audit, redirect map, checks on the new site and a guard.
 - **Monthly client report**: fixes shipped, results against unchanged pages, rankings and next month.
+- **Investigate a traffic drop**: when it dropped, the Google update that ran then, the pages and queries that lost, and the first fixes.
+- **AI search review**: the queries AI answers, the pages that should be quoted and the passages to add.
+- **Executive summary**: one page for leadership: trend, causes, what was fixed and next month.
 
 ### Reference resource
 
