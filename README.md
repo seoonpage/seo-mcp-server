@@ -27,14 +27,15 @@
   <tr><td align="right"><b></b></td><td><img src="assets/logos/contentful.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Contentful&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/strapi.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Strapi&nbsp;&nbsp;·&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/ghost-dark.png"><img src="assets/logos/ghost.png" width="20" height="20" align="absmiddle" alt=""></picture>&nbsp;Ghost&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/magento.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Magento&nbsp;&nbsp;·&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/github-dark.png"><img src="assets/logos/github.png" width="20" height="20" align="absmiddle" alt=""></picture>&nbsp;GitHub&nbsp;pull&nbsp;request</td></tr>
 </table>
 
-<table align="center">
-  <tr><td align="right"><b>Start</b></td><td><a href="#install-in-one-minute">Install</a> · <a href="#built-for-agents">Built for agents</a> · <a href="#what-it-can-do">Tools</a> · <a href="#why-it-is-different">Why it is different</a> · <a href="https://onpage.dev">onpage.dev</a></td></tr>
-  <tr><td align="right"><b>New</b></td><td><a href="#one-click-approval-with-the-wordpress-plugin">WordPress approval</a> · <a href="#spikes-drops-and-the-google-update-behind-them">Traffic drops</a> · <a href="#github-action-preview-check">Preview check</a></td></tr>
-  <tr><td align="right"><b>Your&nbsp;data</b></td><td><a href="#uses-the-seo-data-you-already-have">Your SEO data</a> · <a href="#they-bring-the-data-onpagedev-closes-the-loop">Data vs results</a> · <a href="#a-rank-tracker-that-knows-what-matters">Rank tracker</a> · <a href="#which-of-your-pages-wins-the-keyword">Cannibalization</a> · <a href="#what-changed-since-the-last-audit">What changed</a> · <a href="#bring-your-own-crawl">Your own crawl</a></td></tr>
-  <tr><td align="right"><b>Links</b></td><td><a href="#links-to-win-and-ai-answers-to-enter">Links and AI gaps</a> · <a href="#and-the-links-you-lost">Lost links</a> · <a href="#disavow-without-the-risk-and-manual-actions-cleaned-up">Disavow</a></td></tr>
-  <tr><td align="right"><b>The&nbsp;loop</b></td><td><a href="#the-whole-loop-inside-your-ai-agent">The whole loop</a> · <a href="#from-finding-to-done">From finding to done</a> · <a href="#ships-as-a-pull-request">Pull requests</a> · <a href="#keeps-watching-after-you-ship">Watch and alerts</a> · <a href="#seen-by-every-reader">Every reader</a> · <a href="#real-user-speed">Real-user speed</a></td></tr>
-  <tr><td align="right"><b>Add-ons</b></td><td><a href="#claude-code-plugin">Claude Code plugin</a> · <a href="#github-action-seo-gate">GitHub Action</a> · <a href="#github-action-fix-guard">Fix guard</a></td></tr>
-</table>
+<p align="center">
+  <a href="#install-in-one-minute"><b>Install</b></a> &nbsp;·&nbsp;
+  <a href="#one-click-approval-with-the-wordpress-plugin">WordPress approval</a> &nbsp;·&nbsp;
+  <a href="#spikes-drops-and-the-google-update-behind-them">Traffic drops</a> &nbsp;·&nbsp;
+  <a href="#github-action-preview-check">Preview check</a> &nbsp;·&nbsp;
+  <a href="#what-it-can-do">All tools</a> &nbsp;·&nbsp;
+  <a href="#why-it-is-different">Why it is different</a> &nbsp;·&nbsp;
+  <a href="https://onpage.dev">onpage.dev</a>
+</p>
 
 ---
 
