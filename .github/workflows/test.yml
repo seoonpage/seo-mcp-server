@@ -2,7 +2,9 @@ name: Test
 on:
   push:
     branches: [main]
+    paths-ignore: ["**.md", "assets/**", "examples/**", ".github/ISSUE_TEMPLATE/**"]
   pull_request:
+    paths-ignore: ["**.md", "assets/**", "examples/**", ".github/ISSUE_TEMPLATE/**"]
 permissions:
   contents: read
 jobs:
