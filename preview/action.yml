@@ -1,0 +1,49 @@
+name: OnPage.dev preview check
+description: Compare a deploy preview (Vercel, Netlify, Cloudflare Pages) with production for SEO regressions before merging, and comment the result on the pull request. Free, no key.
+author: OnPage.dev
+branding:
+  icon: git-pull-request
+  color: purple
+inputs:
+  preview-url:
+    description: The deploy preview, for example the environment_url of a deployment_status event.
+    required: true
+  production-url:
+    description: The live site, for example https://example.com.
+    required: true
+  paths:
+    description: Paths to compare, separated by spaces or commas (up to 25).
+    default: "/"
+  fail-on:
+    description: blocker (default), warning or none.
+    default: blocker
+  bypass-token:
+    description: Vercel Protection Bypass for Automation secret, for protected previews.
+    default: ""
+  comment:
+    description: Post or update a comment with the results on the pull request.
+    default: "true"
+  github-token:
+    description: Token used to post the pull request comment.
+    default: ${{ github.token }}
+outputs:
+  blockers:
+    description: Number of blockers found.
+    value: ${{ steps.diff.outputs.blockers }}
+  warnings:
+    description: Number of warnings found.
+    value: ${{ steps.diff.outputs.warnings }}
+runs:
+  using: composite
+  steps:
+    - id: diff
+      shell: bash
+      run: node "${{ github.action_path }}/../action/preview-diff.mjs"
+      env:
+        INPUT_PREVIEW_URL: ${{ inputs.preview-url }}
+        INPUT_PRODUCTION_URL: ${{ inputs.production-url }}
+        INPUT_PATHS: ${{ inputs.paths }}
+        INPUT_FAIL_ON: ${{ inputs.fail-on }}
+        INPUT_BYPASS_TOKEN: ${{ inputs.bypass-token }}
+        INPUT_COMMENT: ${{ inputs.comment }}
+        INPUT_TOKEN: ${{ inputs.github-token }}

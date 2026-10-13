@@ -60,21 +60,23 @@ export function urlFor(file, glob, baseUrl) {
   return `${baseUrl}/${path}`;
 }
 
-async function rpc(body, session) {
+export async function rpc(body, session) {
   const res = await fetch(MCP, { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream', ...(session ? { 'mcp-session-id': session } : {}) }, body: JSON.stringify({ jsonrpc: '2.0', ...body }) });
   return { session: res.headers.get('mcp-session-id'), json: res.status === 202 ? null : await res.json() };
 }
 
-async function comment(markdown) {
+export async function comment(markdown, mark = MARK) {
   const token = env('INPUT_TOKEN');
   const event = process.env.GITHUB_EVENT_PATH ? JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')) : {};
-  const pr = event.pull_request?.number;
-  if (!token || !pr || env('INPUT_COMMENT', 'true') !== 'true') return;
+  if (!token || env('INPUT_COMMENT', 'true') !== 'true') return;
   const api = `${process.env.GITHUB_API_URL || 'https://api.github.com'}/repos/${process.env.GITHUB_REPOSITORY}`;
   const headers = { authorization: `Bearer ${token}`, accept: 'application/vnd.github+json', 'content-type': 'application/json' };
+  const sha = event.deployment?.sha || event.check_run?.head_sha;
+  const pr = event.pull_request?.number ?? (sha ? (await (await fetch(`${api}/commits/${sha}/pulls`, { headers })).json().catch(() => []))?.[0]?.number : undefined);
+  if (!pr) return;
   const list = await (await fetch(`${api}/issues/${pr}/comments?per_page=100`, { headers })).json();
-  const mine = Array.isArray(list) ? list.find((c) => String(c.body || '').includes(MARK)) : null;
-  const body = JSON.stringify({ body: `${MARK}\n${markdown}` });
+  const mine = Array.isArray(list) ? list.find((c) => String(c.body || '').includes(mark)) : null;
+  const body = JSON.stringify({ body: `${mark}\n${markdown}` });
   const res = mine ? await fetch(`${api}/issues/comments/${mine.id}`, { method: 'PATCH', headers, body }) : await fetch(`${api}/issues/${pr}/comments`, { method: 'POST', headers, body });
   if (!res.ok) console.log(`::warning::Could not post the pull request comment (${res.status}). Give the workflow "pull-requests: write" permission.`);
 }

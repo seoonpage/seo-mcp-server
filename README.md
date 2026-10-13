@@ -14,7 +14,7 @@
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
   <img alt="37 tools" src="https://img.shields.io/badge/tools-37-4f46e5">
-  <img alt="109 jobs" src="https://img.shields.io/badge/jobs-109-4f46e5">
+  <img alt="111 jobs" src="https://img.shields.io/badge/jobs-111-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -471,6 +471,29 @@ Assistant:  scan_page            46: title too short, no meta description, 1 ima
 - OnPage.dev never logs in to your site and stores no passwords: your own WordPress connection makes every change.
 - Without a WordPress connection, the same plan tells you exactly what to paste where.
 
+### One-click approval with the WordPress plugin
+
+Install the [OnPage.dev WordPress plugin](https://onpage.dev/downloads/onpage-dev.zip) ([source](wordpress/onpage-dev)), click Connect in Tools, OnPage.dev and give your agent the site key. Then `get_fix_pack` with `mode: "wordpress"` sends the fixes straight to your wp-admin:
+
+```
+You:        Fix the SEO on /trail-shoes and send it to WordPress. Site key wpk_...
+
+Assistant:  get_fix_pack · wordpress   3 changes waiting for approval
+
+wp-admin:   Tools, OnPage.dev
+            title             Trail shoes          ->  Trail running shoes for rocky ground | Acme
+            meta_description  (empty)              ->  Grip, cushioning and sizes for ...
+            jsonld            (none)               ->  Product
+            [Approve selected]  [Reject all]
+
+Assistant:  get_fix_pack · wordpress   change_id: applied, old values kept
+            scan_page · rescan         94, all 3 fixed
+```
+
+- Old and new value per field, approve all or some, undo any change set later.
+- Written through Yoast SEO or Rank Math when active, otherwise the plugin outputs the title, description, canonical and social tags itself. JSON-LD and media library alt texts work everywhere.
+- Pull only: the plugin fetches proposed changes when you open its page. OnPage.dev never logs in to your site, and nothing changes without an administrator's approval.
+
 ### Ships to your CMS, not just WordPress
 
 `get_fix_pack` writes the plan for the platform the site runs on, with the exact MCP tool or API call and field for every fix, applied through the user's own connection after approval:
@@ -645,7 +668,7 @@ What makes OnPage.dev different from every other SEO MCP server:
 - **Closes the loop after shipping.** `request_recrawl · indexnow` pings Bing and other IndexNow engines, and the agent runs URL Inspection in your Search Console tool for Google.
 - **Reads every language right.** Reading ease uses the formula for the page language: Flesch-Douma for Dutch, Amstad for German, Kandel-Moles for French, Fernández-Huerta for Spanish.
 - **A public scoring method.** Every check, what it costs and what the score leaves out, on [onpage.dev/methodology](https://onpage.dev/methodology). What changed lives on [onpage.dev/changelog](https://onpage.dev/changelog).
-- **Light on context.** 37 tools cover 109 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 8 main tools when your agent already loads many servers.
+- **Light on context.** 37 tools cover 111 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 8 main tools when your agent already loads many servers.
 - **Easy to continue, easy on context.** Every partial result carries `next_call`, the exact tool and arguments to continue, so long jobs get finished. Add `detail: "brief"` to any call for a short summary (about 80% shorter) while the structured result stays complete.
 - **Keeps watching.** `watch · page` catches regressions after launch and alerts by RSS or webhook. [More](#keeps-watching-after-you-ship).
 - **Uses the data you already have.** Search Console, GA4, Ahrefs or Semrush in the same chat? `prioritize_fixes` ranks every fix by traffic impact with their numbers, and `ai_visibility · citations` shows what the pages AI cites do differently. [How it works](#uses-the-seo-data-you-already-have).
@@ -801,7 +824,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`, no authentication. Suppor
 
 ## What it can do
 
-37 tools that cover 109 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+37 tools that cover 111 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -1054,6 +1077,32 @@ The pull request gets a comment like this, updated on every push:
 > |---|---:|---:|---|
 > | `dist/about/index.html` | **36** | 0 | There is no meta description; There is no H1; The title is 5 characters |
 > | `dist/index.html` | 90 | 22 | Thin content: 32 words; No structured data; Open Graph is incomplete |
+
+## GitHub Action: preview check
+
+Checks every deploy preview against production before you merge. It compares the same paths on Vercel, Netlify or Cloudflare Pages previews and on the live site: pages that break, titles, canonicals and H1s that disappear, a new noindex, lost structured data, and canonicals or og:url that point to the preview host. The X-Robots-Tag noindex that preview hosts add is ignored. Results go into one pull request comment.
+
+```yaml
+name: SEO preview check
+on: deployment_status
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  seo:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment != 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: seoonpage/seo-mcp-server/preview@v1
+        with:
+          preview-url: ${{ github.event.deployment_status.environment_url }}
+          production-url: https://example.com
+          paths: "/ /pricing /blog"
+          fail-on: blocker          # blocker, warning or none
+          bypass-token: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}   # only for protected Vercel previews
+```
+
+The same check works in chat: `compare` with `mode: "preview"`.
 
 ## GitHub Action: fix guard
 

@@ -1,0 +1,16 @@
+name: SEO preview check
+on: deployment_status
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  seo:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment != 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: seoonpage/seo-mcp-server/preview@v1
+        with:
+          preview-url: ${{ github.event.deployment_status.environment_url }}
+          production-url: https://example.com
+          paths: "/ /pricing /blog"
+          bypass-token: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
