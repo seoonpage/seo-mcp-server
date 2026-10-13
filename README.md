@@ -967,9 +967,18 @@ One click in clients that show prompts:
 
 ### Score card in the chat
 
-In clients that support MCP Apps (Claude) or the Apps SDK (ChatGPT), scan results also show as a visual card:
+<img src="assets/score-card.png" alt="OnPage.dev score card in the chat: score 46, AI readiness 27, and the fixes to make first" width="340" align="right">
 
-<p align="center"><img src="assets/score-card.png" alt="OnPage.dev score card in the chat: score 46, AI readiness 27, and the fixes to make first" width="420"></p>
+In clients that support MCP Apps (Claude) or the Apps SDK (ChatGPT), a scan also shows as a visual card right in the chat:
+
+- **The score** from 0 to 100, with a one-line verdict.
+- **AI readiness**: how well AI assistants can read, trust and quote the page.
+- **Fix first**: the most important issues, marked error, attention or tip.
+- **Open full report**: the complete visual report on onpage.dev.
+
+Other clients get the same result as text and structured data, so nothing is lost.
+
+<br clear="right">
 
 ## Why it is different
 
