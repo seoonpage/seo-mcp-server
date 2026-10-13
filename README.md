@@ -2,7 +2,7 @@
   <a href="https://onpage.dev/mcp"><img src="assets/onpage-dev-banner.png" alt="OnPage.dev: free SEO and AI-visibility checks for AI assistants" width="720"></a>
 </p>
 
-<h1 align="center">OnPage.dev MCP server</h1>
+<h1 align="center">OnPage.dev SEO MCP server</h1>
 
 <p align="center">
   <b>The SEO scanner your AI assistant uses to fix your site itself.</b><br>
