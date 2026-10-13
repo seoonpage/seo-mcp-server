@@ -20,60 +20,21 @@
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
 
-<p align="center">
-  <sub><b>Runs in</b></sub>&nbsp;&nbsp;
-  <img src="assets/logos/claude.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Claude&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/chatgpt.png" width="22" height="22" align="absmiddle" alt="">&nbsp;ChatGPT&nbsp;&nbsp;&nbsp;
-  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/cursor-dark.png"><img src="assets/logos/cursor.png" width="22" height="22" align="absmiddle" alt=""></picture>&nbsp;Cursor&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/vscode.png" width="22" height="22" align="absmiddle" alt="">&nbsp;VS&nbsp;Code
-  <br><br>
-  <sub><b>Checks your site for</b></sub>&nbsp;&nbsp;
-  <img src="assets/logos/chatgpt.png" width="22" height="22" align="absmiddle" alt="">&nbsp;ChatGPT&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/claude.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Claude&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/gemini.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Gemini&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/perplexity.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Perplexity&nbsp;&nbsp;&nbsp;
-  <sub><b>Ships fixes to</b></sub>&nbsp;&nbsp;
-  <img src="assets/logos/wordpress.png" width="22" height="22" align="absmiddle" alt="">&nbsp;WordPress&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/shopify.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Shopify&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/webflow.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Webflow&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/wix.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Wix&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/storyblok.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Storyblok&nbsp;&nbsp;&nbsp;
-  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/sanity-dark.png"><img src="assets/logos/sanity.png" width="22" height="22" align="absmiddle" alt=""></picture>&nbsp;Sanity&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/contentful.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Contentful&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/strapi.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Strapi&nbsp;&nbsp;&nbsp;
-  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/ghost-dark.png"><img src="assets/logos/ghost.png" width="22" height="22" align="absmiddle" alt=""></picture>&nbsp;Ghost&nbsp;&nbsp;&nbsp;
-  <img src="assets/logos/magento.png" width="22" height="22" align="absmiddle" alt="">&nbsp;Magento&nbsp;&nbsp;&nbsp;
-  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/github-dark.png"><img src="assets/logos/github.png" width="22" height="22" align="absmiddle" alt=""></picture>&nbsp;GitHub
-</p>
+<table align="center">
+  <tr><td align="right"><b>Runs in</b></td><td><img src="assets/logos/claude.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Claude&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/chatgpt.png" width="20" height="20" align="absmiddle" alt="">&nbsp;ChatGPT&nbsp;&nbsp;·&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/cursor-dark.png"><img src="assets/logos/cursor.png" width="20" height="20" align="absmiddle" alt=""></picture>&nbsp;Cursor&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/vscode.png" width="20" height="20" align="absmiddle" alt="">&nbsp;VS&nbsp;Code</td></tr>
+  <tr><td align="right"><b>Checks your site for</b></td><td><img src="assets/logos/chatgpt.png" width="20" height="20" align="absmiddle" alt="">&nbsp;ChatGPT&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/claude.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Claude&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/gemini.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Gemini&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/perplexity.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Perplexity</td></tr>
+  <tr><td align="right"><b>Ships fixes to</b></td><td><img src="assets/logos/wordpress.png" width="20" height="20" align="absmiddle" alt="">&nbsp;WordPress&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/shopify.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Shopify&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/webflow.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Webflow&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/wix.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Wix&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/storyblok.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Storyblok&nbsp;&nbsp;·&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/sanity-dark.png"><img src="assets/logos/sanity.png" width="20" height="20" align="absmiddle" alt=""></picture>&nbsp;Sanity</td></tr>
+  <tr><td align="right"><b></b></td><td><img src="assets/logos/contentful.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Contentful&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/strapi.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Strapi&nbsp;&nbsp;·&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/ghost-dark.png"><img src="assets/logos/ghost.png" width="20" height="20" align="absmiddle" alt=""></picture>&nbsp;Ghost&nbsp;&nbsp;·&nbsp;&nbsp;<img src="assets/logos/magento.png" width="20" height="20" align="absmiddle" alt="">&nbsp;Magento&nbsp;&nbsp;·&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/logos/github-dark.png"><img src="assets/logos/github.png" width="20" height="20" align="absmiddle" alt=""></picture>&nbsp;GitHub&nbsp;pull&nbsp;request</td></tr>
+</table>
 
-<p align="center">
-  <a href="#install-in-one-minute">Install</a> ·
-  <a href="#one-click-approval-with-the-wordpress-plugin">WordPress approval</a> ·
-  <a href="#spikes-drops-and-the-google-update-behind-them">Traffic drops</a> ·
-  <a href="#github-action-preview-check">Preview check</a> ·
-  <a href="#they-bring-the-data-onpagedev-closes-the-loop">Data vs results</a> ·
-  <a href="#uses-the-seo-data-you-already-have">Your SEO data</a> ·
-  <a href="#a-rank-tracker-that-knows-what-matters">Rank tracker</a> ·
-  <a href="#which-of-your-pages-wins-the-keyword">Cannibalization</a> ·
-  <a href="#disavow-without-the-risk-and-manual-actions-cleaned-up">Disavow</a> ·
-  <a href="#bring-your-own-crawl">Your own crawl</a> ·
-  <a href="#what-changed-since-the-last-audit">What changed</a> ·
-  <a href="#links-to-win-and-ai-answers-to-enter">Links and AI gaps</a> ·
-  <a href="#and-the-links-you-lost">Lost links</a> ·
-  <a href="#the-whole-loop-inside-your-ai-agent">The whole loop</a> ·
-  <a href="#from-finding-to-done">From finding to done</a> ·
-  <a href="#seen-by-every-reader">Every reader</a> ·
-  <a href="#real-user-speed">Real-user speed</a> ·
-  <a href="#ships-as-a-pull-request">Pull requests</a> ·
-  <a href="#keeps-watching-after-you-ship">Watch and alerts</a> ·
-  <a href="#built-for-agents">Built for agents</a> ·
-  <a href="#what-it-can-do">Tools</a> ·
-  <a href="#why-it-is-different">Why it is different</a> ·
-  <a href="#claude-code-plugin">Claude Code plugin</a> ·
-  <a href="#github-action-seo-gate">GitHub Action</a> ·
-  <a href="#github-action-fix-guard">Fix guard</a> ·
-  <a href="https://onpage.dev">onpage.dev</a>
-</p>
+<table align="center">
+  <tr><td align="right"><b>Start</b></td><td><a href="#install-in-one-minute">Install</a> · <a href="#built-for-agents">Built for agents</a> · <a href="#what-it-can-do">Tools</a> · <a href="#why-it-is-different">Why it is different</a> · <a href="https://onpage.dev">onpage.dev</a></td></tr>
+  <tr><td align="right"><b>New</b></td><td><a href="#one-click-approval-with-the-wordpress-plugin">WordPress approval</a> · <a href="#spikes-drops-and-the-google-update-behind-them">Traffic drops</a> · <a href="#github-action-preview-check">Preview check</a></td></tr>
+  <tr><td align="right"><b>Your data</b></td><td><a href="#uses-the-seo-data-you-already-have">Your SEO data</a> · <a href="#they-bring-the-data-onpagedev-closes-the-loop">Data vs results</a> · <a href="#a-rank-tracker-that-knows-what-matters">Rank tracker</a> · <a href="#which-of-your-pages-wins-the-keyword">Cannibalization</a> · <a href="#what-changed-since-the-last-audit">What changed</a> · <a href="#bring-your-own-crawl">Your own crawl</a></td></tr>
+  <tr><td align="right"><b>Links</b></td><td><a href="#links-to-win-and-ai-answers-to-enter">Links and AI gaps</a> · <a href="#and-the-links-you-lost">Lost links</a> · <a href="#disavow-without-the-risk-and-manual-actions-cleaned-up">Disavow</a></td></tr>
+  <tr><td align="right"><b>The loop</b></td><td><a href="#the-whole-loop-inside-your-ai-agent">The whole loop</a> · <a href="#from-finding-to-done">From finding to done</a> · <a href="#ships-as-a-pull-request">Pull requests</a> · <a href="#keeps-watching-after-you-ship">Watch and alerts</a> · <a href="#seen-by-every-reader">Every reader</a> · <a href="#real-user-speed">Real-user speed</a></td></tr>
+  <tr><td align="right"><b>Add-ons</b></td><td><a href="#claude-code-plugin">Claude Code plugin</a> · <a href="#github-action-seo-gate">GitHub Action</a> · <a href="#github-action-fix-guard">Fix guard</a></td></tr>
+</table>
 
 ---
 
