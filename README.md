@@ -7,7 +7,8 @@
 <p align="center">
   <b>The SEO scanner your AI assistant uses to fix your site itself.</b><br>
   Scan, fix, check before deploy, confirm after. For Google and for AI search.<br>
-  <b>Remembers every site across chats, projects and clients.</b>
+  <b>Remembers every site across chats, projects and clients.</b><br>
+  Approve fixes in WordPress with one click. Explains traffic drops, with the Google update behind them.
 </p>
 
 <p align="center">
@@ -47,6 +48,9 @@
 
 <p align="center">
   <a href="#install-in-one-minute">Install</a> ·
+  <a href="#one-click-approval-with-the-wordpress-plugin">WordPress approval</a> ·
+  <a href="#spikes-drops-and-the-google-update-behind-them">Traffic drops</a> ·
+  <a href="#github-action-preview-check">Preview check</a> ·
   <a href="#they-bring-the-data-onpagedev-closes-the-loop">Data vs results</a> ·
   <a href="#uses-the-seo-data-you-already-have">Your SEO data</a> ·
   <a href="#a-rank-tracker-that-knows-what-matters">Rank tracker</a> ·
@@ -94,6 +98,14 @@ Assistant:  scan_page            46/100  no meta description, no H1, title 14 ch
 
             Done. 46 to 94. Two prices in the JSON-LD still need your real values.
 ```
+
+### New
+
+| | |
+|---|---|
+| **Approve fixes in WordPress, one click** | Your agent sends the fixes to the free [OnPage.dev WordPress plugin](#one-click-approval-with-the-wordpress-plugin). You see old and new value per field, approve, and undo any time. Through Yoast SEO, Rank Math or its own tags. OnPage.dev never logs in. |
+| **Ask about your traffic, no CSV exports** | [Finds the day traffic broke](#spikes-drops-and-the-google-update-behind-them) and the Google update that ran then, from Google's own status dashboard. Plus lost and split queries, the questions AI answers, and Google against Bing, from the Search Console, GA4 and Bing rows your assistant already reads. |
+| **Checks every deploy preview** | [Holds a Vercel, Netlify or Cloudflare preview against production](#github-action-preview-check) before you merge: lost titles and canonicals, noindex, broken pages. In chat or as a GitHub Action that comments on the pull request. |
 
 ## They bring the data. OnPage.dev closes the loop.
 
