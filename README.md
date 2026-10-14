@@ -66,6 +66,7 @@ Assistant:  scan_page            46/100  no meta description, no H1, title 14 ch
 
 ### New
 
+- **Drafts and post updates in WordPress.** The [content autopilot](#writes-in-your-sites-own-voice) now ends in wp-admin: new posts arrive as drafts, updates show what changes, one click to approve, undo any time. Plugin 1.1.
 - **Content in your site's own voice.** [Content autopilot](#writes-in-your-sites-own-voice): `content` modes `voice`, `calendar` and `draft` plus the `content_autopilot` prompt: your agent writes, OnPage.dev learns how the site writes, plans a dated calendar, checks each draft for voice, unsourced figures and SEO before you approve, and learns from measured results which formats work on your site.
 - **Approve fixes in WordPress, one click.** Your agent sends the fixes to the free [OnPage.dev WordPress plugin](#one-click-approval-with-the-wordpress-plugin). You see old and new value per field, approve, and undo any time. Through Yoast SEO, Rank Math or its own tags. OnPage.dev never logs in.
 - **Ask about your traffic, no CSV exports.** [Finds the day traffic broke](#spikes-drops-and-the-google-update-behind-them) and the Google update that ran then, from Google's own status dashboard. Plus lost and split queries, the questions AI answers, and Google against Bing, from the Search Console, GA4 and Bing rows your assistant already reads.
@@ -495,6 +496,8 @@ Assistant:  scan_page            46: title too short, no meta description, 1 ima
 ### One-click approval with the WordPress plugin
 
 Install the [OnPage.dev WordPress plugin](https://onpage.dev/downloads/onpage-dev.zip) ([source](wordpress/onpage-dev)), click Connect in Tools, OnPage.dev and give your agent the site key. Then `get_fix_pack` with `mode: "wordpress"` sends the fixes straight to your wp-admin:
+
+New in plugin 1.1: your agent can also send a whole post. A new post or page arrives as a draft you publish yourself. An update to an existing post shows the removed and added paragraphs side by side and goes live when you approve it. Undo restores the old text unless someone edited the post since.
 
 ```
 You:        Fix the SEO on /trail-shoes and send it to WordPress. Site key wpk_...

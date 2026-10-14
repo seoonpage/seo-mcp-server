@@ -3,7 +3,7 @@
  * Plugin Name: OnPage.dev
  * Plugin URI: https://github.com/seoonpage/seo-mcp-server/tree/main/wordpress/onpage-dev
  * Description: Approve SEO fixes from your AI assistant with one click. OnPage.dev proposes, you approve, the plugin writes them through Yoast, Rank Math or its own tags, and every change can be undone.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * Author: OnPage.dev
@@ -17,6 +17,8 @@ if (!defined('ABSPATH')) {
 }
 
 const ONPAGE_DEV_HISTORY_MAX = 200;
+const ONPAGE_DEV_VERSION = '1.1.0';
+const ONPAGE_DEV_CONTENT_MAX = 200000;
 
 function onpage_dev_api($path) {
 	return apply_filters('onpage_dev_api_base', 'https://onpage.dev') . '/wp/v1' . $path;
@@ -27,7 +29,7 @@ function onpage_dev_request($method, $path, $body = null) {
 	$args = array(
 		'method' => $method,
 		'timeout' => 15,
-		'headers' => array('Authorization' => 'Bearer ' . $auth, 'Content-Type' => 'application/json'),
+		'headers' => array('Authorization' => 'Bearer ' . $auth, 'Content-Type' => 'application/json', 'X-OnPage-Plugin' => ONPAGE_DEV_VERSION),
 	);
 	if (null !== $body) {
 		$args['body'] = wp_json_encode($body);
@@ -78,6 +80,21 @@ function onpage_dev_post_for($url) {
 }
 
 function onpage_dev_clean($field, $value) {
+	if ('post_content' === $field) {
+		return is_string($value) && '' !== trim($value) && strlen($value) <= ONPAGE_DEV_CONTENT_MAX ? wp_kses_post($value) : null;
+	}
+	if ('new_post' === $field) {
+		if (!is_array($value) || !isset($value['title'], $value['content']) || !is_string($value['title']) || !is_string($value['content']) || '' === trim($value['title']) || '' === trim($value['content']) || strlen($value['content']) > ONPAGE_DEV_CONTENT_MAX) {
+			return null;
+		}
+		return array(
+			'title' => mb_substr(sanitize_text_field($value['title']), 0, 200),
+			'content' => wp_kses_post($value['content']),
+			'slug' => isset($value['slug']) && is_string($value['slug']) ? sanitize_title($value['slug']) : '',
+			'excerpt' => isset($value['excerpt']) && is_string($value['excerpt']) ? mb_substr(sanitize_textarea_field($value['excerpt']), 0, 400) : '',
+			'type' => isset($value['type']) && 'page' === $value['type'] ? 'page' : 'post',
+		);
+	}
 	if ('image_alt' === $field) {
 		if (!is_array($value) || !isset($value['src'], $value['alt'])) {
 			return null;
@@ -124,6 +141,37 @@ function onpage_dev_apply($set, $picked) {
 			$result[] = array('field' => $field, 'ok' => false, 'error' => 'value refused by the plugin');
 			continue;
 		}
+		if ('new_post' === $field) {
+			if (!current_user_can('page' === $value['type'] ? 'edit_pages' : 'edit_posts')) {
+				$result[] = array('field' => $field, 'ok' => false, 'error' => 'not allowed to create a ' . $value['type']);
+				continue;
+			}
+			$new_id = wp_insert_post(wp_slash(array('post_title' => $value['title'], 'post_content' => $value['content'], 'post_excerpt' => $value['excerpt'], 'post_name' => $value['slug'], 'post_type' => $value['type'], 'post_status' => 'draft', 'post_author' => get_current_user_id())), true);
+			if (is_wp_error($new_id)) {
+				$result[] = array('field' => $field, 'ok' => false, 'error' => $new_id->get_error_message());
+				continue;
+			}
+			onpage_dev_history_add(array('at' => time(), 'set' => $set['id'], 'post' => $new_id, 'key' => 'new_post', 'old' => '', 'new' => $value['title'], 'field' => $field));
+			$result[] = array('field' => $field, 'ok' => true, 'via' => 'draft', 'post_id' => $new_id, 'url' => get_preview_post_link($new_id));
+			continue;
+		}
+		if ('post_content' === $field) {
+			if (!$post_id || !current_user_can('edit_post', $post_id)) {
+				$result[] = array('field' => $field, 'ok' => false, 'error' => 'no post or page for this URL');
+				continue;
+			}
+			$prev = '_onpage_dev_prev_' . substr(md5($set['id']), 0, 12);
+			update_post_meta($post_id, $prev, wp_slash(get_post_field('post_content', $post_id, 'raw')));
+			$saved = wp_update_post(wp_slash(array('ID' => $post_id, 'post_content' => $value)), true);
+			if (is_wp_error($saved)) {
+				delete_post_meta($post_id, $prev);
+				$result[] = array('field' => $field, 'ok' => false, 'error' => $saved->get_error_message());
+				continue;
+			}
+			onpage_dev_history_add(array('at' => time(), 'set' => $set['id'], 'post' => $post_id, 'key' => $prev, 'old' => '', 'new' => md5(get_post_field('post_content', $post_id, 'raw')), 'field' => $field));
+			$result[] = array('field' => $field, 'ok' => true, 'via' => 'post content', 'url' => get_permalink($post_id));
+			continue;
+		}
 		if ('image_alt' === $field) {
 			$src = preg_replace('/-\d+x\d+(\.[a-z0-9]+)$/i', '$1', $value['src']);
 			$att = attachment_url_to_postid($src);
@@ -151,6 +199,38 @@ function onpage_dev_apply($set, $picked) {
 		clean_post_cache($post_id);
 	}
 	return $result;
+}
+
+function onpage_dev_undo($set_id) {
+	$history = get_option('onpage_dev_history', array());
+	$all = true;
+	foreach ($history as $i => $h) {
+		if ($h['set'] !== $set_id || !empty($h['undone']) || !current_user_can('edit_post', $h['post'])) {
+			continue;
+		}
+		if ('new_post' === $h['field']) {
+			if (!in_array(get_post_status($h['post']), array('draft', 'pending', 'auto-draft'), true)) {
+				$all = false;
+				continue;
+			}
+			wp_trash_post($h['post']);
+		} elseif ('post_content' === $h['field']) {
+			if (md5(get_post_field('post_content', $h['post'], 'raw')) !== $h['new']) {
+				$all = false;
+				continue;
+			}
+			wp_update_post(wp_slash(array('ID' => $h['post'], 'post_content' => get_post_meta($h['post'], $h['key'], true))));
+			delete_post_meta($h['post'], $h['key']);
+		} elseif ('' === $h['old'] || null === $h['old']) {
+			delete_post_meta($h['post'], $h['key']);
+		} else {
+			update_post_meta($h['post'], $h['key'], wp_slash($h['old']));
+		}
+		clean_post_cache($h['post']);
+		$history[$i]['undone'] = time();
+	}
+	update_option('onpage_dev_history', $history, false);
+	return $all;
 }
 
 function onpage_dev_own($field) {
@@ -230,21 +310,9 @@ add_action('admin_post_onpage_dev', function () {
 	}
 	if ('undo' === $do && isset($_POST['set'])) {
 		$set_id = sanitize_text_field(wp_unslash($_POST['set']));
-		$history = get_option('onpage_dev_history', array());
-		foreach ($history as $i => $h) {
-			if ($h['set'] === $set_id && empty($h['undone']) && current_user_can('edit_post', $h['post'])) {
-				if ('' === $h['old'] || null === $h['old']) {
-					delete_post_meta($h['post'], $h['key']);
-				} else {
-					update_post_meta($h['post'], $h['key'], wp_slash($h['old']));
-				}
-				clean_post_cache($h['post']);
-				$history[$i]['undone'] = time();
-			}
-		}
-		update_option('onpage_dev_history', $history, false);
+		$all = onpage_dev_undo($set_id);
 		onpage_dev_request('POST', '/changes/' . rawurlencode($set_id), array('status' => 'undone', 'result' => array()));
-		$note = 'undone';
+		$note = $all ? 'undone' : 'undone-partly';
 	}
 	if ('disconnect' === $do) {
 		onpage_dev_request('DELETE', '/site');
@@ -276,9 +344,57 @@ function onpage_dev_current($set, $field) {
 	return is_array($value) ? 'JSON-LD' : (string) $value;
 }
 
+function onpage_dev_words($html) {
+	return count(preg_split('/\s+/u', trim(wp_strip_all_tags(preg_replace('/<[^>]+>/', ' ', (string) $html))), -1, PREG_SPLIT_NO_EMPTY));
+}
+
+function onpage_dev_paras($html) {
+	preg_match_all('#<(p|li|h[1-6])\b[^>]*>(.*?)</\1>#is', (string) $html, $m);
+	return array_values(array_filter(array_map(function ($t) {
+		return trim(preg_replace('/\s+/u', ' ', wp_strip_all_tags($t)));
+	}, $m[2])));
+}
+
+function onpage_dev_box($html) {
+	return '<div style="max-height:420px;overflow:auto;border:1px solid #dcdcde;padding:8px 12px;background:#fff">' . wp_kses_post($html) . '</div>';
+}
+
+function onpage_dev_content_now($set, $field) {
+	if ('new_post' === $field) {
+		return 'New draft';
+	}
+	$id = onpage_dev_post_for($set['url']);
+	return $id ? onpage_dev_words(get_post_field('post_content', $id, 'raw')) . ' words' : '';
+}
+
+function onpage_dev_content_new($set, $c) {
+	$v = $c['value'];
+	if ('new_post' === sanitize_key($c['field'])) {
+		$html = is_array($v) && isset($v['content']) ? (string) $v['content'] : '';
+		$type = is_array($v) && isset($v['type']) && 'page' === $v['type'] ? 'page' : 'post';
+		$title = is_array($v) && isset($v['title']) ? (string) $v['title'] : '';
+		return esc_html($title . ' (' . $type . ', saved as a draft)') . '<br>' . esc_html(onpage_dev_words($html) . ' words') . '<details><summary>Read it</summary>' . onpage_dev_box($html) . '</details>';
+	}
+	$html = (string) $v;
+	$id = onpage_dev_post_for($set['url']);
+	$old = $id ? onpage_dev_paras(get_post_field('post_content', $id, 'raw')) : array();
+	$new = onpage_dev_paras($html);
+	$added = array_values(array_diff($new, $old));
+	$removed = array_values(array_diff($old, $new));
+	$out = esc_html(onpage_dev_words($html) . ' words, new or changed paragraphs: ' . count($added) . ', removed: ' . count($removed) . '. Approving updates the live post.');
+	$out .= '<details><summary>Show the changes</summary>';
+	foreach (array_slice($removed, 0, 30) as $p) {
+		$out .= '<p style="background:#fcf0f1;margin:4px 0;padding:4px 8px"><del>' . esc_html($p) . '</del></p>';
+	}
+	foreach (array_slice($added, 0, 30) as $p) {
+		$out .= '<p style="background:#edfaef;margin:4px 0;padding:4px 8px"><ins>' . esc_html($p) . '</ins></p>';
+	}
+	return $out . '</details><details><summary>Read the new text</summary>' . onpage_dev_box($html) . '</details>';
+}
+
 function onpage_dev_page() {
 	$key = get_option('onpage_dev_site_key');
-	$messages = array('connected' => 'Connected. Give the site key to your AI assistant.', 'connect-failed' => 'Could not reach OnPage.dev. Try again in a minute.', 'applied' => 'Changes written. Clear your page cache if you use one.', 'rejected' => 'Changes rejected.', 'undone' => 'Changes undone.', 'disconnected' => 'Disconnected.');
+	$messages = array('connected' => 'Connected. Give the site key to your AI assistant.', 'connect-failed' => 'Could not reach OnPage.dev. Try again in a minute.', 'applied' => 'Changes written. Clear your page cache if you use one.', 'rejected' => 'Changes rejected.', 'undone' => 'Changes undone.', 'undone-partly' => 'Undone, except content that was edited or published since. Use the post revisions for those.', 'disconnected' => 'Disconnected.');
 	$note = isset($_GET['onpage']) ? sanitize_key(wp_unslash($_GET['onpage'])) : '';
 	echo '<div class="wrap"><h1>OnPage.dev</h1>';
 	if (isset($messages[$note])) {
@@ -311,12 +427,16 @@ function onpage_dev_page() {
 			if (!empty($set['note'])) {
 				echo '<p>' . esc_html($set['note']) . '</p>';
 			}
-			if (!onpage_dev_post_for($set['url'])) {
+			if (!onpage_dev_post_for($set['url']) && !in_array('new_post', wp_list_pluck($set['changes'], 'field'), true)) {
 				echo '<p><strong>No post or page found for this URL.</strong> Only image alt texts can be written.</p>';
 			}
 			echo '<table class="widefat striped"><thead><tr><th style="width:2em"></th><th>Field</th><th>Now</th><th>New</th></tr></thead><tbody>';
 			foreach ($set['changes'] as $i => $c) {
 				$field = sanitize_key($c['field']);
+				if ('post_content' === $field || 'new_post' === $field) {
+					echo '<tr><td><input type="checkbox" name="pick[]" value="' . (int) $i . '" checked aria-label="Approve ' . esc_attr($field) . '"></td><td>' . esc_html('new_post' === $field ? 'New post' : 'Post text') . '</td><td>' . esc_html(onpage_dev_content_now($set, $field)) . '</td><td>' . onpage_dev_content_new($set, $c) . '</td></tr>';
+					continue;
+				}
 				$new = 'jsonld' === $field ? wp_json_encode(json_decode((string) $c['value'], true), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : onpage_dev_show($c['value']);
 				echo '<tr><td><input type="checkbox" name="pick[]" value="' . (int) $i . '" checked aria-label="Approve ' . esc_attr($field) . '"></td><td>' . esc_html($field) . '</td><td>' . esc_html(onpage_dev_current($set, $field)) . '</td><td>' . ('jsonld' === $field ? '<details><summary>Show JSON-LD</summary><pre style="white-space:pre-wrap">' . esc_html($new) . '</pre></details>' : esc_html($new)) . '</td></tr>';
 			}

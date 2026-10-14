@@ -1,0 +1,8 @@
+{
+  "landingPage": "/wp-admin/",
+  "login": true,
+  "steps": [
+    { "step": "activatePlugin", "pluginPath": "onpage-dev/onpage-dev.php" },
+    { "step": "runPHP", "code": "<?php require '/tests/apply-test.php';" }
+  ]
+}
