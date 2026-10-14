@@ -433,6 +433,7 @@ Assistant:  content · voice      5 articles read: sentences ~14 words, paragrap
 - **Plans the calendar.** Refreshes for queries almost on page 1 and new pages for topics you miss (from `content · topics` or `ai_visibility · gaps`), alternated and dated per week. Keywords already drafted are skipped.
 - **Checks every draft before you see it.** Voice match with concrete tips, figures without a source link, and a full SEO scan of the HTML.
 - **Learns what works on your site.** Once a draft is published and logged, `measure · impact` results are tied to its format, length, title and FAQ. Three measurements make a rule, Google updates are left out, and every fifth item tests a format not tried yet.
+- **Keeps the loop going.** The calendar is saved in the site memory, so `site_memory` shows what is due and overdue, and which published posts are ready to measure. Add a Slack or Discord webhook and it reminds you every Monday.
 - **Never publishes on its own.** The `content_autopilot` prompt runs the whole loop and waits for your approval before anything goes live.
 
 ## Matches search intent
