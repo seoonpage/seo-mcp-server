@@ -15,7 +15,7 @@
   <a href="https://onpage.dev/mcp"><img alt="Hosted MCP server" src="https://img.shields.io/badge/MCP-hosted-4f46e5"></a>
   <img alt="Free, no API key" src="https://img.shields.io/badge/price-free%2C%20no%20key-0a7a43">
   <img alt="37 tools" src="https://img.shields.io/badge/tools-37-4f46e5">
-  <img alt="113 jobs" src="https://img.shields.io/badge/jobs-113-4f46e5">
+  <img alt="116 jobs" src="https://img.shields.io/badge/jobs-116-4f46e5">
   <a href="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml"><img alt="Tests" src="https://github.com/seoonpage/seo-mcp-server/actions/workflows/test.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0b0b0f"></a>
 </p>
@@ -29,6 +29,7 @@
 
 <p align="center">
   <a href="#install-in-one-minute"><b>Install</b></a> &nbsp;·&nbsp;
+  <a href="#writes-in-your-sites-own-voice">Content autopilot</a> &nbsp;·&nbsp;
   <a href="#one-click-approval-with-the-wordpress-plugin">WordPress approval</a> &nbsp;·&nbsp;
   <a href="#spikes-drops-and-the-google-update-behind-them">Traffic drops</a> &nbsp;·&nbsp;
   <a href="#github-action-preview-check">Preview check</a> &nbsp;·&nbsp;
@@ -65,6 +66,7 @@ Assistant:  scan_page            46/100  no meta description, no H1, title 14 ch
 
 ### New
 
+- **Content in your site's own voice.** [Content autopilot](#writes-in-your-sites-own-voice): `content` modes `voice`, `calendar` and `draft` plus the `content_autopilot` prompt: your agent writes, OnPage.dev learns how the site writes, plans a dated calendar, checks each draft for voice, unsourced figures and SEO before you approve, and learns from measured results which formats work on your site.
 - **Approve fixes in WordPress, one click.** Your agent sends the fixes to the free [OnPage.dev WordPress plugin](#one-click-approval-with-the-wordpress-plugin). You see old and new value per field, approve, and undo any time. Through Yoast SEO, Rank Math or its own tags. OnPage.dev never logs in.
 - **Ask about your traffic, no CSV exports.** [Finds the day traffic broke](#spikes-drops-and-the-google-update-behind-them) and the Google update that ran then, from Google's own status dashboard. Plus lost and split queries, the questions AI answers, and Google against Bing, from the Search Console, GA4 and Bing rows your assistant already reads.
 - **Checks every deploy preview.** [Holds a Vercel, Netlify or Cloudflare preview against production](#github-action-preview-check) before you merge: lost titles and canonicals, noindex, broken pages. In chat or as a GitHub Action that comments on the pull request.
@@ -406,6 +408,32 @@ Lost backlinks work too. Pass Ahrefs backlinks with their history and `lost_reas
 
 No Search Console connected? `find_opportunities · striking_distance` and `content · topics` also take Ahrefs or Semrush organic keyword rows (keyword, url, position, volume, traffic). And `content · topics` with `competitor_rows` gives a keyword gap: topics where competitors rank in the top 10 and you do not, by search volume, with the page to strengthen or the page to write.
 
+## Writes in your site's own voice
+
+Most AI writing tools sound like AI writing tools. OnPage.dev does not write at all: **your own agent writes**, and OnPage.dev gives it the eyes, the plan and the checks, so every post sounds like the rest of your site and is built on what already worked there.
+
+```
+You:        Plan next month's posts for example.com and draft the first one.
+
+Assistant:  content · voice      5 articles read: sentences ~14 words, paragraphs ~52,
+                                 "you" voice, 30% question headings
+            content · calendar   8 items over 4 weeks
+                                 Mon  Refresh /guides/compost "compost bin" (pos 11, +140 clicks)
+                                 Thu  New     "raised bed soil"  as a list (lists lifted clicks +18% here)
+            content · draft      Voice match 91/100
+                                 1 figure without a source: "cuts household waste by 30%"
+                                 SEO scan 88/100
+
+            Here is the draft. Approve it and I publish it as a draft in WordPress,
+            log it, and measure it in 4 weeks.
+```
+
+- **Learns the voice.** Sentence, paragraph and section length, question headings, lists, "you" or "we", title length and sample passages, from 2 to 5 of your best articles. Every content brief then carries it.
+- **Plans the calendar.** Refreshes for queries almost on page 1 and new pages for topics you miss (from `content · topics` or `ai_visibility · gaps`), alternated and dated per week. Keywords already drafted are skipped.
+- **Checks every draft before you see it.** Voice match with concrete tips, figures without a source link, and a full SEO scan of the HTML.
+- **Learns what works on your site.** Once a draft is published and logged, `measure · impact` results are tied to its format, length, title and FAQ. Three measurements make a rule, Google updates are left out, and every fifth item tests a format not tried yet.
+- **Never publishes on its own.** The `content_autopilot` prompt runs the whole loop and waits for your approval before anything goes live.
+
 ## Matches search intent
 
 The fastest way to waste a month: write a product page for a keyword where Google only ranks guides. `content · intent` checks what actually ranks before you write.
@@ -661,7 +689,7 @@ What makes OnPage.dev different from every other SEO MCP server:
 - **Closes the loop after shipping.** `request_recrawl · indexnow` pings Bing and other IndexNow engines, and the agent runs URL Inspection in your Search Console tool for Google.
 - **Reads every language right.** Reading ease uses the formula for the page language: Flesch-Douma for Dutch, Amstad for German, Kandel-Moles for French, Fernández-Huerta for Spanish.
 - **A public scoring method.** Every check, what it costs and what the score leaves out, on [onpage.dev/methodology](https://onpage.dev/methodology). What changed lives on [onpage.dev/changelog](https://onpage.dev/changelog).
-- **Light on context.** 37 tools cover 113 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 8 main tools when your agent already loads many servers.
+- **Light on context.** 37 tools cover 116 jobs: related jobs share one tool with a `mode`, so the tool list your agent loads in every chat is about 71 KB instead of 155 KB, and it fits clients that cap the number of tools. Old tool names keep working. Connect `https://onpage.dev/mcp?tools=core` for the 8 main tools when your agent already loads many servers.
 - **Easy to continue, easy on context.** Every partial result carries `next_call`, the exact tool and arguments to continue, so long jobs get finished. Add `detail: "brief"` to any call for a short summary (about 80% shorter) while the structured result stays complete.
 - **Keeps watching.** `watch · page` catches regressions after launch and alerts by RSS or webhook. [More](#keeps-watching-after-you-ship).
 - **Uses the data you already have.** Search Console, GA4, Ahrefs or Semrush in the same chat? `prioritize_fixes` ranks every fix by traffic impact with their numbers, and `ai_visibility · citations` shows what the pages AI cites do differently. [How it works](#uses-the-seo-data-you-already-have).
@@ -817,7 +845,7 @@ Streamable HTTP transport at `https://onpage.dev/mcp`, no authentication. Suppor
 
 ## What it can do
 
-37 tools that cover 113 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
+37 tools that cover 116 jobs. Related jobs share one tool and are picked with `mode`, for example `site_audit` with `start`, `continue`, `import`, `compare` and `report`; leave `mode` out for the first one. Old tool names from before 2.0 keep working. Every result links to the full visual report on [onpage.dev](https://onpage.dev). Issues carry stable codes; the full list is in the `onpage://rules` resource.
 
 ### Audit and fix
 
@@ -941,6 +969,9 @@ Streamable HTTP transport at `https://onpage.dev/mcp`, no authentication. Suppor
 | `check_keyword · focus` | Eight checks for one search term: title, description, H1, URL, opening text, subheadings, alt texts and keyword use | `6 of 8` |
 | `snippet · search` | Pixel-width estimate of title and description against Google's cut-off, desktop and mobile | `612 px, cut off` |
 | `content · brief` | A writing brief from the pages that rank: subtopics, questions, figures, target length, schema, title patterns and internal links | `8 topics, 5 questions` |
+| `content · voice` | Learn how the site writes from 2 to 5 of its best articles: sentence, paragraph and section length, headings, lists, voice and sample passages | `14 words per sentence, "you"` |
+| `content · calendar` | A dated calendar of refreshes and new pages, steered by the formats that lifted traffic on this site | `8 items over 4 weeks` |
+| `content · draft` | A draft your agent wrote against the site's voice, figures without a source and an SEO scan, before approval | `Voice 91/100, 1 figure` |
 | `layout · probe` / `layout · analyze` | Run the first-screen checks in your own browser tool: no daily limit, works on staging and localhost | `First screen, 3 devices` |
 
 ### Ready workflows (MCP prompts)
@@ -960,6 +991,7 @@ One click in clients that show prompts:
 - **Investigate a traffic drop**: when it dropped, the Google update that ran then, the pages and queries that lost, and the first fixes.
 - **AI search review**: the queries AI answers, the pages that should be quoted and the passages to add.
 - **Executive summary**: one page for leadership: trend, causes, what was fixed and next month.
+- **Content autopilot**: learn the voice, plan the calendar, draft, check, publish after approval and learn from the results.
 
 ### Reference resource
 
